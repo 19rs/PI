@@ -5,34 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>HTMX</title>
+    <title>Reconectando Vidas</title>
 </head>
 <body>
-    <div class="text-center">
-        <h1 class="text-2xl font-bold my-5">Exemplo de Request Simples</h1>
-        <button
-            hx-get="/users"
-            hx-target="#usuarios"
-            hx-indicator="#loading"
-            class="bg-blue-500 text-white py-2 px-3 my-5 rounded-lg"
-        >
-            Carregar Usuários
-        </button>
+    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg">
+        <img class="h-10" src="img/newLogo.png" alt="logo">
+        <nav>
+            <div class="flex divide-x py-2 text-white font-bold" id="listaLinks">
+                <button class="underline underline-offset-4 px-5 hover:underline hover:underline-offset-4" hx-get="/home" hx-target="#main" id="botao-home">HOME</button>
+                <!-- depois tem que bloquer no back end o acesso ao inserir? -->
+                <button class="px-5 hover:underline hover:underline-offset-4 hidden" hx-get="/inserir" hx-target="#main" id="botao-inserir">INSERIR</button>
+                <button class="px-5 hover:underline hover:underline-offset-4" hx-get="/forum" hx-target="#main" id="botao-forum">FÓRUM</button>
+                <button class="px-5 hover:underline hover:underline-offset-4" hx-get="/localizar" hx-target="#main" id="botao-localizar">LOCALIZAR</button>
+                <button class="px-5 hover:underline hover:underline-offset-4" hx-get="/login" hx-target="#main" id="botao-login">ENTRAR</button>
+            </div>
+        </nav>
+    </header>
 
-        <button
-            hx-get="/users"
-            hx-target="#usuarios"
-            hx-indicator="#loading"
-            hx-vals='{"limit": 5}'
-            class="bg-blue-500 text-white py-2 px-3 my-5 rounded-lg"
-        >
-            Carregar 5 Usuários
-        </button>
+    <main class="mt-32 container mx-auto">
+        <section id="main">
+            <h1>Home</h1>
+        </section>
+    </main>
 
-        <span class="htmx-indicator" id="loading">
-            <img src="img/loader.gif" alt="Loading..." class="m-auto h-10">
-        </span>
-        <div id="usuarios"></div>
-    </div>
+    <script>
+        // function trocarLinkSelecionado(botaoClicado) {
+        //     let listaLinks = document.getElementById('listaLinks')
+
+        //     for (const botao of listaLinks.children) {
+        //         botao.className = botao.className.replace("underline underline-offset-4", "")
+        //     }
+
+        //     botaoClicado.className += ' underline underline-offset-4'
+        // }
+    </script>
 </body>
 </html>
