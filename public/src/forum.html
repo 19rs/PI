@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Reconectando Vidas</title>
+</head>
+<body>
+    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20">
+        <img class="h-10" src="./img/newLogo.png" alt="logo">
+        <nav id="navMenu">
+
+        </nav>
+    </header>
+
+    <main class="mt-32 container mx-auto">
+        <section>
+            <h1>Fórum</h1>
+        </section>
+    </main>
+
+    <script src="../src/clients/auth.js"></script>
+    <script src="../src/clients/desaparecidos.js"></script>
+
+    <script>
+        document.onload = carregarMenu()
+    </script>
+</body>
+</html>

@@ -4,13 +4,15 @@
             "id": "1",
             "nome": "Admin",
             "email": "admin@email.com",
-            "senha": "admin"
+            "senha": "admin",
+            "perfil": "1"
         },
         {
             "id": "2",
             "nome": "Usuário",
             "email": "usuario@email.com",
-            "senha": "123456"
+            "senha": "123456",
+            "perfil": "2"
         }
     ]
 }
