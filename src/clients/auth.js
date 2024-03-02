@@ -56,7 +56,7 @@ function logar() {
     let email = document.getElementById('email').value
     let senha = document.getElementById('senha').value
 
-    fetch('http://localhost:3000/api/login', {
+    fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
