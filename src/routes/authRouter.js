@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createTableUsuarios, verificarAdmin, logar } from "../controllers/authController.js"
+import { createTableUsuarios, logar } from "../controllers/authController.js"
 
 createTableUsuarios()
 

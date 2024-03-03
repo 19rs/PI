@@ -49,3 +49,31 @@ function criarDialogCadastroDesaparecido() {
     document.body.appendChild(dialogCadastroDesaparecido)
     dialogCadastroDesaparecido.showModal()
 }
+
+function listarDesaparecidos() {
+    fetch('http://localhost:3000/pessoas')
+    .then(response => response.json())
+    .then(function(data) {
+        console.log(data)
+
+        //para testar
+        let listaDesparecidos = document.getElementById('listaDesparecidos')
+        listaDesparecidos.className = 'container grid grid-cols-4 gap-x-5 gap-y-16'
+
+        data.forEach(pessoa => {
+            listaDesparecidos.innerHTML += `
+            <div class='shadow'>
+                <img class='border border-gray-400 rounded-tl rounded-tr' src=${pessoa.foto} alt="foto desaparecido">
+                <div class='border border-gray-400 border-t-0 rounded-bl rounded-br'>
+                    <h1 class='text-center font-bold text-lg bg-gray-200 py-3'>${pessoa.nome}</h1>
+                    <h2 class='px-3 py-3 border-b'>Nascimento: ${pessoa.data_nascimento.split('-').reverse().join('/')}</h2>
+                    <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento.split('-').reverse().join('/')}</b></h2>
+                    <h2 class='px-3 py-3'>Local: <b>${pessoa.local_desaparecimento}</b></h2>
+                </div>
+            </div>
+            `
+        })
+        
+    })
+    .catch(error => console.error("Erro:", error))
+}
