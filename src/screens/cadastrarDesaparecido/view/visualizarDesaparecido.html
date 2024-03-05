@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../../../formulario.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <img src="../../../assets/newLogo.png" alt="logo" style="height: 3.5vh;">
+        <nav>
+            <ul>
+                <li><a href="../../index.html">HOME</li></a>
+                <li><a href="/src/telas/cadastrarDesaparecido/cadastrar/cadastrarDesaparecido.html">INSERIR</li></a>
+                <li><a href="/src/telas/cadastrarDesaparecido/view/visualizarDesaparecido.html">DESAPARECIDOS</li></a>
+                <li><a href="#">LOCALIZAR</li></a>
+                <li><a href="#">FÓRUM</li></a>
+                <li><a href="/src/telas/cadastrarUsuario/cadastrarusuario.html">ENTRAR</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main id="main">
+
+    </main>
+
+    <div id="overlay"></div>
+    <div id="modal"></div>
+
+    <footer>
+        <p>Entre em contato pelo WhatsApp</p>
+        <img src="../../../assets/whatsapp (1).png" alt="">
+    </footer>
+
+    <script src="../../../client/clientDesaparecidos.js"></script>
+    <script>
+        const modal = document.getElementById('modal')
+        const overlay = document.getElementById('overlay')
+        let arrayPessoas = []
+
+        fetch(`http://localhost:3000/desaparecidos`)
+            .then(response => response.json())
+            .then(function (json) {
+                console.log(json)
+                json.forEach(element => {
+                    arrayPessoas = json
+                    thumb(element)
+                });
+
+
+
+            })
+            .catch(error => console.error('Erro na requisição:', error));
+
+        function thumb(object) {
+            const div = document.createElement('div')
+            div.classList = 'container-thumb'
+            div.onclick = function () {
+                renderItem(object.nome_completo)
+            }
+            div.innerHTML = `
+
+                 <h4>${object.nome_completo}</h4>
+                <div id='foto'><img src='${object.foto}' id='tam'></div>
+               
+              
+           `
+            document.getElementById('main').appendChild(div);
+        }
+
+        function renderItem(nome) {
+
+            modal.innerHTML = ''
+            const pessoa = arrayPessoas.find(p => p.nome_completo === nome)
+            const div = document.createElement('div')
+            div.classList = 'container'
+            div.innerHTML = `
+            <div>
+                <h4>${pessoa.nome_completo}</h4>
+                <div id='foto'><img src='${pessoa.foto}' id='tamDetalhes'></div>
+                </div>
+                
+                    <div>
+                <p>Idade: ${pessoa.idade}</p>
+                <p>Genero: ${pessoa.genero}</p>
+                <p>Olhos: ${pessoa.olhos}</p>
+                <p>Altura: ${pessoa.altura}</p>
+                <p>Peso: ${pessoa.peso}</p>
+                <p>Cabelo: ${pessoa.cabelo}</p>
+                <p>Residente: ${pessoa.residente_em}</p>
+                <p>Ultima Vez Visto: ${pessoa.ultima_vez_visto}</p>
+                <p>Vestimentas: ${pessoa.vestimentas}</p>
+                <p>Data Desaparecimento: ${pessoa.data_desaparecimento}</p>
+                <p>Catacteristicas Fisicas: ${pessoa.caracteristicas_fisicas}</p>
+                <p>Contato: ${pessoa.contato}</p>
+                <p>Detalhes: ${pessoa.detalhes_desaparecimento}</p>
+                <button onclick='deleteDesaparecido(${pessoa.id})'> Excluir </button>
+                <button onclick='alterar(${pessoa.id})'> Alterar </button>
+                        </div>
+               
+           `
+
+
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+            modal.appendChild(div);
+        }
+
+
+        function alterar(id) {
+
+            const pessoa = arrayPessoas.find(p => p.id === id);
+            modal.innerHTML = `
+              <form id="form" action="#">
+
+<div>
+    <div id="container-form">
+       
+        <div id="content-form">
+            <label for="nome">NOME COMPLETO: </label>
+            <input type="text" required id="nomeAlterar">
+
+            <label for="cpf">IDADE: </label>
+            <input type="number" required id="idadeAlterar">
+
+            <label for="username">GENERO: </label>
+            <input type="text" required id="generoAlterar">
+
+            <label for="senha">OLHOS: </label>
+            <input type="text" required id="olhosAlterar">
+
+            <label for="nome">ALTURA: </label>
+            <input type="text" required id="alturaAlterar">
+
+            <label for="cpf">PESO: </label>
+            <input type="number" required id="pesoAlterar">
+
+            <label for="senha">CABELO: </label>
+            <input type="text" required id="cabeloAlterar">
+
+            <label for="username">RESIDENTE EM: </label>
+            <input type="text" required id="residenteAlterar">
+
+        </div>
+
+        <div id="content-form1">
+
+            <label for="senha">FOTO: </label>
+            <input type="text" required id="fotoAlterar">
+
+            <label for="nome">ULTIMA VEZ VISTO: </label>
+            <input type="text" required id="ultimaAlterar">
+
+            <label for="cpf">VESTIMENTAS: </label>
+            <input type="number" required id="vestimentasAlterar">
+
+            <label for="senha">DATA DESAPARECIMENTO: </label>
+            <input type="text" required id="dataAlterar">
+
+            <label for="senha">CARACTERISITICAS FISICAS: </label>
+            <input type="text" required id="caracteAlterar">
+
+            <label for="senha">CONTATO: </label>
+            <input type="text" required id="contatoAlterar">
+
+            <label for="senha">DETALHES DESAPARECIMENTO: </label>
+            <input type="text" id="detalhes-desaparecimentoAlterar">
+
+        </div>
+    </div>
+
+    <input type="submit" value="Alterar" id="btn" onclick="updateDesaparecido(${pessoa.id})">
+              `
+            modal.style.display = 'block';
+
+        }
+
+
+
+
+        overlay.onclick = function () {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+
+        };
+    </script>
+</body>
+
+</html>

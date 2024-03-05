@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleUsuario.css">
+    <title>CRIAR CONTA</title>
+</head>
+
+<body>
+    <header>
+        <img src="../../assets/newLogo.png" alt="logo" style="height: 3.5vh;">
+        <nav>
+            <ul>
+                <li><a href="../index.html">HOME</li></a>
+                <li><a href="/src/telas/cadastrarDesaparecido/cadastrar/cadastrarDesaparecido.html">INSERIR</li></a>
+                <li><a href="/src/telas/cadastrarDesaparecido/view/visualizarDesaparecido.html">DESAPARECIDOS</li></a>
+                <li><a href="#">LOCALIZAR</li></a>
+                <li><a href="#">FÓRUM</li></a>
+                <li><a href="/src/telas/cadastrarUsuario/cadastrarusuario.html">ENTRAR</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <form id="form" action="#">
+            <p>Crie sua conta</p>
+            <span>Crie uma conta para ver e cadastrar pessoas.</span>
+            <label for="nome">NOME: </label>
+            <input type="text" required id="nome">
+            <label for="cpf">CPF: </label>
+            <input type="number" required id="cpf">
+            <label for="username">USERNAME: </label>
+            <input type="text" required id="username">
+            <label for="senha">SENHA: </label>
+            <input type="text" required id="senha">
+            <input type="submit" value="Criar sua conta" id="btn" onclick="addUsuario()">
+
+        </form>
+        <button id="viewBtn">VIEW</button>
+    </main>
+
+    <div id="overlay"></div>
+    <div id="modal"></div>
+
+    <footer>
+        <p>Entre em contato pelo WhatsApp</p>
+        <img src="../../assets/whatsapp (1).png" alt="">
+    </footer>
+
+
+    <script>
+        let arrPessoas = []
+        const modal = document.getElementById('modal')
+        const overlay = document.getElementById('overlay')
+        window.onload = inicio
+
+        function inicio() {
+            fetch(`http://localhost:3000/usuarios`)
+                .then(response => response.json())
+                .then(function (json) {
+
+                    json.forEach(element => {
+                        name(element)
+
+                    });
+                    arrPessoas = json
+
+                })
+                .catch(error => console.error('Erro na requisição:', error));
+        }
+
+
+        function name(params) {
+
+            const viewBtn = document.getElementById('viewBtn');
+
+            modal.innerHTML += `
+              
+                <p>nome: ${params.nome}</p>
+                <p>cpf: ${params.cpf}</p>
+                <p>username: ${params.username}</p>
+                <p>senha: ${params.senha}</p>
+                <button onclick="deleteUsuario(${params.id})">Deletar</button>
+                <button onclick="alterar(${params.id})">Alterar</button>
+            `;
+
+        }
+
+        function alterar(id) {
+
+            const pessoa = arrPessoas.find(p => p.id === id);
+
+            const div = document.createElement('div')
+            div.classList = 'alterarDiv'
+            div.innerHTML = `
+                <label for="nome">NOME: </label>
+                 <input type="text"  id="nomeAlterar">
+                 <label for="cpf">CPF: </label>
+                 <input type="number"  id="cpfAlterar">
+                <label for="username">USERNAME: </label>
+                 <input type="text"  id="usernameAlterar">
+                 <label for="senha">SENHA: </label>
+                <input type="text"  id="senhaAlterar">
+                <input type='submit' onclick='updateUsuario(${pessoa.id})'></input>
+                `
+
+                overlay.onclick = function () {
+            modal.style.display = 'none'
+            overlay.style.display = 'none'
+            div.style.display = 'none'
+        }
+            document.body.appendChild(div)
+        }
+
+      
+        viewBtn.onclick = function () {
+            modal.style.display = 'block'
+            overlay.style.display = 'block'
+        }
+
+        overlay.onclick = function () {
+            modal.style.display = 'none'
+            overlay.style.display = 'none'   
+        }
+       
+
+
+
+
+
+    </script>
+    <script src="./../../client/clientUsuario.js"></script>
+</body>
+
+</html>
