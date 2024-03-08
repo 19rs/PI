@@ -2,7 +2,7 @@ function cadastrarDesaparecido() {
     let perfilUsuario = sessionStorage.getItem('userProfile')
 
     if(!perfilUsuario || parseInt(perfilUsuario) !== 1) {
-        alert('Probido')
+        alert('Proibido')
         return
     } else {
         criarDialogCadastroDesaparecido()
@@ -58,15 +58,17 @@ function listarDesaparecidos() {
 
         //para testar
         let listaDesparecidos = document.getElementById('listaDesparecidos')
-        listaDesparecidos.className = 'container grid grid-cols-4 gap-x-5 gap-y-16'
+        listaDesparecidos.className = 'container px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10'
 
         data.forEach(pessoa => {
             listaDesparecidos.innerHTML += `
-            <div class='shadow'>
-                <img class='border border-gray-400 rounded-tl rounded-tr' src=${pessoa.foto} alt="foto desaparecido">
-                <div class='border border-gray-400 border-t-0 rounded-bl rounded-br'>
-                    <h1 class='text-center font-bold text-lg bg-gray-200 py-3'>${pessoa.nome}</h1>
-                    <h2 class='px-3 py-3 border-b'>Nascimento: ${pessoa.data_nascimento.split('-').reverse().join('/')}</h2>
+            <div class='shadow border border-gray-300 rounded'>
+                <div class='h-64 w-64 flex justify-center'>
+                    <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${pessoa.foto ? pessoa.foto : '../img/pessoas/SemFoto.png'} alt="foto desaparecido">
+                </div>
+                <div>
+                    <h1 class='text-center font-bold text-lg border-t border-b border-gray-300 bg-gray-200 py-3'>${pessoa.nome}</h1>
+                    <h2 class='px-3 py-3 border-b'>Nascimento: ${pessoa.data_nascimento ? pessoa.data_nascimento.split('-').reverse().join('/') : ''}</h2>
                     <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento.split('-').reverse().join('/')}</b></h2>
                     <h2 class='px-3 py-3'>Local: <b>${pessoa.local_desaparecimento}</b></h2>
                 </div>

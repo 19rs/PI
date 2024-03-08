@@ -35,7 +35,7 @@ export async function logar(req, res) {
         const usuario = await stmt.get()
 
         if(!usuario) {
-            res.send({erro: 'Credenciais inválidas'});
+            res.send({erro: 'Credenciais inválidas'})
         } else {
             res.send({
                 sucesso: 'Login bem sucedido',
