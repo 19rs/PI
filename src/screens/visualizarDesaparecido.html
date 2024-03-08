@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../../../../formulario.css">
+    <link rel="stylesheet" href="styles/styleVisualizarPessoa.css">
+    <link rel="stylesheet" href="styles/formulario.css">
     <title>Document</title>
 </head>
 
@@ -14,12 +14,7 @@
         <img src="../../../assets/newLogo.png" alt="logo" style="height: 3.5vh;">
         <nav>
             <ul>
-                <li><a href="../../index.html">HOME</li></a>
-                <li><a href="/src/telas/cadastrarDesaparecido/cadastrar/cadastrarDesaparecido.html">INSERIR</li></a>
-                <li><a href="/src/telas/cadastrarDesaparecido/view/visualizarDesaparecido.html">DESAPARECIDOS</li></a>
-                <li><a href="#">LOCALIZAR</li></a>
-                <li><a href="#">FÓRUM</li></a>
-                <li><a href="/src/telas/cadastrarUsuario/cadastrarusuario.html">ENTRAR</a></li>
+                
             </ul>
         </nav>
 
@@ -37,26 +32,14 @@
         <img src="../../../assets/whatsapp (1).png" alt="">
     </footer>
 
-    <script src="../../../client/clientDesaparecidos.js"></script>
+  
+    <script src="../clients/authClient.js"></script>
+    <script src="../clients/desaparecidosClient.js"></script>
+
     <script>
         const modal = document.getElementById('modal')
         const overlay = document.getElementById('overlay')
-        let arrayPessoas = []
-
-        fetch(`http://localhost:3000/desaparecidos`)
-            .then(response => response.json())
-            .then(function (json) {
-                console.log(json)
-                json.forEach(element => {
-                    arrayPessoas = json
-                    thumb(element)
-                });
-
-
-
-            })
-            .catch(error => console.error('Erro na requisição:', error));
-
+        
         function thumb(object) {
             const div = document.createElement('div')
             div.classList = 'container-thumb'
