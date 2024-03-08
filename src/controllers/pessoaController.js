@@ -9,7 +9,7 @@ export async function createTablePessoas() {
             nome VARCHAR(255) NOT NULL,
             cpf VARCHAR(80),
             data_nascimento DATE,
-            genero CHAR(1),
+            genero VARCHAR(25),
             olhos VARCHAR(25),
             altura_estimada VARCHAR(10),
             peso_estimado VARCHAR(10),

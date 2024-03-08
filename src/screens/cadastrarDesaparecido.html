@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/styleCadastrarPessoa.css">
+    <link rel="stylesheet" href="./styles/formulario.css">
+    <title>Cadastrar Pessoa Desaparecida</title>
+</head>
+
+<body>
+    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20">
+        <img class="h-10" src="img/newLogo.png" alt="logo">
+        <nav id="navMenu">
+            
+        </nav>
+    </header>
+    
+    <script src="../clients/authClient.js"></script>
+    <script src="../clients/desaparecidosClient.js"></script>
+
+    <script>
+        document.onload = verificarPermissao()
+        document.onload = carregarMenu()
+    </script>
+
+    <main class="mt-36 mb-20 container mx-auto">
+        <form id="form" action="#">
+            <div>
+                <div id="container-form">
+                    <h4 style="grid-column: span 2;">INFORMACOES PESSOAIS</h4>    
+                    <div id="content-form">
+                        <label for="nome">NOME COMPLETO: </label>
+                        <input type="text" required id="nome">
+
+                        <label for="foto">FOTO: </label>
+                        <input type="text" id="foto">
+
+                        <label for="cpf">CPF: </label>
+                        <input type="text" id="cpf">
+
+                        <label for="dataNascimento">DATA DE NASCIMENTO: </label>
+                        <input type="date" id="dataNascimento">
+
+                        <label for="genero">GENERO: </label>
+                        <input type="text" id="genero">
+
+                        <label for="olhos">OLHOS: </label>
+                        <input type="text" id="olhos">
+
+                        <label for="altura">ALTURA: </label>
+                        <input type="text" id="altura">
+
+                        <label for="peso">PESO: </label>
+                        <input type="text" id="peso"> 
+
+                        <label for="cabelo">CABELO: </label>
+                        <input type="text" id="cabelo">
+
+                        
+                    </div>
+
+                    <div id="content-form1">
+                        <label for="residenteEm">RESIDENTE EM: </label>
+                        <input type="text" id="residenteEm">
+
+                        <label for="vestimentas">VESTIMENTAS: </label>
+                        <input type="text" id="vestimentas">
+
+                        <label for="localDesaparecimento">LOCAL DESAPARECIMENTO: </label>
+                        <input type="text" required id="localDesaparecimento">
+
+                        <label for="dataDesaparecimento">DATA DESAPARECIMENTO: </label>
+                        <input type="date" required id="dataDesaparecimento">
+
+                        <label for="senha">CARACTERISITICAS FISICAS: </label>
+                        <input type="text" id="caracte">
+
+                        <label for="senha">CONTATO: </label>
+                        <input type="text" id="contato">
+
+                        <label for="senha">DETALHES DESAPARECIMENTO: </label>
+                        <textarea class="border p-2" name="" id="detalhes-desaparecimento" cols="20" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <input type="submit" value="cadastrar" id="btn" onclick="addDesaparecidos()">
+        </form>
+    </main>
+</body>
+</html>

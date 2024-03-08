@@ -1,0 +1,100 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+:root{
+  --cor-header: #141414;
+  --tamanho-nav-a: 1.3em;
+  --cor-fundo: #4D4B4B;
+}
+
+header{
+  background-color: var(--cor-header) ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  padding: 0 5em;
+}
+
+header > nav > ul{
+  display: flex;
+  gap: 2em;
+  list-style: none; 
+  align-items: center;
+}
+
+header > nav > ul > li > a{
+  color: white;
+  text-decoration: none;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1em;
+  display: inline;
+  border-bottom: 1px solid transparent; 
+  transition: border-bottom .3s ease; 
+}
+
+
+
+header > nav > ul > li >a:hover {
+border-bottom: 1px solid white;
+}
+
+
+
+header > nav > ul > li::after {
+content: "";
+border-left: 1px solid white;
+margin-left: 1em;
+}
+
+
+
+
+
+
+main{
+  height: calc(100vh - 20vh);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+#contato, #detalhes, #vestimentas, #ultima{
+  width: 100%;
+}
+
+
+
+
+footer{
+  height: 10vh;
+  display: flex;
+  background-color: var(--cor-header);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+footer img{
+height: 2.2vh;
+}
