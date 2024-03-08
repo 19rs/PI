@@ -1,6 +1,5 @@
 import { openDB } from "../dist/configDB.js"
 
-
 export async function createTablePessoas() {
     const db = await openDB()
     try {
@@ -17,7 +16,7 @@ export async function createTablePessoas() {
             caracteristicas_fisicas VARCHAR(255),
             vestimentas VARCHAR(255),
             residente_em VARCHAR(255),
-            foto TEXT DEFAULT '../img/pessoas/SemFoto.png',
+            foto TEXT,
             data_desaparecimento DATE NOT NULL,
             local_desaparecimento VARCHAR(255) NOT NULL,
             detalhes_desaparecimento VARCHAR(255),
@@ -79,13 +78,33 @@ export async function selectPessoa(req, res) {
 export async function insertPessoa(req, res) {
     const db = await openDB()
     let stmt = null
+
+    let pessoa = req.body
     
-    const pessoa = req.body
+
+    let uploadPath = 'src/screens/img/pessoas/'
+    pessoa.foto = 'img/pessoas/SemFoto.png'
+
+    if(req.files) {
+        if(req.files.foto) {
+            // fotoDesaparecido = `img/pessoas/${pessoa.nome.replaceAll(" ", "")}.png`
+            let data = new Date()
+            pessoa.foto = `img/pessoas/${pessoa.nome.replaceAll(" ", "")+data.getTime()}.png`
+            uploadPath = `src/screens/img/pessoas/${pessoa.nome.replaceAll(" ", "")+data.getTime()}.png`
+
+            req.files.foto.mv(uploadPath, function(err) {
+                if (err) {
+                    return res.status(500).send(err);
+                } 
+            })
+        }
+    }
 
     try {
         stmt = await db.prepare(`INSERT INTO Pessoas (nome, cpf, data_nascimento, genero, olhos, altura_estimada, peso_estimado, cabelo, caracteristicas_fisicas, vestimentas, residente_em, foto, data_desaparecimento, local_desaparecimento, detalhes_desaparecimento, contato) VALUES(@nome, @cpf, @data_nascimento, @genero, @olhos, @altura_estimada, @peso_estimado, @cabelo, @caracteristicas_fisicas, @vestimentas, @residente_em, @foto, @data_desaparecimento, @local_desaparecimento, @detalhes_desaparecimento, @contato)`)
         await stmt.bind({ '@nome': pessoa.nome, '@cpf': pessoa.cpf, '@data_nascimento': pessoa.data_nascimento, '@genero': pessoa.genero, '@olhos': pessoa.olhos, '@altura_estimada': pessoa.altura_estimada, '@peso_estimado': pessoa.peso_estimado, '@cabelo': pessoa.cabelo, '@caracteristicas_fisicas': pessoa.caracteristicas_fisicas, '@vestimentas': pessoa.vestimentas, '@residente_em': pessoa.residente_em, '@foto': pessoa.foto, '@data_desaparecimento': pessoa.data_desaparecimento, '@local_desaparecimento': pessoa.local_desaparecimento, '@detalhes_desaparecimento': pessoa.detalhes_desaparecimento, '@contato': pessoa.contato })
         await stmt.run()
+
         res.status(201).json({ message: 'Pessoa cadastrada com sucesso' })
     } catch(error) {
         console.error('Erro ao cadastrar Pessoa:', error)

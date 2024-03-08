@@ -96,7 +96,6 @@ function addDesaparecidos() {
     const residente_em = document.getElementById("residenteEm").value;
     
     const cpf = document.getElementById("cpf").value;
-    const foto = document.getElementById("foto").value;
     const vestimentas = document.getElementById("vestimentas").value;
     const data_desaparecimento = document.getElementById("dataDesaparecimento").value;
     const local_desaparecimento = document.getElementById("localDesaparecimento").value;
@@ -104,36 +103,44 @@ function addDesaparecidos() {
     const contato = document.getElementById("contato").value;
     const detalhes_desaparecimento = document.getElementById("detalhes-desaparecimento").value;
 
-
+    const inputFoto = document.getElementById('fotoDesaparecido')
+    let foto = ''
+    
+    if(inputFoto.files[0]) {
+        foto = inputFoto.files[0];
+    }
    
+    const formData = new FormData()
+
+    formData.append('nome', nome)
+    formData.append('cpf', cpf)
+    formData.append('data_nascimento', data_nascimento)
+    formData.append('genero', genero)
+    formData.append('olhos', olhos)
+    formData.append('altura_estimada', altura_estimada)
+    formData.append('peso_estimado', peso_estimado)
+    formData.append('cabelo', cabelo)
+    formData.append('caracteristicas_fisicas', caracteristicas_fisicas)
+    formData.append('vestimentas', vestimentas)
+    formData.append('residente_em', residente_em)
+    formData.append('foto', foto)
+    formData.append('data_desaparecimento', data_desaparecimento)
+    formData.append('local_desaparecimento', local_desaparecimento)
+    formData.append('detalhes_desaparecimento', detalhes_desaparecimento)
+    formData.append('contato', contato)
+
     
     fetch('http://localhost:3000/pessoas', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            nome: nome,
-            cpf: cpf,
-            data_nascimento: data_nascimento,
-            genero: genero,
-            olhos: olhos,
-            altura_estimada: altura_estimada,
-            peso_estimado: peso_estimado,
-            cabelo: cabelo,
-            caracteristicas_fisicas: caracteristicas_fisicas,
-            vestimentas: vestimentas,
-            residente_em: residente_em,
-            foto: foto,
-            data_desaparecimento: data_desaparecimento,
-            local_desaparecimento: local_desaparecimento,
-            detalhes_desaparecimento: detalhes_desaparecimento,
-            contato: contato
-        })
-    }) .then(() => {
-        // displaySuccessMessage()
+        body: formData
     })
-    .catch(error => alert("Erro:" + error))
+    .then(response => response.json())
+    .then((data) => {
+        // displaySuccessMessage()
+        alert(data.message)
+        console.log('Cadastro realizado com sucesso!')
+    })
+    .catch(error => console.log("Erro:" + error))
 }
 
 function deleteDesaparecido(id) {

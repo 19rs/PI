@@ -36,7 +36,7 @@
                         <input type="text" required id="nome">
 
                         <label for="foto">FOTO: </label>
-                        <input type="text" id="foto">
+                        <input type="file" id="fotoDesaparecido" class="w-full" name="fotoDesaparecido">
 
                         <label for="cpf">CPF: </label>
                         <input type="text" id="cpf">
@@ -86,8 +86,17 @@
                     </div>
                 </div>
 
-                <input type="submit" value="cadastrar" id="btn" onclick="addDesaparecidos()">
+                <!-- <input type="submit" value="cadastrar" id="btn" onclick="addDesaparecidos()"> -->
+                <input type="submit" value="cadastrar" id="btn">
         </form>
+
+        <script>
+            let form = document.getElementById('form')
+            form.addEventListener('submit', function (event){
+                event.preventDefault()
+                addDesaparecidos()
+            })
+        </script>
     </main>
 </body>
 </html>
