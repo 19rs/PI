@@ -9,7 +9,7 @@ export async function createTableUsuarios() {
             nome VARCHAR(255) NOT NULL, 
             email VARCHAR(255) UNIQUE NOT NULL, 
             username VARCHAR(80), 
-            perfil TINYINT NOT NULL, 
+            perfil TINYINT  NULL, 
             senha VARCHAR(100) NOT NULL
         )`)
     } catch(error) {
@@ -19,6 +19,48 @@ export async function createTableUsuarios() {
         db.close()
     }
 }
+
+
+
+export async function insertUsuario(req, res) {
+    const db = await openDB();
+    let stmt = null;
+
+    let pessoa = req.body;
+
+    try {
+        stmt = await db.prepare(`INSERT INTO Usuarios (nome, email, username, perfil, senha) VALUES(@nome, @email, @username,@perfil, @senha)`);
+        await stmt.bind({ '@nome': pessoa.nome, '@email': pessoa.email, '@username': pessoa.username, '@perfil':pessoa.perfil, '@senha': pessoa.senha });
+        await stmt.run();
+
+        res.status(201).json({ message: 'Usuario cadastrada com sucesso' });
+    } catch(error) {
+        console.error('Erro ao cadastrar Usuario:', error);
+        throw error;
+    } finally {
+        stmt ? await stmt.finalize() : null;
+        await db.close();
+    }
+}
+
+
+export async function selectUsuario(req, res) {
+    const db = await openDB()
+    let stmt = null
+
+    try {
+        stmt = await db.prepare('SELECT * FROM Usuarios  DESC LIMIT 20')
+        const pessoas = await stmt.all()
+        return res.json(pessoas)
+    } catch(error) {
+        console.error('Erro ao selecionar Usuarios:', error)
+        throw error
+    } finally {
+        stmt ? await stmt.finalize() : null
+        await db.close()
+    }
+}
+
 
 
 //depois usar hash na senha
