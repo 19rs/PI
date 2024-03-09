@@ -62,22 +62,27 @@ function listarDesaparecidos() {
         //para testar
         let listaDesparecidos = document.getElementById('listaDesparecidos')
         listaDesparecidos.className = 'container px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10'
-           const div = document.createElement
-            div.onclick = function () {
-                renderItem(object.nome_completo)
-            }
+           
         data.forEach(pessoa => {
-            listaDesparecidos.innerHTML += `
-            <div class='shadow border border-gray-300 rounded' onclick="renderItem(${data})">
-                <div class='h-64 w-64 flex justify-center'>
-                    <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${pessoa.foto ? pessoa.foto : 'img/pessoas/SemFoto.png'} alt="foto desaparecido">
-                </div>
-                <div>
-                    <h1 class='text-center font-bold text-lg border-t border-b border-gray-300 bg-gray-200 py-3'>${pessoa.nome}</h1>
-                    <h2 class='px-3 py-3 border-b'>Nascimento: ${pessoa.data_nascimento ? pessoa.data_nascimento.split('-').reverse().join('/') : ''}</h2>
-                    <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento.split('-').reverse().join('/')}</b></h2>
-                    <h2 class='px-3 py-3'>Local: <b>${pessoa.local_desaparecimento}</b></h2>
-                </div>
+            // console.log(pessoa)
+            // console.log(typeof(pessoa))
+            let div = document.createElement('div')
+            div.className = 'shadow border border-gray-300 rounded'
+            div.addEventListener("click", function() {
+                renderItem(pessoa)
+            })
+
+            listaDesparecidos.appendChild(div)
+            
+            div.innerHTML += `
+            <div class='h-64 w-64 flex justify-center'>
+                <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${pessoa.foto ? pessoa.foto : 'img/pessoas/SemFoto.png'} alt="foto desaparecido">
+            </div>
+            <div>
+                <h1 class='text-center font-bold text-lg border-t border-b border-gray-300 bg-gray-200 py-3'>${pessoa.nome}</h1>
+                <h2 class='px-3 py-3 border-b'>Nascimento: ${pessoa.data_nascimento ? pessoa.data_nascimento.split('-').reverse().join('/') : ''}</h2>
+                <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento.split('-').reverse().join('/')}</b></h2>
+                <h2 class='px-3 py-3'>Local: <b>${pessoa.local_desaparecimento}</b></h2>
             </div>
             `
             
@@ -88,43 +93,22 @@ function listarDesaparecidos() {
 }
 
 function renderItem(pessoa) {
-
-   const modal = document.getElementById('modal')
+    
+    // return
+        const modal = document.getElementById('modal')
+            
+    // const pessoa = data.find(p => p.id === parseInt(data.id))
     
     const div = document.createElement('div')
     div.classList = 'container'
-
-
-    // pessoa.forEach(pessoa => )
-    // div.innerHTML = `
+    div.innerHTML = `
     <div>
-        <h4>${pessoa.nome_completo}</h4>
+        <h4>${pessoa.nome}</h4>
         <div id='foto'><img src='${pessoa.foto}' id='tamDetalhes'></div>
         </div>
-        
-            <div>
-        <p>Idade: ${pessoa.idade}</p>
-        <p>Genero: ${pessoa.genero}</p>
-        <p>Olhos: ${pessoa.olhos}</p>
-        <p>Altura: ${pessoa.altura}</p>
-        <p>Peso: ${pessoa.peso}</p>
-        <p>Cabelo: ${pessoa.cabelo}</p>
-        <p>Residente: ${pessoa.residente_em}</p>
-        <p>Ultima Vez Visto: ${pessoa.ultima_vez_visto}</p>
-        <p>Vestimentas: ${pessoa.vestimentas}</p>
-        <p>Data Desaparecimento: ${pessoa.data_desaparecimento}</p>
-        <p>Catacteristicas Fisicas: ${pessoa.caracteristicas_fisicas}</p>
-        <p>Contato: ${pessoa.contato}</p>
-        <p>Detalhes: ${pessoa.detalhes_desaparecimento}</p>
-        <button onclick='deleteDesaparecido(${pessoa.id})'> Excluir </button>
-        <button onclick='alterar(${pessoa.id})'> Alterar </button>
-                </div>
-       
+          
    `
-
-
     modal.style.display = 'block';
-    //overlay.style.display = 'block';
     modal.appendChild(div);
 }
 
