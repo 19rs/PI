@@ -68,7 +68,7 @@ function listarDesaparecidos() {
             }
         data.forEach(pessoa => {
             listaDesparecidos.innerHTML += `
-            <div class='shadow border border-gray-300 rounded' onclick="renderItem(${data})">
+            <div class='shadow border border-gray-300 rounded'>
                 <div class='h-64 w-64 flex justify-center'>
                     <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${pessoa.foto ? pessoa.foto : 'img/pessoas/SemFoto.png'} alt="foto desaparecido">
                 </div>
@@ -87,46 +87,46 @@ function listarDesaparecidos() {
     .catch(error => console.error("Erro:", error))
 }
 
-function renderItem(pessoa) {
+// function renderItem(pessoa) {
 
-   const modal = document.getElementById('modal')
+//    const modal = document.getElementById('modal')
     
-    const div = document.createElement('div')
-    div.classList = 'container'
+//     const div = document.createElement('div')
+//     div.classList = 'container'
 
 
-    // pessoa.forEach(pessoa => )
-    // div.innerHTML = `
-    <div>
-        <h4>${pessoa.nome_completo}</h4>
-        <div id='foto'><img src='${pessoa.foto}' id='tamDetalhes'></div>
-        </div>
+//     // pessoa.forEach(pessoa => )
+//     // div.innerHTML = `
+//     <div>
+//         <h4>${pessoa.nome_completo}</h4>
+//         <div id='foto'><img src='${pessoa.foto}' id='tamDetalhes'></div>
+//         </div>
         
-            <div>
-        <p>Idade: ${pessoa.idade}</p>
-        <p>Genero: ${pessoa.genero}</p>
-        <p>Olhos: ${pessoa.olhos}</p>
-        <p>Altura: ${pessoa.altura}</p>
-        <p>Peso: ${pessoa.peso}</p>
-        <p>Cabelo: ${pessoa.cabelo}</p>
-        <p>Residente: ${pessoa.residente_em}</p>
-        <p>Ultima Vez Visto: ${pessoa.ultima_vez_visto}</p>
-        <p>Vestimentas: ${pessoa.vestimentas}</p>
-        <p>Data Desaparecimento: ${pessoa.data_desaparecimento}</p>
-        <p>Catacteristicas Fisicas: ${pessoa.caracteristicas_fisicas}</p>
-        <p>Contato: ${pessoa.contato}</p>
-        <p>Detalhes: ${pessoa.detalhes_desaparecimento}</p>
-        <button onclick='deleteDesaparecido(${pessoa.id})'> Excluir </button>
-        <button onclick='alterar(${pessoa.id})'> Alterar </button>
-                </div>
+//             <div>
+//         <p>Idade: ${pessoa.idade}</p>
+//         <p>Genero: ${pessoa.genero}</p>
+//         <p>Olhos: ${pessoa.olhos}</p>
+//         <p>Altura: ${pessoa.altura}</p>
+//         <p>Peso: ${pessoa.peso}</p>
+//         <p>Cabelo: ${pessoa.cabelo}</p>
+//         <p>Residente: ${pessoa.residente_em}</p>
+//         <p>Ultima Vez Visto: ${pessoa.ultima_vez_visto}</p>
+//         <p>Vestimentas: ${pessoa.vestimentas}</p>
+//         <p>Data Desaparecimento: ${pessoa.data_desaparecimento}</p>
+//         <p>Catacteristicas Fisicas: ${pessoa.caracteristicas_fisicas}</p>
+//         <p>Contato: ${pessoa.contato}</p>
+//         <p>Detalhes: ${pessoa.detalhes_desaparecimento}</p>
+//         <button onclick='deleteDesaparecido(${pessoa.id})'> Excluir </button>
+//         <button onclick='alterar(${pessoa.id})'> Alterar </button>
+//                 </div>
        
-   `
+//    `
 
 
-    modal.style.display = 'block';
-    //overlay.style.display = 'block';
-    modal.appendChild(div);
-}
+//     modal.style.display = 'block';
+//     //overlay.style.display = 'block';
+//     modal.appendChild(div);
+// }
 
 
 function addDesaparecidos() {
