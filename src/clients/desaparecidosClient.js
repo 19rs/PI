@@ -10,48 +10,6 @@ function cadastrarDesaparecido() {
   }
 }
 
-/*
-function criarDialogCadastroDesaparecido() {
-    let dialogCadastroDesaparecido = document.createElement('dialog')
-    dialogCadastroDesaparecido.className = 'w-1/2 mt-24 bg-gray-50 rounded-lg shadow-lg border border-bg-gray-100'
-    dialogCadastroDesaparecido.id = 'dialogCadastroDesaparecido'
-
-    let closeButton = document.createElement('button')
-    closeButton.className = 'absolute top-3 right-5 border border-gray-200 px-2 pb-0.5 rounded'
-    closeButton.innerText = 'x'
-    closeButton.addEventListener('click', () => dialogCadastroDesaparecido.close())
-    dialogCadastroDesaparecido.appendChild(closeButton)
-
-    let form = document.createElement('form')
-    form.className = "grid gap-5 bg-gray-50 pt-10 pb-16 px-5 px-32"
-    form.innerHTML = `
-        <h1 class="font-bold text-xl text-center my-5">CADASTRAR PESSOA DESAPARECIDA</h1>
-        <div class="grid w-full">
-            <label for="nome">Nome Completo:</label>
-            <input type="text" name="nome" id="nome" class="border px-2 py-3">
-        </div>
-        <div class="grid">
-            <label for="dataNascimento">Data Nascimento:</label>
-            <input type="date" name="dataNascimento" id="dataNascimento" class="border px-2 py-3">
-        </div>
-        <div class="h-4">
-            <span class="text-red-500 hidden text-center" id="spanErro"></span>
-        </div>
-        <button type="submit" class="px-10 border p-4 mt-4 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Cadastrar</button>
-    `
-
-    form.addEventListener('submit', function (event){
-        event.preventDefault()
-        logar()
-    })
-
-    dialogCadastroDesaparecido.appendChild(form)
-
-    document.body.appendChild(dialogCadastroDesaparecido)
-    dialogCadastroDesaparecido.showModal()
-}
-*/
-
 function listarDesaparecidos() {
   fetch("http://localhost:3000/pessoas")
     .then((response) => response.json())
@@ -106,6 +64,9 @@ function listarDesaparecidos() {
 function renderItem(pessoa) {
   const modal = document.getElementById("modal");
   const overlay = document.getElementById("overlay");
+  let perfilUsuario = sessionStorage.getItem("userProfile");
+  let mostrarBotoes = parseInt(perfilUsuario) === 1;
+
   modal.innerHTML = ` `;
 
   modal.innerHTML = `
@@ -128,13 +89,111 @@ function renderItem(pessoa) {
         <h6>PESO: ${pessoa.peso_estimado}</h6>
         <h6>RESIDENTE: ${pessoa.residente_em}</h6>
         <h6>ULTIMA VEZ VISTO: ${pessoa.ultima_vez_visto}</h6>
+        <div class='p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
+        <button id='btn' ">Alterar</button>
+
+          <button onclick='deleteDesaparecido(${pessoa.id})'>Excluir</button>
+          </div>
       
         </div>
      
           
    `;
+
+  document.getElementById(`btn`).onclick = function () {
+    alterar(pessoa);
+  };
   modal.style.display = "flex";
   overlay.style.display = "block";
+
+  overlay.onclick = function () {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+  };
+}
+
+function alterar(pessoa) {
+  const modal = document.getElementById("modal");
+  const overlay = document.getElementById("overlay");
+
+  modal.innerHTML = "";
+
+  modal.innerHTML = `
+  <div class='bg-[#191919] p-5 rounded-lg  justify-center flex flex-col  '>
+    
+  <label for="nomeAlterar">NOME COMPLETO: </label>
+  <input type="text" required id="nomeAlterar" class='text-black'>
+
+  <label for="cpfAlterar">CPF: </label>
+  <input type="text" id="cpfAlterar" class='text-black'>
+
+  
+
+  <label for="generoAlterar">GÊNERO: </label>
+  <input type="text" id="generoAlterar" class='text-black'>
+
+  <label for="olhosAlterar">OLHOS: </label>
+  <input type="text" id="olhosAlterar" class='text-black'>
+
+  <label for="altEstAlterar">ALTURA ESTIMADA: </label>
+  <input type="text" id="altEstAlterar" class='text-black'>
+
+  <label for="pesoAlterar">PESO ESTIMADO: </label>
+  <input type="text" id="pesoAlterar" class='text-black'> 
+
+  <label for="cabeloAlterar">CABELO: </label>
+  <input type="text" id="cabeloAlterar" class='text-black'>
+
+  <label for="CARACTERISTICAS">CARACTERISTICAS FISICAS: </label>
+  <input type="text" id="caracteAlterar" class='text-black'>
+
+  <label for="vestimentasAlterar">VESTIMENTAS: </label>
+  <input type="text" id="vestimentasAlterar" class='text-black'>
+
+  <label for="residenteAlterar">RESIDENTE EM: </label>
+  <input type="text" id="residenteAlterar" class='text-black'>
+
+  <label for="fotoAlterar">FOTO: </label>
+  <input type="file" id="fotoAlterar" class="w-full " name="fotoAlterar">
+
+
+
+  <label for="dtDesaAlterar">DATA DESAPARECIMENTO: </label>
+  <input type="date" required id="dtDesaAlterar" class='text-black'>
+
+  <label for="localDesaAlterar">LOCAL DESAPARECIMENTO: </label>
+  <input type="text" id="localDesaAlterar" class='text-black'>
+
+  <label for="detalhesAlterar">DETALHES DESAPARECIMENTO: </label>
+  <textarea class="border p-2 text-black" name="" id="detalhesAlterar" cols="10" rows="2"></textarea>
+
+  <label for="contatoAlterar">CONTATO: </label>
+  <input type="text" id="contatoAlterar" class='text-black'>
+
+    
+
+    <button onclick='updateDesaparecido(${pessoa.id})'>ALterar</button>
+      </div>
+  `;
+  document.getElementById("nomeAlterar").value = pessoa.nome;
+  document.getElementById("cpfAlterar").value = pessoa.cpf;
+  document.getElementById("generoAlterar").value = pessoa.genero;
+  document.getElementById("olhosAlterar").value = pessoa.olhos;
+  document.getElementById("altEstAlterar").value = pessoa.altura_estimada;
+  document.getElementById("pesoAlterar").value = pessoa.peso_estimado;
+  document.getElementById("cabeloAlterar").value = pessoa.cabelo;
+  document.getElementById("caracteAlterar").value =
+    pessoa.caracteristicas_fisicas;
+  document.getElementById("vestimentasAlterar").value = pessoa.vestimentas;
+
+  document.getElementById("residenteAlterar").value = pessoa.residente_em;
+  document.getElementById("dtDesaAlterar").value = pessoa.data_desaparecimento;
+  document.getElementById("localDesaAlterar").value =
+    pessoa.local_desaparecimento;
+
+  document.getElementById("detalhesAlterar").value =
+    pessoa.detalhes_desaparecimento;
+  document.getElementById("contatoAlterar").value = pessoa.contato;
 
   overlay.onclick = function () {
     modal.style.display = "none";
@@ -207,7 +266,9 @@ function addDesaparecidos() {
 
 function deleteDesaparecido(id) {
   const conv = parseInt(id);
-  fetch(`http://localhost:3000/desaparecidos/${conv}`, {
+
+ 
+  fetch(`http://localhost:3000/pessoa/${conv}`, {
     method: "DELETE",
   })
     .then((response) => response.json())
@@ -219,48 +280,30 @@ function deleteDesaparecido(id) {
 
 function updateDesaparecido(id) {
   const conv = parseInt(id);
+  //nao funciona !!!
 
-  const nome_completo = document.getElementById("nomeAlterar").value;
-  const idade = document.getElementById("idadeAlterar").value;
-  const genero = document.getElementById("generoAlterar").value;
-  const olhos = document.getElementById("olhosAlterar").value;
-  const altura = document.getElementById("alturaAlterar").value;
-  const peso = document.getElementById("pesoAlterar").value;
-  const cabelo = document.getElementById("cabeloAlterar").value;
-  const residente_em = document.getElementById("residenteAlterar").value;
-  const foto = document.getElementById("fotoAlterar").value;
-  const ultima_vez_visto = document.getElementById("ultimaAlterar").value;
-  const vestimentas = document.getElementById("vestimentasAlterar").value;
-  const data_desaparecimento = document.getElementById("dataAlterar").value;
-
-  const caracteristicas_fisicas =
-    document.getElementById("caracteAlterar").value;
-  const contato = document.getElementById("contatoAlterar").value;
-  const detalhes_desaparecimento = document.getElementById(
-    "detalhes-desaparecimentoAlterar"
-  ).value;
-
-  fetch(`http://localhost:3000/desaparecidos/${conv}`, {
+  fetch(`http://localhost:3000/pessoa/${conv}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      nome_completo,
-      idade,
-      genero,
-      olhos,
-      altura,
-      peso,
-      cabelo,
-      residente_em,
-      foto,
-      ultima_vez_visto,
-      vestimentas,
-      data_desaparecimento,
-      caracteristicas_fisicas,
-      contato,
-      detalhes_desaparecimento,
+      nome: document.getElementById("nomeAlterar").value,
+      cpf: document.getElementById("cpfAlterar").value,
+      genero: document.getElementById("generoAlterar").value,
+      olhos: document.getElementById("olhosAlterar").value,
+      altura_estimada: document.getElementById("altEstAlterar").value,
+      peso_estimado: document.getElementById("pesoAlterar").value,
+      cabelo: document.getElementById("cabeloAlterar").value,
+      caracteristicas_fisicas: document.getElementById("caracteAlterar").value,
+      vestimentas: document.getElementById("vestimentasAlterar").value,
+      residente_em: document.getElementById("residenteAlterar").value,
+      foto: document.getElementById("fotoAlterar").value,
+      data_desaparecimento: document.getElementById("dtDesaAlterar").value,
+      local_desaparecimento: document.getElementById("localDesaAlterar").value,
+      detalhes_desaparecimento:
+        document.getElementById("detalhesAlterar").value,
+      contato: document.getElementById("contatoAlterar").value,
     }),
   })
     .then((response) => response.json())

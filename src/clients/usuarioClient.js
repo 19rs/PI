@@ -10,7 +10,7 @@ function addUsuario() {
   formData.append("nome", nome);
   formData.append("email", email);
   formData.append("username", username);
-  formData.append("perfil" , null)
+  formData.append("perfil" , 2)
   formData.append("senha", senha);
   
   
