@@ -62,6 +62,27 @@ export async function selectUsuario(req, res) {
 }
 
 
+export async function deleteUsuario(req, res) {
+    const db = await openDB()
+    let stmt = null
+    
+    const id = req.body.id
+
+    try {
+        stmt = await db.prepare(`DELETE FROM Usuarios WHERE id = ?`)
+        await stmt.bind([ id ])
+        await stmt.run()
+        res.status(201).json({ message: 'Usuario deletada com sucesso' })
+    } catch(error) {
+        console.error('Erro ao deletar Usuario:', error)
+        throw error
+    } finally {
+        stmt ? await stmt.finalize() : null
+        await db.close()
+    }
+}
+
+
 
 //depois usar hash na senha
 export async function logar(req, res) {

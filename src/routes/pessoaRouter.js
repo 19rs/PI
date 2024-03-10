@@ -9,7 +9,7 @@ const pessoasRouter = Router()
 pessoasRouter.get('/pessoas', selectPessoas)
 pessoasRouter.get('/pessoa', selectPessoa)
 pessoasRouter.post('/pessoas', insertPessoa)
-pessoasRouter.put('/pessoa', updatePessoa)
-pessoasRouter.delete('/pessoa', deletePessoa)
+pessoasRouter.put('/pessoa/:id', updatePessoa)
+pessoasRouter.delete('/pessoa/:id', deletePessoa)
 
 export default pessoasRouter

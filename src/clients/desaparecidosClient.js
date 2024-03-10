@@ -76,7 +76,7 @@ function renderItem(pessoa) {
       
        
         <h6>CPF: ${pessoa.cpf}</h6>
-        <h6>ALTURA: ${pessoa.altura}</h6>
+        <h6>ALTURA: ${pessoa.altura_estimada}</h6>
         <h6>CABELO: ${pessoa.cabelo}</h6>
         <h6>CARACTERISTICAS: ${pessoa.caracteristicas_fisicas}</h6>
         <h6>CONTATO: ${pessoa.contato}</h6>
@@ -84,11 +84,9 @@ function renderItem(pessoa) {
         <h6>DESAPARECIMENTO: ${pessoa.data_desaparecimento}</h6>
         <h6>DETALHES: ${pessoa.detalhes_desaparecimento}</h6>
         <h6>GENERO: ${pessoa.genero}</h6>
-        <h6>IDADE: ${pessoa.idade}</h6>
         <h6>OLHOS: ${pessoa.olhos}</h6>
         <h6>PESO: ${pessoa.peso_estimado}</h6>
         <h6>RESIDENTE: ${pessoa.residente_em}</h6>
-        <h6>ULTIMA VEZ VISTO: ${pessoa.ultima_vez_visto}</h6>
         <div class='p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
         <button id='btn' ">Alterar</button>
 
@@ -152,10 +150,6 @@ function alterar(pessoa) {
 
   <label for="residenteAlterar">RESIDENTE EM: </label>
   <input type="text" id="residenteAlterar" class='text-black'>
-
-  <label for="fotoAlterar">FOTO: </label>
-  <input type="file" id="fotoAlterar" class="w-full " name="fotoAlterar">
-
 
 
   <label for="dtDesaAlterar">DATA DESAPARECIMENTO: </label>
@@ -267,48 +261,60 @@ function addDesaparecidos() {
 function deleteDesaparecido(id) {
   const conv = parseInt(id);
 
- 
+  if (isNaN(conv)) {
+    alert("ID inválido");
+    return;
+  }
+
   fetch(`http://localhost:3000/pessoa/${conv}`, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("OK");
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Erro ao excluir pessoa");
+      }
+      return response.json();
     })
-    .catch((error) => alert("Erro:", error));
+    .then((data) => {
+      alert("Pessoa deletada com sucesso");
+    })
+    .catch((error) => {
+      alert("Erro: " + error.message);
+    });
 }
+
 
 function updateDesaparecido(id) {
   const conv = parseInt(id);
-  //nao funciona !!!
+  
 
-  fetch(`http://localhost:3000/pessoa/${conv}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      nome: document.getElementById("nomeAlterar").value,
-      cpf: document.getElementById("cpfAlterar").value,
-      genero: document.getElementById("generoAlterar").value,
-      olhos: document.getElementById("olhosAlterar").value,
-      altura_estimada: document.getElementById("altEstAlterar").value,
-      peso_estimado: document.getElementById("pesoAlterar").value,
-      cabelo: document.getElementById("cabeloAlterar").value,
-      caracteristicas_fisicas: document.getElementById("caracteAlterar").value,
-      vestimentas: document.getElementById("vestimentasAlterar").value,
-      residente_em: document.getElementById("residenteAlterar").value,
-      foto: document.getElementById("fotoAlterar").value,
-      data_desaparecimento: document.getElementById("dtDesaAlterar").value,
-      local_desaparecimento: document.getElementById("localDesaAlterar").value,
-      detalhes_desaparecimento:
-        document.getElementById("detalhesAlterar").value,
-      contato: document.getElementById("contatoAlterar").value,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert("ok");
+  const formData = new FormData();
+  formData.append("id", conv);
+  formData.append("nome", document.getElementById("nomeAlterar").value);
+  formData.append("cpf", document.getElementById("cpfAlterar").value);
+  formData.append("genero", document.getElementById("generoAlterar").value);
+  formData.append("olhos", document.getElementById("olhosAlterar").value);
+  formData.append("altura_estimada", document.getElementById("altEstAlterar").value);
+  formData.append("peso_estimado", document.getElementById("pesoAlterar").value);
+  formData.append("cabelo", document.getElementById("cabeloAlterar").value);
+  formData.append("caracteristicas_fisicas", document.getElementById("caracteAlterar").value);
+  formData.append("vestimentas", document.getElementById("vestimentasAlterar").value);
+  formData.append("residente_em", document.getElementById("residenteAlterar").value);
+  formData.append("data_desaparecimento", document.getElementById("dtDesaAlterar").value);
+  formData.append("local_desaparecimento", document.getElementById("localDesaAlterar").value);
+  formData.append("detalhes_desaparecimento", document.getElementById("detalhesAlterar").value);
+  formData.append("contato", document.getElementById("contatoAlterar").value);
+
+
+    fetch(`http://localhost:3000/pessoa/${conv}`, {
+      method: "PUT",
+      body: formData,
     })
-    .catch((error) => alert("Erro:", error));
+      .then((response) => response.json())
+      .then((data) => {
+     
+        alert(data.message);
+        console.log("Alterado  com sucesso!");
+      })
+      .catch((error) => console.log("Erro:" + error));
 }
