@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styleUsuario.css">
+    <title>CRIAR CONTA</title>
+</head>
+
+<body>
+    <header>
+      
+        <nav>
+            <ul>
+                <li><a href="./index.html">HOME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <form id="form" action="#">
+            <p>Crie sua conta</p>
+            <span>Crie uma conta para ver e cadastrar pessoas.</span>
+            <label for="nome">NOME: </label>
+            <input type="text" required id="nome">
+            <label for="cpf">EMAIL: </label>
+            <input type="text" required id="email">
+            <label for="username">USERNAME: </label>
+            <input type="text" required id="username">
+            <label for="senha">SENHA: </label>
+            <input type="text" required id="senha">
+            <input type="submit" value="Criar sua conta" id="btn" onclick="addUsuario()">
+
+        </form>
+        <!-- <button id="viewBtn">VIEW</button> -->
+    </main>
+
+    <div id="overlay"></div>
+    <div id="modal"></div>
+
+    <footer>
+        <p>Entre em contato pelo WhatsApp</p>
+        <img src="./img/whatsapp.png" alt="">
+    </footer>
+
+    <script src="../clients/usuarioClient.js"></script>
+ 
+</body>
+
+</html>

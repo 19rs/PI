@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +17,10 @@
     <main class="mt-32 container mx-auto">
         <h1 class="text-center mb-6 text-2xl font-bold">Lista de Desaparecidos</h1>
         <section id="listaDesparecidos">
-            
+           
         </section>
-        <div class="modal" style="display: none;"></div>
+        <div id="modal" class=" hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-auto bg-cover text-white z-1000"></div>
+            <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-999"></div>
     </main>
     
     <script src="../clients/authClient.js"></script>

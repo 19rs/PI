@@ -101,8 +101,8 @@ export async function insertPessoa(req, res) {
     }
 
     try {
-        stmt = await db.prepare(`INSERT INTO Pessoas (nome, cpf, data_nascimento, genero, olhos, altura_estimada, peso_estimado, cabelo, caracteristicas_fisicas, vestimentas, residente_em, foto, data_desaparecimento, local_desaparecimento, detalhes_desaparecimento, contato) VALUES(@nome, @cpf, @data_nascimento, @genero, @olhos, @altura_estimada, @peso_estimado, @cabelo, @caracteristicas_fisicas, @vestimentas, @residente_em, @foto, @data_desaparecimento, @local_desaparecimento, @detalhes_desaparecimento, @contato)`)
-        await stmt.bind({ '@nome': pessoa.nome, '@cpf': pessoa.cpf, '@data_nascimento': pessoa.data_nascimento, '@genero': pessoa.genero, '@olhos': pessoa.olhos, '@altura_estimada': pessoa.altura_estimada, '@peso_estimado': pessoa.peso_estimado, '@cabelo': pessoa.cabelo, '@caracteristicas_fisicas': pessoa.caracteristicas_fisicas, '@vestimentas': pessoa.vestimentas, '@residente_em': pessoa.residente_em, '@foto': pessoa.foto, '@data_desaparecimento': pessoa.data_desaparecimento, '@local_desaparecimento': pessoa.local_desaparecimento, '@detalhes_desaparecimento': pessoa.detalhes_desaparecimento, '@contato': pessoa.contato })
+        stmt = await db.prepare(`INSERT INTO Pessoas (nome, cpf, genero, olhos, altura_estimada, peso_estimado, cabelo, caracteristicas_fisicas, vestimentas, residente_em, foto, data_desaparecimento, local_desaparecimento, detalhes_desaparecimento, contato) VALUES(@nome, @cpf, @genero, @olhos, @altura_estimada, @peso_estimado, @cabelo, @caracteristicas_fisicas, @vestimentas, @residente_em, @foto, @data_desaparecimento, @local_desaparecimento, @detalhes_desaparecimento, @contato)`)
+        await stmt.bind({ '@nome': pessoa.nome, '@cpf': pessoa.cpf, '@genero': pessoa.genero, '@olhos': pessoa.olhos, '@altura_estimada': pessoa.altura_estimada, '@peso_estimado': pessoa.peso_estimado, '@cabelo': pessoa.cabelo, '@caracteristicas_fisicas': pessoa.caracteristicas_fisicas, '@vestimentas': pessoa.vestimentas, '@residente_em': pessoa.residente_em, '@foto': pessoa.foto, '@data_desaparecimento': pessoa.data_desaparecimento, '@local_desaparecimento': pessoa.local_desaparecimento, '@detalhes_desaparecimento': pessoa.detalhes_desaparecimento, '@contato': pessoa.contato })
         await stmt.run()
 
         res.status(201).json({ message: 'Pessoa cadastrada com sucesso' })
@@ -123,8 +123,8 @@ export async function updatePessoa(req, res) {
     const pessoa = req.body
 
     try {
-        stmt = await db.prepare(`UPDATE Pessoas SET nome = ?, cpf = ?, data_nascimento = ?, genero = ?, olhos = ?, altura_estimada = ?, peso_estimado = ?, cabelo = ?, caracteristicas_fisicas = ?, vestimentas = ?, residente_em = ?, foto = ?, data_desaparecimento = ?, local_desaparecimento = ?, detalhes_desaparecimento = ?, contato = ? WHERE id = ?`)
-        await stmt.bind([ pessoa.nome, pessoa.cpf, pessoa.data_nascimento, pessoa.genero, pessoa.olhos, pessoa.altura_estimada, pessoa.peso_estimado, pessoa.cabelo, pessoa.caracteristicas_fisicas, pessoa.vestimentas, pessoa.residente_em, pessoa.foto, pessoa.data_desaparecimento, pessoa.local_desaparecimento, pessoa.detalhes_desaparecimento, pessoa.contato, pessoa.id ])
+        stmt = await db.prepare(`UPDATE Pessoas SET nome = ?, cpf = ?, genero = ?, olhos = ?, altura_estimada = ?, peso_estimado = ?, cabelo = ?, caracteristicas_fisicas = ?, vestimentas = ?, residente_em = ?,  data_desaparecimento = ?, local_desaparecimento = ?, detalhes_desaparecimento = ?, contato = ? WHERE id = ?`)
+        await stmt.bind([ pessoa.nome, pessoa.cpf, pessoa.genero, pessoa.olhos, pessoa.altura_estimada, pessoa.peso_estimado, pessoa.cabelo, pessoa.caracteristicas_fisicas, pessoa.vestimentas, pessoa.residente_em, pessoa.data_desaparecimento, pessoa.local_desaparecimento, pessoa.detalhes_desaparecimento, pessoa.contato, pessoa.id ])
         await stmt.run()
         res.status(201).json({ message: 'Pessoa atualizada com sucesso' })
     } catch(error) {
@@ -140,8 +140,9 @@ export async function updatePessoa(req, res) {
 export async function deletePessoa(req, res) {
     const db = await openDB()
     let stmt = null
-    
-    const id = req.body.id
+    const id = req.params.id; 
+
+    //const id = req.body.id assim nao exclui da db
 
     try {
         stmt = await db.prepare(`DELETE FROM Pessoas WHERE id = ?`)
