@@ -142,8 +142,6 @@ export async function deletePessoa(req, res) {
     let stmt = null
     const id = req.params.id; 
 
-    //const id = req.body.id assim nao exclui da db
-
     try {
         stmt = await db.prepare(`DELETE FROM Pessoas WHERE id = ?`)
         await stmt.bind([ id ])

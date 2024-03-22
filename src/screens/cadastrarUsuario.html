@@ -30,12 +30,13 @@
             <input type="text" required id="username">
             <label for="senha">SENHA: </label>
             <input type="text" required id="senha">
-            <input type="submit" value="Criar sua conta" id="btn" onclick="addUsuario()">
+            <input type="submit" value="Criar sua conta" id="btn">
 
         </form>
         <!-- <button id="viewBtn">VIEW</button> -->
     </main>
 
+    
     <div id="overlay"></div>
     <div id="modal"></div>
 
@@ -46,6 +47,13 @@
 
     <script src="../clients/usuarioClient.js"></script>
  
+    <script>
+        let form = document.getElementById("form")
+        form.addEventListener('submit', function (event){
+        event.preventDefault()
+        addUsuario()
+    })
+    </script>
 </body>
 
 </html>
