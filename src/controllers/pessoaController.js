@@ -37,7 +37,7 @@ export async function selectPessoas(req, res) {
     let stmt = null
 
     try {
-        stmt = await db.prepare('SELECT * FROM Pessoas ORDER BY data_desaparecimento DESC LIMIT 20')
+        stmt = await db.prepare('SELECT * FROM Pessoas WHERE status = 0 ORDER BY data_desaparecimento DESC LIMIT 20')
         const pessoas = await stmt.all()
         return res.json(pessoas)
     } catch(error) {
@@ -116,6 +116,7 @@ export async function insertPessoa(req, res) {
 }
 
 
+//falta add data_nascimento
 export async function updatePessoa(req, res) {
     const db = await openDB()
     let stmt = null

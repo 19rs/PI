@@ -11,7 +11,7 @@ function loginLogout() {
 
 function criarDialogLogin() {
     let dialogLogin = document.createElement('dialog')
-    dialogLogin.className = 'w-full sm:w-1/2 mt-24 bg-gray-50 rounded-lg shadow-lg border border-bg-gray-100'
+    dialogLogin.className = 'w-full sm:w-1/2 mt-24 bg-gray-50 rounded-lg shadow-lg border border-gray-300'
     dialogLogin.id = 'dialogLogin'
 
     let closeButton = document.createElement('button')
@@ -26,11 +26,11 @@ function criarDialogLogin() {
         <h1 class="font-bold text-xl text-center my-5">LOGIN</h1>
         <div class="grid w-full">
             <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email" class="border px-2 py-3">
+            <input type="email" name="email" id="emailLogin" class="border px-2 py-3">
         </div>
         <div class="grid">
             <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha" class="border px-2 py-3">
+            <input type="password" name="senha" id="senhaLogin" class="border px-2 py-3">
         </div>
         <div class="h-4">
             <span class="text-red-500 hidden text-center" id="spanErro"></span>
@@ -38,7 +38,7 @@ function criarDialogLogin() {
 
         <button type="submit" class="px-10 border p-4 mt-4 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Entrar</button>
 
-        <p class="mx-auto"><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
+        <p class="mx-auto text-sm"><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
     `
 
     form.addEventListener('submit', function (event){
@@ -55,8 +55,8 @@ function criarDialogLogin() {
 
 
 function logar() {
-    let email = document.getElementById('email').value
-    let senha = document.getElementById('senha').value
+    let email = document.getElementById('emailLogin').value
+    let senha = document.getElementById('senhaLogin').value
 
     fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -116,8 +116,8 @@ function carregarMenu() {
         navMenu.innerHTML = `
         <div class="flex divide-x py-2 text-white font-bold">
             <a href="./index.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('index') ? 'bg-white text-black' : ''}">HOME</a>
-            <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
             <a href="desaparecidos.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('desaparecidos') ? 'bg-white text-black' : ''}">DESAPARECIDOS</a>
+            <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
             <button class="px-5 py-0.5 hover:underline hover:underline-offset-4" id="botaoLoginLogout" onclick="loginLogout()">${userID ? 'SAIR' : 'ENTRAR'}</button>
         </div>
         `
@@ -125,8 +125,9 @@ function carregarMenu() {
         navMenu.innerHTML = `
         <div class="flex divide-x py-2 text-white font-bold">
             <a href="./index.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('index') ? 'bg-white text-black' : ''}">HOME</a>
-            <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
             <a href="desaparecidos.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('desaparecidos') ? 'bg-white text-black' : ''}">DESAPARECIDOS</a>
+            <a href="usuarios.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('usuarios') ? 'bg-white text-black' : ''}">USUÁRIOS</a>
+            <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
             <button class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('cadastrar') ? 'bg-white text-black' : ''}" id="botaoCadastrarDesaparecido" onclick="cadastrarDesaparecido()">CADASTAR</button>
             <button class="px-5 py-0.5 hover:underline hover:underline-offset-4" id="botaoLoginLogout" onclick="loginLogout()">${userID ? 'SAIR' : 'ENTRAR'}</button>
         </div>

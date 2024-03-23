@@ -4,32 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./styles/styleUsuario.css">
     <title>CRIAR CONTA</title>
 </head>
 
 <body>
-    <header>
-      
-        <nav>
-            <ul>
-                <li><a href="./index.html">HOME</a></li>
-            </ul>
+    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20">
+        <img class="h-10" src="img/newLogo.png" alt="logo">
+        <nav id="navMenu">
+            
         </nav>
     </header>
 
-    <main id="main">
+    <main id="main" class="pt-32">
         <form id="form" action="#">
             <p>Crie sua conta</p>
             <span>Crie uma conta para ver e cadastrar pessoas.</span>
             <label for="nome">NOME: </label>
             <input type="text" required id="nome">
             <label for="cpf">EMAIL: </label>
-            <input type="text" required id="email">
+            <input type="text" required id="emailUsuario">
             <label for="username">USERNAME: </label>
             <input type="text" required id="username">
             <label for="senha">SENHA: </label>
-            <input type="text" required id="senha">
+            <input type="text" required id="senhaUsuario">
             <input type="submit" value="Criar sua conta" id="btn">
 
         </form>
@@ -40,14 +39,16 @@
     <div id="overlay"></div>
     <div id="modal"></div>
 
-    <footer>
+    <footer class="fixed w-full bottom-0">
         <p>Entre em contato pelo WhatsApp</p>
         <img src="./img/whatsapp.png" alt="">
     </footer>
 
-    <script src="../clients/usuarioClient.js"></script>
+    <script src="../clients/authClient.js"></script>
+    <script src="../clients/usuariosClient.js"></script>
  
     <script>
+        document.onload = carregarMenu()
         let form = document.getElementById("form")
         form.addEventListener('submit', function (event){
         event.preventDefault()
