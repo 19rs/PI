@@ -21,7 +21,7 @@ function criarDialogLogin() {
     dialogLogin.appendChild(closeButton)
 
     let form = document.createElement('form')
-    form.className = "grid gap-5 bg-gray-50 pt-10 pb-16 px-5 sm:px-32"
+    form.className = "grid gap-5 bg-gray-50 pt-10 pb-16 px-5 sm:px-20"
     form.innerHTML = `
         <h1 class="font-bold text-xl text-center my-5">LOGIN</h1>
         <div class="grid w-full">
@@ -38,7 +38,7 @@ function criarDialogLogin() {
 
         <button type="submit" class="px-10 border p-4 mt-4 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Entrar</button>
 
-        <p><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
+        <p class="mx-auto"><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
     `
 
     form.addEventListener('submit', function (event){
