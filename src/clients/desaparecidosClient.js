@@ -70,29 +70,161 @@ function renderItem(pessoa) {
   modal.innerHTML = ` `;
 
   modal.innerHTML = `
-     <div class='bg-[#191919] p-5 rounded-lg w-full items-center justify-center flex flex-col '>
-     <img src='${pessoa.foto}' class='w-80 h-auto rounded-md' id='tamDetalhes'>
-        <h4 class='text-2xl font-bold p-4'>${pessoa.nome}</h4>
-      
-       
-        <h6>CPF: ${pessoa.cpf}</h6>
-        <h6>ALTURA: ${pessoa.altura_estimada}</h6>
-        <h6>CABELO: ${pessoa.cabelo}</h6>
-        <h6>CARACTERISTICAS: ${pessoa.caracteristicas_fisicas}</h6>
-        <h6>CONTATO: ${pessoa.contato}</h6>
-        <h6>NASCIMENTO: ${pessoa.data_nascimento}</h6>
-        <h6>DESAPARECIMENTO: ${pessoa.data_desaparecimento}</h6>
-        <h6>DETALHES: ${pessoa.detalhes_desaparecimento}</h6>
-        <h6>GENERO: ${pessoa.genero}</h6>
-        <h6>OLHOS: ${pessoa.olhos}</h6>
-        <h6>PESO: ${pessoa.peso_estimado}</h6>
-        <h6>RESIDENTE: ${pessoa.residente_em}</h6>
-        <div class='p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
-        <button id='btn' ">Alterar</button>
+ <div class='bg-[#191919] p-10 rounded-lg  w-[70vw] '>
 
-          <button onclick='deleteDesaparecido(${pessoa.id})'>Excluir</button>
-          </div>
-      
+  <div class='flex '>
+  <div class='w-6/12' >
+  <img src='${
+    pessoa.foto
+  }' class='rounded-md w-full h-full ' >
+  </div>
+             
+
+      <div class='flex flex-col gap-10 items-center w-full ' >
+                 
+              <div class='flex gap-10 ' >
+                      <div class='flex-col '>
+                      <div class="flow-root w-full">
+                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-80">
+                         
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium">Nome</dt>
+                            <dd class="sm:col-span-2 capitalize">${pessoa.nome}</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Altura</dt>
+                            <dd class=" sm:col-span-2">${
+                              pessoa.altura_estimada
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Cabelo</dt>
+                            <dd class=" sm:col-span-2 capitalize">${pessoa.cabelo}</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Caracteristicas</dt>
+                            <dd class=" sm:col-span-2 capitalize" >${
+                              pessoa.caracteristicas_fisicas
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <dt class="font-medium ">Contato</dt>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.contato}</dd>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <dt class="font-medium ">Residente</dt>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.residente_em}</dd>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <dt class="font-medium ">Idade</dt>
+                          <dd class=" sm:col-span-2">${pessoa.idade}</dd>
+                        </div>
+              </dl>
+</div>
+                    
+                      </div>
+
+                      <div class='flex-col '>
+                    
+                    
+                    
+                      <div class="flow-root w-full">
+                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-80">
+                         
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium">Nascimento</dt>
+                            <dd class="sm:col-span-2">${
+                              pessoa.data_nascimento
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Desapareu</dt>
+                            <dd class=" sm:col-span-2 " >${
+                              pessoa.data_desaparecimento
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Genero</dt>
+                            <dd class=" sm:col-span-2 capitalize">${pessoa.genero}</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Olhos</dt>
+                            <dd class=" sm:col-span-2 capitalize">${
+                              pessoa.olhos
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                            <dt class="font-medium ">Peso</dt>
+                            <dd class=" sm:col-span-2">${
+                              pessoa.peso_estimado
+                            }</dd>
+                          </div>
+
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <dt class="font-medium ">Contato</dt>
+                          <dd class=" sm:col-span-2">${pessoa.contato}</dd>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium ">Detalhes</dt>
+                        <dd class=" sm:col-span-2 capitalize">${
+                          pessoa.detalhes_desaparecimento
+                        }</dd>
+                      </div>
+              </dl>
+</div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+
+
+
+                      </div>
+                 
+ 
+              </div>
+    
+   
+                 
+                <div class=' p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
+              <div class='text-center flex gap-5'>
+              <a
+              id="btn"
+              class="block rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-105 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+              href="#" >
+              Alterar
+                </a>
+            
+              <a
+              id="deletar"
+              class="block rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-105 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+              href="#" >
+              Excluir
+                </a>
+              </div>
+
+
+              
+                </div>
+                </div>
+              </div>
+
+            
         </div>
      
           
@@ -101,6 +233,11 @@ function renderItem(pessoa) {
   document.getElementById(`btn`).onclick = function () {
     alterar(pessoa);
   };
+
+   document.getElementById(`deletar`).onclick = function () {
+    deleteDesaparecido(pessoa.id);
+  };
+  
   modal.style.display = "flex";
   overlay.style.display = "block";
 
@@ -117,58 +254,299 @@ function alterar(pessoa) {
   modal.innerHTML = "";
 
   modal.innerHTML = `
-  <div class='bg-[#191919] p-5 rounded-lg  justify-center flex flex-col  '>
-    
-  <label for="nomeAlterar">NOME COMPLETO: </label>
-  <input type="text" required id="nomeAlterar" class='text-black'>
 
-  <label for="cpfAlterar">CPF: </label>
-  <input type="text" id="cpfAlterar" class='text-black'>
+  <div class='bg-[#191919] p-10 flex-col  rounded-lg flex  items-start '>
+
+  <div class='flex gap-12	py-5'>
+
+  <div class='flex flex-col  gap-2 w-80 '>
+
+  <div>
+  <label
+  for="nomeAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="nomeAlterar"
+    placeholder="Nome"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Nome
+  </span>
+  </div>
+
+
+  <div>
+  <label
+  for="cpfAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="cpfAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    CPF
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="generoAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="generoAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Genero
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="olhosAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="olhosAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Olhos
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="altEstAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="altEstAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Altura
+  </span>
+  </div>
+
+
+  <div>
+  <label
+  for="pesoAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="pesoAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Peso
+  </span>
+  </div>
+
 
   
+  <div>
+  <label
+  for="cabeloAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="cabeloAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
 
-  <label for="generoAlterar">GÊNERO: </label>
-  <input type="text" id="generoAlterar" class='text-black'>
-
-  <label for="olhosAlterar">OLHOS: </label>
-  <input type="text" id="olhosAlterar" class='text-black'>
-
-  <label for="altEstAlterar">ALTURA ESTIMADA: </label>
-  <input type="text" id="altEstAlterar" class='text-black'>
-
-  <label for="pesoAlterar">PESO ESTIMADO: </label>
-  <input type="text" id="pesoAlterar" class='text-black'> 
-
-  <label for="cabeloAlterar">CABELO: </label>
-  <input type="text" id="cabeloAlterar" class='text-black'>
-
-  <label for="CARACTERISTICAS">CARACTERISTICAS FISICAS: </label>
-  <input type="text" id="caracteAlterar" class='text-black'>
-
-  <label for="vestimentasAlterar">VESTIMENTAS: </label>
-  <input type="text" id="vestimentasAlterar" class='text-black'>
-
-  <label for="residenteAlterar">RESIDENTE EM: </label>
-  <input type="text" id="residenteAlterar" class='text-black'>
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Cabelo
+  </span>
+  </div>
 
 
-  <label for="dtDesaAlterar">DATA DESAPARECIMENTO: </label>
-  <input type="date" required id="dtDesaAlterar" class='text-black'>
 
-  <label for="localDesaAlterar">LOCAL DESAPARECIMENTO: </label>
-  <input type="text" id="localDesaAlterar" class='text-black'>
 
-  <label for="detalhesAlterar">DETALHES DESAPARECIMENTO: </label>
-  <textarea class="border p-2 text-black" name="" id="detalhesAlterar" cols="10" rows="2"></textarea>
+  </div>
 
-  <label for="contatoAlterar">CONTATO: </label>
-  <input type="text" id="contatoAlterar" class='text-black'>
+  <div  class='flex flex-col  w-80 gap-2 '>
 
-    
 
-    <button onclick='updateDesaparecido(${pessoa.id})'>ALterar</button>
+  <div>
+  <label
+  for="caracteAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="caracteAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+    Caracteristicas Fisicas
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="vestimentasAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="vestimentasAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Vestimentas
+  </span>
+  </div>
+
+
+  <div>
+  <label
+  for="residenteAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="residenteAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Residente Em
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="dtDesaAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="date"
+    id="dtDesaAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Data Desaparecimento
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="localDesaAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="localDesaAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Local Desaparecimento
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="contatoAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="contatoAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Contato
+  </span>
+  </div>
+
+  <div>
+  <label
+  for="detalhesAlterar"
+  class="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600">
+  <input
+    type="text"
+    id="detalhesAlterar"
+    placeholder="CPF"
+    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+  />
+
+  <span
+    class="absolute start-0 top-2 -translate-y-1/2 text-xs  transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+  >
+   Detalhes
+  </span>
+  </div>
+
+ 
+  </div>
+  </div>
+
+
+
+  <div class=' w-full text-center'>
+  <a
+  id="AlterButton"
+  class="block rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-105 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+  href="#" >
+  Alterar
+    </a>
+  </div>
       </div>
   `;
+
+  document.getElementById("AlterButton").addEventListener("click", function () {
+    updateDesaparecido(pessoa.id);
+  });
+
   document.getElementById("nomeAlterar").value = pessoa.nome;
   document.getElementById("cpfAlterar").value = pessoa.cpf;
   document.getElementById("generoAlterar").value = pessoa.genero;
@@ -226,11 +604,17 @@ function addDesaparecidos() {
     foto = inputFoto.files[0];
   }
 
+  const anoAtual = new Date().getFullYear();
+
+  const anoNascimento = data_nascimento.substring(0, 4);
+  let idade = anoAtual - anoNascimento;
+
   const formData = new FormData();
 
   formData.append("nome", nome);
   formData.append("cpf", cpf);
   formData.append("data_nascimento", data_nascimento);
+  formData.append("idade", idade);
   formData.append("genero", genero);
   formData.append("olhos", olhos);
   formData.append("altura_estimada", altura_estimada);
@@ -253,7 +637,8 @@ function addDesaparecidos() {
     .then((data) => {
       // displaySuccessMessage()
       alert(data.message);
-      console.log("Cadastro realizado com sucesso!");
+      // console.log("Cadastro realizado com sucesso!");
+      
     })
     .catch((error) => console.log("Erro:" + error));
 }
@@ -283,10 +668,8 @@ function deleteDesaparecido(id) {
     });
 }
 
-
 function updateDesaparecido(id) {
   const conv = parseInt(id);
-  
 
   const formData = new FormData();
   formData.append("id", conv);
@@ -294,27 +677,49 @@ function updateDesaparecido(id) {
   formData.append("cpf", document.getElementById("cpfAlterar").value);
   formData.append("genero", document.getElementById("generoAlterar").value);
   formData.append("olhos", document.getElementById("olhosAlterar").value);
-  formData.append("altura_estimada", document.getElementById("altEstAlterar").value);
-  formData.append("peso_estimado", document.getElementById("pesoAlterar").value);
+  formData.append(
+    "altura_estimada",
+    document.getElementById("altEstAlterar").value
+  );
+  formData.append(
+    "peso_estimado",
+    document.getElementById("pesoAlterar").value
+  );
   formData.append("cabelo", document.getElementById("cabeloAlterar").value);
-  formData.append("caracteristicas_fisicas", document.getElementById("caracteAlterar").value);
-  formData.append("vestimentas", document.getElementById("vestimentasAlterar").value);
-  formData.append("residente_em", document.getElementById("residenteAlterar").value);
-  formData.append("data_desaparecimento", document.getElementById("dtDesaAlterar").value);
-  formData.append("local_desaparecimento", document.getElementById("localDesaAlterar").value);
-  formData.append("detalhes_desaparecimento", document.getElementById("detalhesAlterar").value);
+  formData.append(
+    "caracteristicas_fisicas",
+    document.getElementById("caracteAlterar").value
+  );
+  formData.append(
+    "vestimentas",
+    document.getElementById("vestimentasAlterar").value
+  );
+  formData.append(
+    "residente_em",
+    document.getElementById("residenteAlterar").value
+  );
+  formData.append(
+    "data_desaparecimento",
+    document.getElementById("dtDesaAlterar").value
+  );
+  formData.append(
+    "local_desaparecimento",
+    document.getElementById("localDesaAlterar").value
+  );
+  formData.append(
+    "detalhes_desaparecimento",
+    document.getElementById("detalhesAlterar").value
+  );
   formData.append("contato", document.getElementById("contatoAlterar").value);
 
-
-    fetch(`http://localhost:3000/pessoa/${conv}`, {
-      method: "PUT",
-      body: formData,
+  fetch(`http://localhost:3000/pessoa/${conv}`, {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+      console.log("Alterado  com sucesso!");
     })
-      .then((response) => response.json())
-      .then((data) => {
-     
-        alert(data.message);
-        console.log("Alterado  com sucesso!");
-      })
-      .catch((error) => console.log("Erro:" + error));
+    .catch((error) => console.log("Erro:" + error));
 }
