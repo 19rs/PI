@@ -38,7 +38,7 @@ function criarDialogLogin() {
 
         <button type="submit" class="px-10 border p-4 mt-4 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Entrar</button>
 
-        <p><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
+        <p class='text-center'><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
     `
 
     form.addEventListener('submit', function (event){

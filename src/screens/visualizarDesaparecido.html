@@ -99,7 +99,7 @@
 
             const pessoa = arrayPessoas.find(p => p.id === id);
             modal.innerHTML = `
-              <form id="form" action="#">
+              <form id="form">
 
 <div>
     <div id="container-form">
@@ -154,10 +154,10 @@
             <label for="senha">DETALHES DESAPARECIMENTO: </label>
             <input type="text" id="detalhes-desaparecimentoAlterar">
 
-        </div>
-    </div>
+             </div>
+                </div>
 
-    <input type="submit" value="Alterar" id="btn" onclick="updateDesaparecido(${pessoa.id})">
+            <input type="submit" value="Alterar" id="btn" onclick="updateDesaparecido(${pessoa.id})">
               `
             modal.style.display = 'block';
 
