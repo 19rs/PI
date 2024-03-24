@@ -20,9 +20,10 @@ function addUsuario() {
   })
     .then((response) => response.json())
     .then((data) => {
-   
-      alert(data.message);
+      alert('OK')
       console.log("Cadastro realizado com sucesso!");
+
+      document.getElementById('alert').style.display = 'block'
     })
     .catch((error) => console.log("Erro:" + error));
 }

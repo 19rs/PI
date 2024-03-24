@@ -95,35 +95,35 @@ function renderItem(pessoa) {
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Altura</dt>
                             <dd class=" sm:col-span-2">${
-                              pessoa.altura_estimada
+                              pessoa.altura_estimada ? pessoa.altura_estimada : 'N/A'
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Cabelo</dt>
-                            <dd class=" sm:col-span-2 capitalize">${pessoa.cabelo}</dd>
+                            <dd class=" sm:col-span-2 capitalize">${pessoa.cabelo ? pessoa.cabelo : 'N/A'}</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Caracteristicas</dt>
                             <dd class=" sm:col-span-2 capitalize" >${
-                              pessoa.caracteristicas_fisicas
+                              pessoa.caracteristicas_fisicas ?  pessoa.caracteristicas_fisicas : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Contato</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.contato}</dd>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.contato ? pessoa.contato : "N/A"}</dd>
                         </div>
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Residente</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.residente_em}</dd>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.residente_em ? pessoa.residente_em : "N/A"}</dd>
                         </div>
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Idade</dt>
-                          <dd class=" sm:col-span-2">${pessoa.idade}</dd>
+                          <dd class=" sm:col-span-2">${pessoa.idade ? pessoa.idade :"N/A"}</dd>
                         </div>
               </dl>
 </div>
@@ -140,7 +140,7 @@ function renderItem(pessoa) {
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium">Nascimento</dt>
                             <dd class="sm:col-span-2">${
-                              pessoa.data_nascimento
+                              pessoa.data_nascimento ?  pessoa.data_nascimento:'N/A'
                             }</dd>
                           </div>
 
@@ -153,32 +153,32 @@ function renderItem(pessoa) {
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Genero</dt>
-                            <dd class=" sm:col-span-2 capitalize">${pessoa.genero}</dd>
+                            <dd class=" sm:col-span-2 capitalize">${pessoa.genero ? pessoa.genero:'N/A'}</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Olhos</dt>
                             <dd class=" sm:col-span-2 capitalize">${
-                              pessoa.olhos
+                              pessoa.olhos ?  pessoa.olhos:'N/A'
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Peso</dt>
                             <dd class=" sm:col-span-2">${
-                              pessoa.peso_estimado
-                            }</dd>
+                              pessoa.peso_estimado ?  pessoa.peso_estimado : "N/A"
+                            }</dd> 
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Contato</dt>
-                          <dd class=" sm:col-span-2">${pessoa.contato}</dd>
+                          <dd class=" sm:col-span-2">${pessoa.contato? pessoa.contato:'N/A' }</dd>
                         </div>
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                         <dt class="font-medium ">Detalhes</dt>
                         <dd class=" sm:col-span-2 capitalize">${
-                          pessoa.detalhes_desaparecimento
+                          pessoa.detalhes_desaparecimento ? pessoa.detalhes_desaparecimento:"N/A"
                         }</dd>
                       </div>
               </dl>
@@ -543,8 +543,10 @@ function alterar(pessoa) {
       </div>
   `;
 
-  document.getElementById("AlterButton").addEventListener("click", function () {
+  document.getElementById("AlterButton").addEventListener("click", function (evt) {
+    evt.preventDefault()
     updateDesaparecido(pessoa.id);
+    
   });
 
   document.getElementById("nomeAlterar").value = pessoa.nome;
@@ -574,6 +576,7 @@ function alterar(pessoa) {
 }
 
 function addDesaparecidos() {
+  
   const nome = document.getElementById("nome").value;
   const data_nascimento = document.getElementById("dataNascimento").value;
   const genero = document.getElementById("genero").value;
@@ -636,9 +639,12 @@ function addDesaparecidos() {
     .then((response) => response.json())
     .then((data) => {
       // displaySuccessMessage()
-      alert(data.message);
+      //alert(data.message);
       // console.log("Cadastro realizado com sucesso!");
-      
+    
+      //aparece muito rapido
+      document.getElementById('alert').style.display = 'block';
+
     })
     .catch((error) => console.log("Erro:" + error));
 }
@@ -720,6 +726,10 @@ function updateDesaparecido(id) {
     .then((data) => {
       alert(data.message);
       console.log("Alterado  com sucesso!");
+      window.location.reload()
     })
     .catch((error) => console.log("Erro:" + error));
 }
+
+
+
