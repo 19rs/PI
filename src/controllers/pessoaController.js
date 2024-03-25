@@ -39,7 +39,7 @@ export async function selectPessoas(req, res) {
 
   try {
     stmt = await db.prepare(
-      "SELECT * FROM Pessoas ORDER BY data_desaparecimento DESC LIMIT 20"
+      "SELECT * FROM Pessoas WHERE status = 0 ORDER BY data_desaparecimento DESC LIMIT 20"
     );
     const pessoas = await stmt.all();
     return res.json(pessoas);
@@ -75,6 +75,37 @@ export async function selectPessoa(req, res) {
     await db.close();
   }
 }
+
+
+export async function filtrarPessoas(req, res) {
+  const db = await openDB()
+  let stmt = null
+
+  try {
+      let sql = 'SELECT * FROM Pessoas WHERE status = 0'
+  
+      if(req.query.nome) {
+          sql += ` AND nome LIKE '%${req.query.nome}%'`
+      }
+
+      if(req.query.local_desaparecimento) {
+          
+      }
+
+      sql += ' ORDER BY data_desaparecimento DESC'
+
+      stmt = await db.prepare(sql)
+      const pessoas = await stmt.all()
+      return res.json(pessoas)
+  } catch(error) {
+      console.error('Erro ao selecionar pessoas:', error)
+      throw error
+  } finally {
+      stmt ? await stmt.finalize() : null
+      await db.close()
+  }
+}
+
 
 export async function insertPessoa(req, res) {
   const db = await openDB();
