@@ -80,7 +80,7 @@ function renderItem(pessoa) {
   </div>
              
 
-      <div class='flex flex-col gap-10 items-center w-full ' >
+      <div class='flex flex-col gap-10 items-center w-full justify-center ' >
                  
               <div class='flex gap-10 ' >
                       <div class='flex-col '>
