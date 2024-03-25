@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Usuários - Gerenciamento</title>
+</head>
+<body>
+    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20">
+        <img class="h-10" src="img/newLogo.png" alt="logo">
+        <nav id="navMenu">
+            
+        </nav>
+    </header>
+
+    <main class="mt-32 container mx-auto">
+        <h1 class="text-center mb-6 text-2xl font-bold">Lista de Usuários</h1>
+        <section id="listaUsuarios" class="container px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10">
+           
+        </section>
+    </main>
+
+    <script src="../clients/authClient.js"></script>
+    <script src="../clients/desaparecidosClient.js"></script>
+    <script src="../clients/usuariosClient.js"></script>
+
+    <script>
+        document.onload = carregarMenu()
+        document.onload = listarUsuarios()
+    </script>
+</body>
+</html>

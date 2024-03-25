@@ -30,7 +30,7 @@ export async function insertUsuario(req, res) {
 
     try {
         stmt = await db.prepare(`INSERT INTO Usuarios (nome, email, username, perfil, senha) VALUES(@nome, @email, @username,@perfil, @senha)`);
-        await stmt.bind({ '@nome': pessoa.nome, '@email': pessoa.email, '@username': pessoa.username, '@perfil':pessoa.perfil, '@senha': pessoa.senha });
+        await stmt.bind({ '@nome': pessoa.nome, '@email': pessoa.email, '@username': pessoa.username, '@perfil': 2, '@senha': pessoa.senha });
         await stmt.run();
 
         res.status(201).json({ message: 'Usuario cadastrada com sucesso' });
@@ -44,12 +44,12 @@ export async function insertUsuario(req, res) {
 }
 
 
-export async function selectUsuario(req, res) {
+export async function selectUsuarios(req, res) {
     const db = await openDB()
     let stmt = null
 
     try {
-        stmt = await db.prepare('SELECT * FROM Usuarios  DESC LIMIT 20')
+        stmt = await db.prepare('SELECT id, nome, email, username, perfil FROM Usuarios')
         const pessoas = await stmt.all()
         return res.json(pessoas)
     } catch(error) {
@@ -62,12 +62,34 @@ export async function selectUsuario(req, res) {
 }
 
 
+export async function updateUsuario(req, res) {
+    const db = await openDB()
+    let stmt = null
+
+    const id = req.params.id
+    const usuario = req.body
+
+    try {
+        stmt = await db.prepare('UPDATE Usuarios SET nome = ?, email = ?, username = ? WHERE id = ?')
+        await stmt.bind([ usuario.nome, usuario.email, usuario.username, id ])
+        await stmt.run()
+        res.status(201).json({ message: 'Usuário atualizado com sucesso' })
+    } catch(error) {
+        console.error('Erro ao atualizar Usuário:', error)
+        throw error
+    } finally {
+        stmt ? await stmt.finalize() : null
+        await db.close()
+    }
+}
+
+
 export async function deleteUsuario(req, res) {
     const db = await openDB()
     let stmt = null
     
-    const id = req.body.id
-
+    const id = req.params.id
+    
     try {
         stmt = await db.prepare(`DELETE FROM Usuarios WHERE id = ?`)
         await stmt.bind([ id ])
