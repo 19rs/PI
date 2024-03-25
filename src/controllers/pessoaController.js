@@ -89,11 +89,23 @@ export async function filtrarPessoas(req, res) {
       }
 
       if(req.query.local_desaparecimento) {
-          
+        sql += ` AND local_desaparecimento LIKE '%${req.query.local_desaparecimento}%'`
+      }
+
+      if(req.query.genero) {
+        sql += ` AND genero LIKE '%${req.query.genero}%'`
+      }
+
+      if(req.query.idadeMin) {
+        sql += ` AND DATE('NOW') - data_nascimento`
+
+        req.query.idadeMax  ? sql += ` BETWEEN ${req.query.idadeMin} AND ${req.query.idadeMax}` : ` >= ${ req.query.idadeMin}`
+      } else if(req.query.idadeMax) {
+        sql += ` AND DATE('NOW') - data_nascimento <= ${req.query.idadeMax}`
       }
 
       sql += ' ORDER BY data_desaparecimento DESC'
-
+      console.log(sql)
       stmt = await db.prepare(sql)
       const pessoas = await stmt.all()
       return res.json(pessoas)
