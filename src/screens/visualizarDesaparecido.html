@@ -1,68 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styleVisualizarPessoa.css">
-    <link rel="stylesheet" href="styles/formulario.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styleVisualizarPessoa.css" />
+    <link rel="stylesheet" href="styles/formulario.css" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <img src="../../../assets/newLogo.png" alt="logo" style="height: 3.5vh;">
-        <nav>
-            <ul>
-                
-            </ul>
-        </nav>
-
+      <img src="../../../assets/newLogo.png" alt="logo" style="height: 3.5vh" />
+      <nav>
+        <ul></ul>
+      </nav>
     </header>
 
-    <main id="main">
-
-    </main>
+    <main id="main"></main>
 
     <div id="overlay"></div>
     <div id="modal"></div>
 
     <footer>
-        <p>Entre em contato pelo WhatsApp</p>
-        <img src="./img/whatsapp.png" alt="">
+      <p>Entre em contato pelo WhatsApp</p>
+      <img src="./img/whatsapp.png" alt="" />
     </footer>
 
-  
     <script src="../clients/authClient.js"></script>
     <script src="../clients/desaparecidosClient.js"></script>
 
     <script>
-        const modal = document.getElementById('modal')
-        const overlay = document.getElementById('overlay')
-        
-        function thumb(object) {
-            const div = document.createElement('div')
-            div.classList = 'container-thumb'
-            div.onclick = function () {
-                renderItem(object.nome_completo)
-            }
-            div.innerHTML = `
+      const modal = document.getElementById("modal");
+      const overlay = document.getElementById("overlay");
+
+      function thumb(object) {
+        const div = document.createElement("div");
+        div.classList = "container-thumb";
+        div.onclick = function () {
+          renderItem(object.nome_completo);
+        };
+        div.innerHTML = `
 
                  <h4>${object.nome_completo}</h4>
                 <div id='foto'><img src='${object.foto}' id='tam'></div>
                
               
-           `
-            document.getElementById('main').appendChild(div);
-        }
+           `;
+        document.getElementById("main").appendChild(div);
+      }
 
-        function renderItem(nome) {
-
-            modal.innerHTML = ''
-            const pessoa = arrayPessoas.find(p => p.nome_completo === nome)
-            const div = document.createElement('div')
-            div.classList = 'container'
-            div.innerHTML = `
+      function renderItem(nome) {
+        modal.innerHTML = "";
+        const pessoa = arrayPessoas.find((p) => p.nome_completo === nome);
+        const div = document.createElement("div");
+        div.classList = "container";
+        div.innerHTML = `
             <div>
                 <h4>${pessoa.nome_completo}</h4>
                 <div id='foto'><img src='${pessoa.foto}' id='tamDetalhes'></div>
@@ -84,21 +76,60 @@
                 <p>Detalhes: ${pessoa.detalhes_desaparecimento}</p>
                 <button onclick='deleteDesaparecido(${pessoa.id})'> Excluir </button>
                 <button onclick='alterar(${pessoa.id})'> Alterar </button>
+                <button onclick='avistamento(${pessoa.id})'> Avistamento </button>
                         </div>
                
-           `
+           `;
 
+        modal.style.display = "block";
+        overlay.style.display = "block";
+        modal.appendChild(div);
+      }
 
-            modal.style.display = 'block';
-            overlay.style.display = 'block';
-            modal.appendChild(div);
-        }
+      function avistamento(id) {
+        const pessoa = arrayPessoas.find((p) => p.id === id);
+        modal.innerHTML = `
+              <form id="formAvistamento" action="#">
+                <div id="container-form">
+                  <div id="content-form">
+                      <label for="local">Local:</label>
+                      <input type="text" required id="local" name="local">
 
+                      <label for="data">Data:</label>
+                      <input type="date" required id="data" name="data">
 
-        function alterar(id) {
+                      <label for="detalhes">Detalhes:</label>
+                      <textarea id="detalhes" name="detalhes" rows="4" cols="50"></textarea>
+                  </div>
+                </div>
+                <input type="submit" value="Enviar" id="btn" onclick="enviarAvistamento(${pessoa.id})">
+                <button onclick="fecharDialog()">Fechar</button>
+              </form>
+        `;
+        modal.style.display = "block";
+        overlay.style.display = "block";
+      }
 
-            const pessoa = arrayPessoas.find(p => p.id === id);
-            modal.innerHTML = `
+      function fecharDialog() {
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      }
+
+      function enviarAvistamento(id) {
+        const local = document.getElementById("local").value;
+        const data = document.getElementById("data").value;
+        const detalhes = document.getElementById("detalhes").value;
+
+        // enviar os dados para algum servidor..
+        // após o envio dos dados, o modal é fechado..
+
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      }
+
+      function alterar(id) {
+        const pessoa = arrayPessoas.find((p) => p.id === id);
+        modal.innerHTML = `
               <form id="form" action="#">
 
 <div>
@@ -158,20 +189,14 @@
     </div>
 
     <input type="submit" value="Alterar" id="btn" onclick="updateDesaparecido(${pessoa.id})">
-              `
-            modal.style.display = 'block';
+              `;
+        modal.style.display = "block";
+      }
 
-        }
-
-
-
-
-        overlay.onclick = function () {
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-
-        };
+      overlay.onclick = function () {
+        modal.style.display = "none";
+        overlay.style.display = "none";
+      };
     </script>
-</body>
-
+  </body>
 </html>

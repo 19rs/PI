@@ -89,8 +89,8 @@ function renderItem(pessoa) {
         <h6>RESIDENTE: ${pessoa.residente_em}</h6>
         <div class='p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
         <button id='btn' ">Alterar</button>
-
-          <button onclick='deleteDesaparecido(${pessoa.id})'>Excluir</button>
+        <button onclick='avistamento(${pessoa.id})'> Avistamento </button>
+        <button onclick='deleteDesaparecido(${pessoa.id})'>Excluir</button>
           </div>
       
         </div>
@@ -317,4 +317,51 @@ function updateDesaparecido(id) {
         console.log("Alterado  com sucesso!");
       })
       .catch((error) => console.log("Erro:" + error));
+}
+
+function avistamento(pessoa) {
+  const modal = document.getElementById("modal");
+  const overlay = document.getElementById("overlay");
+
+  modal.innerHTML = "";
+
+  modal.innerHTML = `
+    <div class='bg-[#191919] p-5 rounded-lg  justify-center flex flex-col  '>
+      <label for="localAvistamento">Local do Avistamento: </label>
+      <input type="text" id="localAvistamento" class='text-black'>
+
+      <label for="dataAvistamento">Data do Avistamento: </label>
+      <input type="date" id="dataAvistamento" class='text-black'>
+
+      <label for="detalhesAvistamento">Detalhes do Avistamento: </label>
+      <textarea class="border p-2 text-black" id="detalhesAvistamento" cols="10" rows="2"></textarea>
+
+      <button onclick='enviarAvistamento(${pessoa.id})'>Enviar Avistamento</button>
+      <button onclick='fecharModal()'>Cancelar</button>
+    </div>
+  `;
+  
+  modal.style.display = "block";
+  overlay.style.display = "block";
+}
+
+function enviarAvistamento(id) {
+  const local = document.getElementById("localAvistamento").value;
+  const data = document.getElementById("dataAvistamento").value;
+  const detalhes = document.getElementById("detalhesAvistamento").value;
+
+  fecharModal();
+
+  // pode se criar um função para enviar para o banco de dados / servidor
+
+  // depois de enviar os dados o modal é fechado
+
+}
+
+function fecharModal() {
+  const modal = document.getElementById("modal");
+  const overlay = document.getElementById("overlay");
+
+  modal.style.display = "none";
+  overlay.style.display = "none";
 }
