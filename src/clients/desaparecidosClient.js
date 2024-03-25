@@ -140,14 +140,14 @@ function renderItem(pessoa) {
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium">Nascimento</dt>
                             <dd class="sm:col-span-2">${
-                              pessoa.data_nascimento ?  pessoa.data_nascimento:'N/A'
+                              pessoa.data_nascimento ?  pessoa.data_nascimento.split("-").reverse().join("/"):'N/A'
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Desapareu</dt>
                             <dd class=" sm:col-span-2 " >${
-                              pessoa.data_desaparecimento
+                              pessoa.data_desaparecimento ? pessoa.data_desaparecimento.split("-").reverse().join("/") : "N/A"
                             }</dd>
                           </div>
 
