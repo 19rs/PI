@@ -11,34 +11,47 @@ function loginLogout() {
 
 function criarDialogLogin() {
     let dialogLogin = document.createElement('dialog')
-    dialogLogin.className = 'w-full sm:w-1/2 mt-24 bg-gray-50 rounded-lg shadow-lg border border-bg-gray-100'
+    dialogLogin.className = 'w-full sm:w-1/2 mt-24 rounded-lg shadow-lg border border-gray-300'
     dialogLogin.id = 'dialogLogin'
 
+    dialogLogin.addEventListener('click', function(event) {
+        if (event.target === dialogLogin) { 
+            let dialogLogin = document.getElementById('dialogLogin')
+            dialogLogin.close()
+            dialogLogin.remove()
+        }
+    })
+
     let closeButton = document.createElement('button')
-    closeButton.className = 'absolute top-3 right-5 border border-gray-200 px-2 pb-0.5 rounded'
+    closeButton.className = 'absolute top-3 right-5 border border-gray-200 px-2.5 pb-0.5 rounded hover:bg-red-400 hover:text-white hover:border-red-500'
     closeButton.innerText = 'x'
-    closeButton.addEventListener('click', () => dialogLogin.close())
+    closeButton.addEventListener('click', function() { 
+        dialogLogin.close() 
+        dialogLogin.remove()
+    })
     dialogLogin.appendChild(closeButton)
 
     let form = document.createElement('form')
-    form.className = "grid gap-5 bg-gray-50 pt-10 pb-16 px-5 sm:px-32"
+    form.className = "grid gap-5 pt-10 pb-16 px-5 sm:px-20 bg-white"
     form.innerHTML = `
-        <h1 class="font-bold text-xl text-center my-5">LOGIN</h1>
-        <div class="grid w-full">
-            <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email" class="border px-2 py-3">
+        <h1 class="font-bold text-xl text-center my-8">Login</h1>
+        <div class="relative mb-6 w-full group">
+            <input type="email" name="emailLogin" id="emailLogin" class="block py-4 px-4 w-full text-sm rounded text-gray-900 bg-transparent border border-gray-400 appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " required />
+
+            <label for="emailLogin" class="absolute text-md px-1 duration-300 transform -translate-y-7 scale-75 top-3.5 start-3 z-10 origin-[0] peer-focus:left-3 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">E-mail</label>
         </div>
-        <div class="grid">
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha" class="border px-2 py-3">
+        <div class="relative mb-2 w-full group">
+            <input type="password" name="senhaLogin" id="senhaLogin" class="block py-4 px-4 w-full text-sm rounded text-gray-900 bg-transparent border border-gray-400 appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " required />
+
+            <label for="senhaLogin" class="absolute text-md px-1 duration-300 transform -translate-y-7 scale-75 top-3.5 start-3 z-10 origin-[0] peer-focus:left-3 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">Senha</label>
         </div>
         <div class="h-4">
             <span class="text-red-500 hidden text-center" id="spanErro"></span>
         </div>
 
-        <button type="submit" class="px-10 border p-4 mt-4 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Entrar</button>
+        <button type="submit" class="px-10 border p-4 mt-2 bg-green-500 text-white font-bold text-lg rounded hover:bg-green-400">Entrar</button>
 
-        <p class='text-center'><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
+        <p class="mx-auto text-sm"><a href='./cadastrarUsuario.html'>Ainda nao tem uma conta?</a></p>
     `
 
     form.addEventListener('submit', function (event){
@@ -55,8 +68,8 @@ function criarDialogLogin() {
 
 
 function logar() {
-    let email = document.getElementById('email').value
-    let senha = document.getElementById('senha').value
+    let email = document.getElementById('emailLogin').value
+    let senha = document.getElementById('senhaLogin').value
 
     fetch('http://localhost:3000/login', {
         method: 'POST',
