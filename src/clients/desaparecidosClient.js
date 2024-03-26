@@ -68,6 +68,11 @@ function renderItem(pessoa) {
   let perfilUsuario = sessionStorage.getItem("userProfile");
   let mostrarBotoes = parseInt(perfilUsuario) === 1;
 
+  const anoAtual = new Date().getFullYear();
+
+  const anoNascimento = pessoa.data_nascimento.substring(0, 4);
+  let idade = anoAtual - anoNascimento;
+
   modal.innerHTML = ` `;
 
   modal.innerHTML = `
@@ -112,10 +117,13 @@ function renderItem(pessoa) {
                             }</dd>
                           </div>
 
+
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                          <dt class="font-medium ">Contato</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.contato ? pessoa.contato : "N/A"}</dd>
+                          <dt class="font-medium ">Genero</dt>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.genero ? pessoa.genero:'N/A'}</dd>
                         </div>
+
+
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Residente</dt>
@@ -124,7 +132,7 @@ function renderItem(pessoa) {
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Idade</dt>
-                          <dd class=" sm:col-span-2">${pessoa.idade ? pessoa.idade :"N/A"}</dd>
+                          <dd class=" sm:col-span-2">${idade ? idade :"N/A"}</dd>
                         </div>
               </dl>
 </div>
@@ -141,21 +149,22 @@ function renderItem(pessoa) {
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium">Nascimento</dt>
                             <dd class="sm:col-span-2">${
-                              pessoa.data_nascimento ?  pessoa.data_nascimento:'N/A'
+                              pessoa.data_nascimento ?  pessoa.data_nascimento.split("-").reverse().join("/"):'N/A'
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Desapareu</dt>
                             <dd class=" sm:col-span-2 " >${
-                              pessoa.data_desaparecimento
+                              pessoa.data_desaparecimento ? pessoa.data_desaparecimento.split("-").reverse().join("/") : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
-                            <dt class="font-medium ">Genero</dt>
-                            <dd class=" sm:col-span-2 capitalize">${pessoa.genero ? pessoa.genero:'N/A'}</dd>
-                          </div>
+                          <dt class="font-medium ">Local:</dt>
+                          <dd class=" sm:col-span-2 capitalize">${pessoa.local_desaparecimento ? pessoa.local_desaparecimento : "N/A"}</dd>
+                        </div>
+
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Olhos</dt>
