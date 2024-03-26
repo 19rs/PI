@@ -11,7 +11,7 @@ function loginLogout() {
 
 function criarDialogLogin() {
     let dialogLogin = document.createElement('dialog')
-    dialogLogin.className = 'w-full sm:w-1/2 mt-24 rounded-lg shadow-lg border border-gray-300'
+    dialogLogin.className = 'w-full sm:w-1/2 mt-24 rounded-lg shadow-md'
     dialogLogin.id = 'dialogLogin'
 
     dialogLogin.addEventListener('click', function(event) {
@@ -36,7 +36,7 @@ function criarDialogLogin() {
     form.innerHTML = `
         <h1 class="font-bold text-xl text-center my-8">Login</h1>
         <div class="relative mb-6 w-full group">
-            <input type="email" name="emailLogin" id="emailLogin" class="block py-4 px-4 w-full text-sm rounded text-gray-900 bg-transparent border border-gray-400 appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " required />
+            <input type="email" name="emailLogin" id="emailLogin" class="block py-4 px-4 w-full text-sm rounded text-gray-900 bg-transparent border border-gray-400 appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " required autofocus/>
 
             <label for="emailLogin" class="absolute text-md px-1 duration-300 transform -translate-y-7 scale-75 top-3.5 start-3 z-10 origin-[0] peer-focus:left-3 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">E-mail</label>
         </div>
@@ -141,7 +141,7 @@ function carregarMenu() {
             <a href="desaparecidos.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('desaparecidos') ? 'bg-white text-black' : ''}">DESAPARECIDOS</a>
             <a href="usuarios.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('usuarios') ? 'bg-white text-black' : ''}">USUÁRIOS</a>
             <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
-            <button class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('cadastrar') ? 'bg-white text-black' : ''}" id="botaoCadastrarDesaparecido" onclick="cadastrarDesaparecido()">CADASTAR</button>
+            <button class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('cadastrar') ? 'bg-white text-black' : ''}" id="botaoCadastrarDesaparecido" onclick="cadastrarDesaparecido()">CADASTRAR</button>
             <button class="px-5 py-0.5 hover:underline hover:underline-offset-4" id="botaoLoginLogout" onclick="loginLogout()">${userID ? 'SAIR' : 'ENTRAR'}</button>
         </div>
         `
