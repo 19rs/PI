@@ -28,7 +28,7 @@ function listarDesaparecidos() {
         // console.log(typeof(pessoa))
         let div = document.createElement("div");
         // div.className = "shadow border border-gray-300 rounded cursor-pointer";
-        div.className = "shadow-md rounded cursor-pointer";
+        div.className = "shadow-md rounded cursor-pointer  border border-gray-100";
         div.addEventListener("click", function () {
           renderItem(pessoa);
         });

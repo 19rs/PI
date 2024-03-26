@@ -252,7 +252,7 @@ function criarDialogEdicao(usuario) {
           <label for="email" class="absolute text-md px-1 duration-300 transform -translate-y-7 scale-75 top-3.5 start-3 z-10 origin-[0] peer-focus:left-3 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-7">E-mail</label>
       </div>
 
-      <button type="submit" class="px-10 border p-4 mt-4 bg-gray-300 font-bold text-lg rounded hover:bg-green-400">Salvar Alterações</button>
+      <button type="submit" class="px-10 border p-4 mt-4 font-bold text-lg rounded bg-[#191919] text-white hover:bg-gray-600">Salvar Alterações</button>
   `
 
     form.addEventListener('submit', function (event){

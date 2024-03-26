@@ -1,12 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reconectando Vidas</title>
-</head>
-<body>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f3f4f6;
+        color: #48545a;
+        margin: 0;
+        padding: 0;
+      }
+
+     
+      main {
+        padding: 2rem 1rem;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: #1f2937;
+        text-align: center;
+      }
+
+      footer {
+        background-color: #1f2937;
+        color: #ffffff;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      footer a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      footer a:hover {
+        color: #7f9cf5;
+      }
+
+      p {
+        line-height: 1.4;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      section img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .bg-gray-200 {
+        background-color: #e5e7eb;
+      }
+
+      .bg-gray-200 p {
+        color: #2d3748;
+      }
+
+      .bg-gray-200 img {
+        border-radius: 0.5rem;
+      }
+
+      .success-box {
+        transition: background-color 0.3s ease;
+      }
+
+      .success-box:hover {
+        background-color: #d6d6d6;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+<body class="bg-gray-100 font-sans">
     <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50">
         <img class="h-10" src="img/newLogo.png" alt="logo">
         <nav id="navMenu" class="hidden sm:block">
@@ -14,17 +99,222 @@
         </nav>
     </header>
 
-    <main class="mt-32 container mx-auto">
-        <section>
-            <h1>Home</h1>
-        </section>
+    <main class="mt-24 container mx-auto">
+      <section class="px-4 mb-8">
+        <h1 class="text-5xl font-bold mb-10">Reconectando Vidas</h1>
+        <p class="text-xl leading-relaxed mb-8">
+          Na Reconectando Vidas, nosso compromisso é ajudar a encontrar pessoas
+          desaparecidas e reunir famílias novamente. Nosso trabalho é de
+          importância vital, pois cada pessoa desaparecida representa uma
+          história, uma família angustiada e uma comunidade preocupada.
+        </p>
+        <p class="text-xl leading-relaxed mb-6">
+          A importância do nosso trabalho é imensa, pois não apenas oferecemos
+          esperança às famílias, mas também ajudamos a trazer à tona a
+          conscientização sobre a questão dos desaparecimentos e as medidas
+          preventivas que podem ser tomadas.
+        </p>
+        <p class="text-xl leading-relaxed mb-6">
+          É fundamental destacar que cada caso de desaparecimento é único e
+          merece atenção individualizada. Nossa organização se esforça para
+          oferecer suporte emocional, recursos e assistência prática para
+          aqueles que estão passando por essa situação difícil.
+        </p>
+      </section>
+
+      <section class="px-4 mb-8">
+        <div class="mt-8">
+          <h2 class="text-3xl font-bold mb-6">Dados Relevantes</h2>
+          <ul class="list-disc pl-8">
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Desde o início de nossas operações, ajudamos a reunir mais de 500
+              famílias.
+            </li>
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Nossa equipe é composta por profissionais altamente qualificados
+              em áreas como psicologia, assistência social e investigação.
+            </li>
+            <li class="text-lg font-medium leading-relaxed">
+              Estamos ativos em comunidades de todo o país, trabalhando em
+              parceria com organizações locais para aumentar nosso alcance e
+              eficácia.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="px-2 mb-10">
+        <div class="mt-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="rounded-lg overflow-hidden shadow-md h-auto">
+              <img
+                src="./img/estatistica/estatistica.png"
+                alt="Imagem 1"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="rounded-lg overflow-hidden shadow-md h-auto">
+              <img
+                src="./img/estatistica/estatisticars.png"
+                alt="Imagem 2"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="rounded-lg overflow-hidden shadow-md h-auto">
+              <img
+                src="./img/estatistica/estatisticabrasil.png"
+                alt="Imagem 3"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 mb-8">
+        <div class="mt-8">
+          <h2 class="text-3xl font-bold mb-6">Nosso Processo de Trabalho</h2>
+          <p class="text-xl leading-relaxed mb-6">
+            Nossa organização segue um processo meticuloso para lidar com casos
+            de desaparecimento. Aqui está um resumo de como trabalhamos:
+          </p>
+          <ol class="list-disc pl-8">
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Recebimento do caso e coleta de informações iniciais.
+            </li>
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Contato com autoridades locais e lançamento de campanhas de
+              conscientização.
+            </li>
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Investigação e busca ativa, incluindo entrevistas e rastreamento.
+            </li>
+            <li class="text-lg font-medium leading-relaxed mb-4">
+              Reunião e apoio às famílias afetadas.
+            </li>
+            <li class="text-lg font-medium leading-relaxed">
+              Acompanhamento contínuo e assistência no processo de reintegração.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="px-4 mb-8">
+        <div class="mt-8">
+          <h2 class="text-3xl font-bold mb-6">Histórias de Sucesso</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              class="bg-gray-200 rounded-lg overflow-hidden shadow-md success-box"
+            >
+              <img
+                src="./img/pessoas/Relato.png"
+                alt="História 1"
+                class="w-full h-auto"
+              />
+              <div class="p-4">
+                <p class="text-lg font-semibold mb-5">Bruna Chandelier</p>
+                <p class="text-base font-medium">
+                  "Minha experiência com a Reconectando Vidas foi incrível. Eles
+                  me ajudaram a encontrar minha família depois de anos de
+                  separação. Sou eternamente grato!"
+                </p>
+                <p class="text-sm text-gray-600 mt-10">
+                  Data: 15 de março de 2024
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="bg-gray-200 rounded-lg overflow-hidden shadow-md success-box"
+            >
+              <img
+                src="./img/pessoas/Relato2.png"
+                alt="História 2"
+                class="w-full h-auto"
+              />
+              <div class="p-4">
+                <p class="text-lg font-semibold mb-5">Gustavo Andrade</p>
+                <p class="text-base font-medium">
+                  "Nunca perdi a esperança graças ao apoio contínuo da
+                  Reconectando Vidas. Finalmente, estou de volta à minha família
+                  e não poderia estar mais feliz."
+                </p>
+                <p class="text-sm text-gray-600 mt-11">
+                  Data: 20 de abril de 2024
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="bg-gray-200 rounded-lg overflow-hidden shadow-md success-box"
+            >
+              <img
+                src="./img/pessoas/Relato3.png"
+                alt="História 3"
+                class="w-full h-auto"
+              />
+              <div class="p-4">
+                <p class="text-lg font-semibold mb-5">Gabriel Caputto</p>
+                <p class="text-base font-medium">
+                  "É incrível o que a Reconectando Vidas faz. Eles não apenas me
+                  ajudaram a voltar para casa, mas também me proporcionaram
+                  apoio emocional durante todo o processo. Estou eternamente
+                  agradecido por sua dedicação e compaixão."
+                </p>
+                <p class="text-sm text-gray-600 mt-5">
+                  Data: 5 de maio de 2024
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 mb-8">
+        <div class="mt-8">
+          <h2 class="text-3xl font-bold mb-6">Entre em Contato</h2>
+          <p class="text-xl leading-relaxed mb-6">
+            Se você precisa de ajuda para localizar um ente querido desaparecido
+            ou deseja apoiar nossa causa, não hesite em nos contatar. Estamos
+            aqui para ajudar e apreciamos qualquer forma de colaboração.
+          </p>
+          <p class="text-xl leading-relaxed mb-6">
+            Em Reconectando Vidas, acreditamos na importância de ajudar o
+            próximo. Nosso projeto visa oferecer suporte àqueles que enfrentam a
+            angústia de ter um ente querido desaparecido, fornecendo recursos e
+            assistência prática, além de conscientizar sobre a questão dos
+            desaparecimentos e promover a solidariedade e empatia em nossas
+            comunidades.
+          </p>
+          <p class="text-xl leading-relaxed mb-6">
+            Você pode nos contatar através dos seguintes meios:
+          </p>
+          <ul class="list-disc pl-8">
+            <li class="text-lg font-medium leading-relaxed mb-2">
+              <i class="fas fa-envelope mr-2"></i> E-mail:
+              contato@reconectandovidas.org
+            </li>
+            <li class="text-lg font-medium leading-relaxed">
+              <i class="fas fa-map-marker-alt mr-2"></i> Visite nossa sede:
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
+
+    <footer class="bg-black text-white py-2">
+      <div class="container mx-auto flex justify-between items-center">
+        <p>&copy; 2024 Reconectando Vidas. Todos os direitos reservados.</p>
+        <p>Entre em contato pelo WhatsApp</p>
+        <img src="./img/whatsapp.png" alt="WhatsApp" />
+      </div>
+    </footer>
 
     <script src="../clients/authClient.js"></script>
     <script src="../clients/desaparecidosClient.js"></script>
 
     <script>
-        document.onload = carregarMenu()
+      document.onload = carregarMenu();
     </script>
-</body>
+  </body>
 </html>
