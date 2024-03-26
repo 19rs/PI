@@ -108,7 +108,7 @@ function listarUsuarios() {
       data.forEach(usuario => {
         let tr = document.createElement('tr')
         // tr.className = "border"
-        tr.className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"  
+        tr.className="bg-white border-b"
         tr.innerHTML = `
           <td class="px-6 py-4">${usuario.id}</td>
           <td class="px-6 py-4">${usuario.nome}</td>
