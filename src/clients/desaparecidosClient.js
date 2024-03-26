@@ -19,7 +19,7 @@ function listarDesaparecidos() {
       //para testar
       let listaDesparecidos = document.createElement("section")
       listaDesparecidos.id = "listaDesaparecidos"
-      listaDesparecidos.className = "container px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10"
+      listaDesparecidos.className = "container mx-auto px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10"
 
       document.body.appendChild(listaDesparecidos)
 

@@ -141,7 +141,7 @@ function carregarMenu() {
             <a href="desaparecidos.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('desaparecidos') ? 'bg-white text-black' : ''}">DESAPARECIDOS</a>
             <a href="usuarios.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('usuarios') ? 'bg-white text-black' : ''}">USUÁRIOS</a>
             <a href="./forum.html" class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('forum') ? 'bg-white text-black' : ''}">FÓRUM</a>
-            <button class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('cadastrar') ? 'bg-white text-black' : ''}" id="botaoCadastrarDesaparecido" onclick="cadastrarDesaparecido()">CADASTAR</button>
+            <button class="px-5 py-0.5 hover:underline hover:underline-offset-4 ${url.includes('cadastrar') ? 'bg-white text-black' : ''}" id="botaoCadastrarDesaparecido" onclick="cadastrarDesaparecido()">CADASTRAR</button>
             <button class="px-5 py-0.5 hover:underline hover:underline-offset-4" id="botaoLoginLogout" onclick="loginLogout()">${userID ? 'SAIR' : 'ENTRAR'}</button>
         </div>
         `
