@@ -14,55 +14,58 @@ function listarDesaparecidos() {
   fetch("http://localhost:3000/pessoas")
     .then((response) => response.json())
     .then(function (data) {
-      //console.log(data)
-
-      //para testar
       let listaDesparecidos = document.createElement("section")
       listaDesparecidos.id = "listaDesaparecidos"
       listaDesparecidos.className = "container mx-auto px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10"
 
       document.body.appendChild(listaDesparecidos)
 
-      data.forEach((pessoa) => {
-        // console.log(pessoa)
-        // console.log(typeof(pessoa))
-        let div = document.createElement("div");
-        // div.className = "shadow border border-gray-300 rounded cursor-pointer";
-        div.className = "shadow-md rounded cursor-pointer  border border-gray-100";
-        div.addEventListener("click", function () {
-          renderItem(pessoa);
-        });
-
-        listaDesparecidos.appendChild(div);
-
-        div.innerHTML += `
-            <div class='h-64 w-64 flex justify-center'>
-                <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${
-                  pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
-                } alt="foto desaparecido">
-            </div>
-            <div>
-                <h1 class='text-center font-bold text-lg border-gray-300 bg-gray-200 py-3'>${
-                  pessoa.nome
-                }</h1>
-                <h2 class='px-3 py-3 border-b'>Nascimento: ${
-                  pessoa.data_nascimento
-                    ? pessoa.data_nascimento.split("-").reverse().join("/")
-                    : ""
-                }</h2>
-                <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento
-                  .split("-")
-                  .reverse()
-                  .join("/")}</b></h2>
-                <h2 class='px-3 py-3'>Local: <b>${
-                  pessoa.local_desaparecimento
-                }</b></h2>
-            </div>
-            `;
-      });
-    })
-    .catch((error) => console.error("Erro:", error));
+      criarCardsPessoas(data)
+    })      
+    .catch((error) => console.error("Erro:", error))
 }
+
+function criarCardsPessoas(data) {
+  let listaDesparecidos = document.getElementById("listaDesaparecidos");
+  listaDesparecidos.innerHTML = ''
+
+  data.forEach((pessoa) => {
+    let div = document.createElement("div");
+    // div.className = "shadow border border-gray-300 rounded cursor-pointer";
+    div.className = "shadow-md rounded cursor-pointer border border-gray-100";
+    div.addEventListener("click", function () {
+      renderItem(pessoa)
+    });
+
+    listaDesparecidos.appendChild(div)
+
+    div.innerHTML += `
+      <div class='h-64 w-64 flex justify-center'>
+          <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${
+            pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
+          } alt="foto desaparecido">
+      </div>
+      <div>
+          <h1 class='text-center font-bold text-lg border-gray-300 bg-gray-200 py-3'>${
+            pessoa.nome
+          }</h1>
+          <h2 class='px-3 py-3 border-b'>Nascimento: ${
+            pessoa.data_nascimento
+              ? pessoa.data_nascimento.split("-").reverse().join("/")
+              : ""
+          }</h2>
+          <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento
+            .split("-")
+            .reverse()
+            .join("/")}</b></h2>
+          <h2 class='px-3 py-3'>Local: <b>${
+            pessoa.local_desaparecimento
+          }</b></h2>
+      </div>
+      `
+    })
+}
+
 
 function renderItem(pessoa) {
   const modal = document.getElementById("modal");
@@ -746,48 +749,7 @@ function filtrarDesaparecidos() {
   fetch(`http://localhost:3000/pessoas/filtrar?nome=${nome}&local_desaparecimento=${localDesaparecimento}&genero=${genero}&idadeMin=${idadeMin}&idadeMax=${idadeMax}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data)
-
-
-    //depois separar em uma funcao para nao repetir || ou usar a mesma funcao de get pessoas principal
-    let listaDesparecidos = document.getElementById("listaDesaparecidos");
-    listaDesparecidos.innerHTML = ''
-
-      data.forEach((pessoa) => {
-        let div = document.createElement("div");
-        div.className = "shadow border border-gray-300 rounded cursor-pointer";
-        // div.className = "shadow-md rounded cursor-pointer";
-        div.addEventListener("click", function () {
-          renderItem(pessoa);
-        });
-
-        listaDesparecidos.appendChild(div);
-
-        div.innerHTML += `
-            <div class='h-64 w-64 flex justify-center'>
-                <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${
-                  pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
-                } alt="foto desaparecido">
-            </div>
-            <div>
-                <h1 class='text-center font-bold text-lg border-t border-b border-gray-300 bg-gray-200 py-3'>${
-                  pessoa.nome
-                }</h1>
-                <h2 class='px-3 py-3 border-b'>Nascimento: ${
-                  pessoa.data_nascimento
-                    ? pessoa.data_nascimento.split("-").reverse().join("/")
-                    : ""
-                }</h2>
-                <h2 class='px-3 py-3 border-b'>Desaparecimento: <b>${pessoa.data_desaparecimento
-                  .split("-")
-                  .reverse()
-                  .join("/")}</b></h2>
-                <h2 class='px-3 py-3'>Local: <b>${
-                  pessoa.local_desaparecimento
-                }</b></h2>
-            </div>
-            `;
-      });
+      criarCardsPessoas(data)    
     })
     .catch((error) => console.error("Erro:", error));
 }
