@@ -14,19 +14,14 @@ function listarDesaparecidos() {
   fetch("http://localhost:3000/pessoas")
     .then((response) => response.json())
     .then(function (data) {
-      let listaDesparecidos = document.createElement("section")
-      listaDesparecidos.id = "listaDesaparecidos"
-      listaDesparecidos.className = "container mx-auto px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-10"
-
-      document.body.appendChild(listaDesparecidos)
-
       criarCardsPessoas(data)
     })      
     .catch((error) => console.error("Erro:", error))
 }
 
 function criarCardsPessoas(data) {
-  let listaDesparecidos = document.getElementById("listaDesaparecidos");
+  let listaDesparecidos = document.getElementById("listaDesparecidos");
+  console.log(listaDesparecidos)
   listaDesparecidos.innerHTML = ''
 
   data.forEach((pessoa) => {

@@ -99,7 +99,7 @@ export async function filtrarPessoas(req, res) {
       if(req.query.idadeMin) {
         sql += ` AND DATE('NOW') - data_nascimento`
 
-        req.query.idadeMax  ? sql += ` BETWEEN ${req.query.idadeMin} AND ${req.query.idadeMax}` : ` >= ${ req.query.idadeMin}`
+        req.query.idadeMax  ? sql += ` BETWEEN ${req.query.idadeMin} AND ${req.query.idadeMax}` : sql += ` >= ${ req.query.idadeMin}`
       } else if(req.query.idadeMax) {
         sql += ` AND DATE('NOW') - data_nascimento <= ${req.query.idadeMax}`
       }
