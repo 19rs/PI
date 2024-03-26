@@ -11,7 +11,7 @@ function loginLogout() {
 
 function criarDialogLogin() {
     let dialogLogin = document.createElement('dialog')
-    dialogLogin.className = 'w-full sm:w-1/2 mt-24 rounded-lg shadow-md'
+    dialogLogin.className = 'w-full sm:w-1/2 mt-50 rounded-lg shadow-md'
     dialogLogin.id = 'dialogLogin'
 
     dialogLogin.addEventListener('click', function(event) {
