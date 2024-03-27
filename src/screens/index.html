@@ -6,6 +6,9 @@
     <title>Reconectando Vidas</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link
       rel="stylesheet"
@@ -89,10 +92,17 @@
         background-color: #d6d6d6;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
       }
+
+      #header{
+        font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+      }
     </style>
   </head>
 <body class="bg-gray-100 font-sans">
-    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50">
+    <header id="header" class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50">
        <a href="#" >
       <img class="h-10" src="img/newLogo.png" alt="logo">
     </a>

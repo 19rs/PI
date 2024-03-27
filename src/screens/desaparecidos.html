@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Reconectando Vidas</title>
 </head>
-<body>
-    <header class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50">
+<style>
+    
+  #header,#main{
+      font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    }
+
+
+  
+ 
+  
+  </style>
+<body >
+    <header  id="header" class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50">
       <a href="./index.html" >
         <img class="h-10" src="img/newLogo.png" alt="logo">
       </a>
@@ -16,7 +32,7 @@
         </nav>
     </header>
 
-    <main class="mt-24 container mx-auto">
+    <main id="main" class="mt-24 container mx-auto min-h-[100vh]">
        
         <!-- depois colocar botao para abrir modal -->
         <!-- <button>Filtrar</button> -->

@@ -4,12 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>CRIAR CONTA</title>
   </head>
+  <style>
+    
+    #form{
+        font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      }
+    
+      #header{
+        font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      }
+    
+    </style>
 
   <body>
     <header
+    id="header"
       class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20 z-50"
     >
     <a href="./index.html" >
@@ -115,8 +133,13 @@
             type="submit"
             value="Criar sua conta"
             id="btn"
-            class="w-full bg-[#191919] text-white py-2 rounded-md hover:bg-gray-600 cursor-pointer"
+            class=" w-full  mt-5 cursor-pointer block rounded bg-[#252525] px-8 py-3 text-sm font-medium text-white transition hover:scale-[1.05] hover:shadow-xl focus:outline-none" 
           />
+      
+
+      
+
+      
         </form>
       </div>
 
@@ -125,7 +148,7 @@
 
 <!-- alert -->
 
-<div id="alert" role="alert" class=" fixed top-5 rounded-xl border border-gray-100 bg-white p-4">
+<!-- <div id="alert" role="alert" class="hidden fixed top-5 rounded-xl border border-gray-100 bg-white p-4">
   <div class="flex items-start gap-4">
       <span class="text-green-600">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
@@ -143,7 +166,7 @@
         
       </button>
   </div>
-</div>
+</div> -->
 
 
 

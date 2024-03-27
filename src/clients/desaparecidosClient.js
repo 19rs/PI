@@ -79,10 +79,10 @@ function renderItem(pessoa) {
  <div class='bg-[#191919] p-10 rounded-lg  w-[70vw] '>
 
   <div class='flex '>
-  <div class='w-6/12' >
+  <div class='w-8/12' >
   <img src='${
     pessoa.foto
-  }' class='rounded-md w-full h-full ' >
+  }' class='rounded-md  ' >
   </div>
              
 
@@ -649,11 +649,11 @@ function addDesaparecidos() {
     .then((response) => response.json())
     .then((data) => {
       // displaySuccessMessage()
-      //alert(data.message);
+      alert("tudo certo pai");
       // console.log("Cadastro realizado com sucesso!");
     
       //aparece muito rapido
-      document.getElementById('alert').style.display = 'block';
+      //document.getElementById('alert').style.display = 'block';
 
     })
     .catch((error) => console.log("Erro:" + error));

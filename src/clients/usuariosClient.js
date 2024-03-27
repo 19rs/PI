@@ -105,10 +105,10 @@ function addUsuario() {
   })
     .then((response) => response.json())
     .then((data) => {
-      alert('OK')
+      alert('Tudo certo pai')
       console.log("Cadastro realizado com sucesso!");
 
-      document.getElementById('alert').style.display = 'block'
+      //document.getElementById('alert').style.display = 'block'
     })
     .catch((error) => console.log("Erro:" + error));
 }
