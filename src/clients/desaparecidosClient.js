@@ -40,8 +40,8 @@ function criarCardsPessoas(data) {
             pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
           } alt="foto desaparecido">
       </div>
-      <div>
-          <h1 class='text-center font-bold text-lg border-gray-300 bg-gray-200 py-3'>${
+      <div class="w-full max-w-64">
+          <h1 class='px-2 text-center font-bold text-lg border-gray-300 bg-gray-200 py-3 truncate'>${
             pessoa.nome
           }</h1>
           <h2 class='px-3 py-3 border-b'>Nascimento: ${
@@ -180,7 +180,7 @@ function renderItem(pessoa) {
                             }</dd> 
                           </div>
 
-                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ${mostrarBotoes ? '' : 'hidden'}">
                           <dt class="font-medium ">Contato</dt>
                           <dd class=" sm:col-span-2">${pessoa.contato? pessoa.contato:'N/A' }</dd>
                         </div>

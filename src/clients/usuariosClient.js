@@ -12,81 +12,6 @@ function listarUsuarios() {
 
       listaUsuarios.appendChild(divTabela)
 
-        // <table class=>
- 
-        //         <tr>
-        //             <th scope="col" class="px-6 py-3">
-        //                 Product name
-        //             </th>
-        //             <th scope="col" class="px-6 py-3">
-        //                 Color
-        //             </th>
-        //             <th scope="col" class="px-6 py-3">
-        //                 Category
-        //             </th>
-        //             <th scope="col" class="px-6 py-3">
-        //                 Price
-        //             </th>
-        //             <th scope="col" class="px-6 py-3">
-        //                 Action
-        //             </th>
-        //         </tr>
-        //     </thead>
-        //     <tbody>
-        //         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        //             <th scope="row" class=>
-        //                 Apple MacBook Pro 17"
-        //             </th>
-        //             <td class="px-6 py-4">
-        //                 Silver
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 Laptop
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 $2999
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        //             </td>
-        //         </tr>
-        //         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        //             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        //                 Microsoft Surface Pro
-        //             </th>
-        //             <td class="px-6 py-4">
-        //                 White
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 Laptop PC
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 $1999
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        //             </td>
-        //         </tr>
-        //         <tr class="bg-white dark:bg-gray-800">
-        //             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        //                 Magic Mouse 2
-        //             </th>
-        //             <td class="px-6 py-4">
-        //                 Black
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 Accessories
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 $99
-        //             </td>
-        //             <td class="px-6 py-4">
-        //                 <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-        //             </td>
-        //         </tr>
-        //     </tbody>
-
-
       let tabela = document.createElement('table')
       tabela.className = "table-fixed w-full text-sm text-left text-gray-500"
       tabela.innerHTML = `
@@ -108,7 +33,7 @@ function listarUsuarios() {
       data.forEach(usuario => {
         let tr = document.createElement('tr')
         // tr.className = "border"
-        tr.className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"  
+        tr.className="bg-white border-b"
         tr.innerHTML = `
           <td class="px-6 py-4">${usuario.id}</td>
           <td class="px-6 py-4">${usuario.nome}</td>
@@ -211,7 +136,7 @@ function deletarUsuario(usuario) {
 function criarDialogEdicao(usuario) {
 
   let dialogEdicao = document.createElement('dialog')
-  dialogEdicao.className = 'w-full sm:w-1/2 mt-24 rounded-lg shadow-lg border border-gray-300'
+  dialogEdicao.className = 'w-full sm:w-1/2 mt-50 rounded-lg shadow-lg border border-gray-300'
   dialogEdicao.id = 'dialogEdicao'
 
   dialogEdicao.addEventListener('click', function(event) {
