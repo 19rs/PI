@@ -1,19 +1,18 @@
 function listarUsuarios() {
-  verificarPermissao()
+  verificarPermissao();
 
   fetch("http://localhost:3000/usuarios")
     .then((response) => response.json())
     .then(function (data) {
+      let listaUsuarios = document.getElementById("listaUsuarios");
 
-      let listaUsuarios = document.getElementById("listaUsuarios")
+      let divTabela = document.createElement("div");
+      divTabela.className = "relative overflow-x-auto shadow-md sm:rounded-lg";
 
-      let divTabela = document.createElement('div')  
-      divTabela.className = "relative overflow-x-auto shadow-md sm:rounded-lg"
+      listaUsuarios.appendChild(divTabela);
 
-      listaUsuarios.appendChild(divTabela)
-
-      let tabela = document.createElement('table')
-      tabela.className = "table-fixed w-full text-sm text-left text-gray-500"
+      let tabela = document.createElement("table");
+      tabela.className = "table-fixed w-full text-sm text-left text-gray-500";
       tabela.innerHTML = `
         <thead class="text-sm text-gray-700 uppercase bg-gray-50">
           <tr class="border-b border-gray-200">
@@ -25,139 +24,137 @@ function listarUsuarios() {
             <th class="px-6 py-4 font-bold text-gray-900 text-center whitespace-nowrap">Ações</th>
           </tr>
         </thead>
-      `
+      `;
 
-      let tbody = document.createElement('tbody')
-      tabela.appendChild(tbody)
-      
-      data.forEach(usuario => {
-        let tr = document.createElement('tr')
+      let tbody = document.createElement("tbody");
+      tabela.appendChild(tbody);
+
+      data.forEach((usuario) => {
+        let tr = document.createElement("tr");
         // tr.className = "border"
-        tr.className="bg-white border-b"
+        tr.className = "bg-white border-b";
         tr.innerHTML = `
           <td class="px-6 py-4">${usuario.id}</td>
           <td class="px-6 py-4">${usuario.nome}</td>
           <td class="px-6 py-4">${usuario.username}</td>
           <td class="px-6 py-4">${usuario.email}</td>
-          <td class="px-6 py-4 text-center ${usuario.perfil === 1 ? 'font-bold text-blue-500' : null}">${usuario.perfil === 1 ? 'Admin' : 'Usuário'}</td>
-        `
-        let tdAcoes = document.createElement('td')
-        tdAcoes.className = "px-6 py-4 flex justify-center gap-5"
+          <td class="px-6 py-4 text-center ${
+            usuario.perfil === 1 ? "font-bold text-blue-500" : null
+          }">${usuario.perfil === 1 ? "Admin" : "Usuário"}</td>
+        `;
+        let tdAcoes = document.createElement("td");
+        tdAcoes.className = "px-6 py-4 flex justify-center gap-5";
 
-        tr.appendChild(tdAcoes)
+        tr.appendChild(tdAcoes);
 
-        let btnEdit = document.createElement('button')
-        btnEdit.className="text-[#454545] py-1 hover:text-blue-700"
-        // btnEdit.innerText = "Editar" 
+        let btnEdit = document.createElement("button");
+        btnEdit.className = "text-[#454545] py-1 hover:text-blue-700";
+        // btnEdit.innerText = "Editar"
         btnEdit.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
             <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
             <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
           </svg>
-        `
-        btnEdit.setAttribute('type', "button")
-        btnEdit.addEventListener('click', function () {
-          criarDialogEdicao(usuario)
-        })
-        tdAcoes.appendChild(btnEdit)
+        `;
+        btnEdit.setAttribute("type", "button");
+        btnEdit.addEventListener("click", function () {
+          criarDialogEdicao(usuario);
+        });
+        tdAcoes.appendChild(btnEdit);
 
-        let btnDelete = document.createElement('button')
-        btnDelete.className="text-[#454545] py-1 hover:text-red-600"
-        // btnDelete.innerText = "Deletar" 
+        let btnDelete = document.createElement("button");
+        btnDelete.className = "text-[#454545] py-1 hover:text-red-600";
+        // btnDelete.innerText = "Deletar"
         btnDelete.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
             <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
           </svg>
-        `
-        btnDelete.setAttribute('type', "button")
-        btnDelete.addEventListener('click', function () {
-          deletarUsuario(usuario)
-        })
-        tdAcoes.appendChild(btnDelete)
+        `;
+        btnDelete.setAttribute("type", "button");
+        btnDelete.addEventListener("click", function () {
+          deletarUsuario(usuario);
+        });
+        tdAcoes.appendChild(btnDelete);
 
-        tbody.appendChild(tr)
-      })
+        tbody.appendChild(tr);
+      });
 
       // listaUsuarios.appendChild(tabela)
-      divTabela.appendChild(tabela)
-    })
+      divTabela.appendChild(tabela);
+    });
 }
 
 function addUsuario() {
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const username = document.getElementById('username').value;
-  const senha = document.getElementById('senha').value;
-
+  const nome = document.getElementById("nome").value;
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+  const senha = document.getElementById("senha").value;
 
   const formData = new FormData();
 
   formData.append("nome", nome);
   formData.append("email", email);
   formData.append("username", username);
-  formData.append("perfil" , 2)
+  formData.append("perfil", 2);
   formData.append("senha", senha);
-  
-  
+
   fetch("http://localhost:3000/usuario", {
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
-      alert('Tudo certo pai')
-      console.log("Cadastro realizado com sucesso!");
-
-      //document.getElementById('alert').style.display = 'block'
+    
+      Swal.fire({
+        title: "Sucesso",
+        timer: 10000,
+        icon:'success'
+      })
     })
     .catch((error) => console.log("Erro:" + error));
 }
 
-
-
-
 function deletarUsuario(usuario) {
-  let confirmacao = `Confirma a exclusão desse Usuário?\n\nID: ${usuario.id}\nNome: ${usuario.nome}\nUsername: ${usuario.username}\nEmail: ${usuario.email}`
+  let confirmacao = `Confirma a exclusão desse Usuário?\n\nID: ${usuario.id}\nNome: ${usuario.nome}\nUsername: ${usuario.username}\nEmail: ${usuario.email}`;
 
-  if(confirm(confirmacao) === true) {
+  if (confirm(confirmacao) === true) {
     fetch(`http://localhost:3000/usuario/${usuario.id}`, {
       method: "DELETE",
     })
-    .then((response) => response.json())
-    .then(() => {
-      alert('Usuário deletado com sucesso!')
-    })
-    .catch((error) => console.log("Erro:" + error));
+      .then((response) => response.json())
+      .then(() => {
+        alert("Usuário deletado com sucesso!");
+      })
+      .catch((error) => console.log("Erro:" + error));
   }
 }
 
-
-
 function criarDialogEdicao(usuario) {
+  let dialogEdicao = document.createElement("dialog");
+  dialogEdicao.className =
+    "w-full sm:w-1/2 mt-50 rounded-lg shadow-lg border border-gray-300";
+  dialogEdicao.id = "dialogEdicao";
 
-  let dialogEdicao = document.createElement('dialog')
-  dialogEdicao.className = 'w-full sm:w-1/2 mt-50 rounded-lg shadow-lg border border-gray-300'
-  dialogEdicao.id = 'dialogEdicao'
-
-  dialogEdicao.addEventListener('click', function(event) {
-    if (event.target === dialogEdicao) { 
-        let dialogEdicao = document.getElementById('dialogEdicao')
-        dialogEdicao.close()
-        dialogEdicao.remove()
+  dialogEdicao.addEventListener("click", function (event) {
+    if (event.target === dialogEdicao) {
+      let dialogEdicao = document.getElementById("dialogEdicao");
+      dialogEdicao.close();
+      dialogEdicao.remove();
     }
-  })
+  });
 
-  let closeButton = document.createElement('button')
-  closeButton.className = 'absolute top-3 right-5 border border-gray-200 px-2.5 pb-0.5 rounded hover:bg-red-400 hover:text-white hover:border-red-500'
-  closeButton.innerText = 'x'
-  closeButton.addEventListener('click', function() { 
-    dialogEdicao.close() 
-    dialogEdicao.remove()
-  })
-  dialogEdicao.appendChild(closeButton)
+  let closeButton = document.createElement("button");
+  closeButton.className =
+    "absolute top-3 right-5 border border-gray-200 px-2.5 pb-0.5 rounded hover:bg-red-400 hover:text-white hover:border-red-500";
+  closeButton.innerText = "x";
+  closeButton.addEventListener("click", function () {
+    dialogEdicao.close();
+    dialogEdicao.remove();
+  });
+  dialogEdicao.appendChild(closeButton);
 
-  let form = document.createElement('form')
-  form.className = "grid gap-5 pt-8 pb-12 px-5 sm:px-20 bg-white"
+  let form = document.createElement("form");
+  form.className = "grid gap-5 pt-8 pb-12 px-5 sm:px-20 bg-white";
   form.innerHTML = `
       <h1 class="font-bold text-xl text-center my-8">Editar Usuário</h1>
       <div class="relative mb-6 w-full group">
@@ -178,39 +175,38 @@ function criarDialogEdicao(usuario) {
       </div>
 
       <button type="submit" class="px-10 border p-4 mt-4 font-bold text-lg rounded bg-[#191919] text-white hover:bg-gray-600">Salvar Alterações</button>
-  `
+  `;
 
-    form.addEventListener('submit', function (event){
-        event.preventDefault()
-        atualizarUsuario(usuario.id)
-    })
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    atualizarUsuario(usuario.id);
+  });
 
-    dialogEdicao.appendChild(form)
+  dialogEdicao.appendChild(form);
 
-    document.body.appendChild(dialogEdicao)
-    dialogEdicao.showModal()
+  document.body.appendChild(dialogEdicao);
+  dialogEdicao.showModal();
 }
 
 function atualizarUsuario(id) {
-  const nome = document.getElementById("nome").value
-  const username = document.getElementById("username").value
-  const email = document.getElementById("email").value
+  const nome = document.getElementById("nome").value;
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
 
   fetch(`http://localhost:3000/usuario/${id}`, {
     method: "PUT",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       nome: nome,
       username: username,
-      email: email
+      email: email,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
     })
-  })
-  .then(response => response.json())
-  .then((data) => {
-    alert(data.message)
-  })
-  .catch(error => console.error("Erro:", error))
+    .catch((error) => console.error("Erro:", error));
 }
-

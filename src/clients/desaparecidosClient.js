@@ -86,7 +86,7 @@ function renderItem(pessoa) {
   </div>
              
 
-      <div class='flex flex-col gap-10 items-center w-full ' >
+      <div class='flex flex-col gap-10 items-center w-full justify-center ' >
                  
               <div class='flex gap-10 ' >
                       <div class='flex-col '>
@@ -648,12 +648,13 @@ function addDesaparecidos() {
   })
     .then((response) => response.json())
     .then((data) => {
-      // displaySuccessMessage()
-      alert("tudo certo pai");
-      // console.log("Cadastro realizado com sucesso!");
-    
-      //aparece muito rapido
-      //document.getElementById('alert').style.display = 'block';
+     
+      // alert("tudo certo pai");
+      Swal.fire({
+        title: "Sucesso",
+        timer: 10000,
+        icon:'success'
+      })
 
     })
     .catch((error) => console.log("Erro:" + error));
@@ -662,27 +663,38 @@ function addDesaparecidos() {
 function deleteDesaparecido(id) {
   const conv = parseInt(id);
 
-  if (isNaN(conv)) {
-    alert("ID inválido");
-    return;
-  }
-
-  fetch(`http://localhost:3000/pessoa/${conv}`, {
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erro ao excluir pessoa");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      alert("Pessoa deletada com sucesso");
-    })
-    .catch((error) => {
-      alert("Erro: " + error.message);
-    });
+  Swal.fire({
+    title: "Voce tem certeza?",
+    text: "Voce nao pode reverter isso",
+    icon: "warning",
+    showCancelButton: true,
+    cancelButtonText: "Nao, cancelar",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, tenho certeza"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:3000/pessoa/${conv}`, {
+        method: "DELETE",
+      }).then((data) => {
+        Swal.fire({
+          title: "Deletado!",
+          text: "Deletado com Sucesso.",
+          icon: "success"
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao excluir pessoa:", error);
+        Swal.fire({
+          title: "Erro",
+          text: "Erro ao deletar.",
+          icon: "error"
+        });
+      });
+    }
+  });
 }
+
 
 function updateDesaparecido(id) {
   const conv = parseInt(id);
@@ -728,17 +740,51 @@ function updateDesaparecido(id) {
   );
   formData.append("contato", document.getElementById("contatoAlterar").value);
 
-  fetch(`http://localhost:3000/pessoa/${conv}`, {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert(data.message);
-      console.log("Alterado  com sucesso!");
-      window.location.reload()
-    })
-    .catch((error) => console.log("Erro:" + error));
+
+  Swal.fire({
+    title: "Confirmar Alterações?",
+    icon: "warning",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Confirmar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`http://localhost:3000/pessoa/${conv}`, {
+        method: "PUT",
+        body: formData,
+      }).then((data) => {
+        Swal.fire({
+          title: "Alterado!",
+          text: "Alterado com Sucesso.",
+          icon: "success"
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao excluir pessoa:", error);
+        Swal.fire({
+          title: "Erro",
+          text: "Erro ao Alterar.",
+          icon: "error"
+        });
+      });
+    }
+  });
+
+
+
+  // fetch(`http://localhost:3000/pessoa/${conv}`, {
+  //   method: "PUT",
+  //   body: formData,
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     alert(data.message);
+  //     console.log("Alterado  com sucesso!");
+  //     window.location.reload()
+  //   })
+  //   .catch((error) => console.log("Erro:" + error));
 }
 
 

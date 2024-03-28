@@ -15,7 +15,8 @@
     "express-fileupload": "^1.4.3",
     "nodemon": "^3.0.3",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "sweetalert2": "^11.10.7"
   },
   "type": "module"
 }
