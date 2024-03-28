@@ -10,6 +10,8 @@
       rel="stylesheet"
     />
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -24,6 +26,12 @@
     </header>
 
     <style>
+      .chart-container {
+        width: 800px;
+        height: 400px;
+        margin: auto;
+      }
+
       body {
         font-family: "Poppins", sans-serif;
         background-color: #f3f4f6;
@@ -178,31 +186,10 @@
         </div>
       </section>
 
-      <section class="px-2 mb-10">
-        <div class="mt-10">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <img
-                src="./img/estatistica/estatistica.png"
-                alt="Imagem 1"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <img
-                src="./img/estatistica/estatisticars.png"
-                alt="Imagem 2"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <img
-                src="./img/estatistica/estatisticabrasil.png"
-                alt="Imagem 3"
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
+      <section>
+        <h2>Estatísticas de Desaparecidos no Rio Grande do Sul em 2022</h2>
+        <div class="chart-container">
+          <canvas id="desaparecidosChart"></canvas>
         </div>
       </section>
 
@@ -350,6 +337,71 @@
 
     <script>
       document.onload = carregarMenu();
+    </script>
+
+    <script>
+      const data = {
+        labels: [
+          "Janeiro",
+          "Fevereiro",
+          "Março",
+          "Abril",
+          "Maio",
+          "Junho",
+          "Julho",
+          "Agosto",
+          "Setembro",
+          "Outubro",
+          "Novembro",
+          "Dezembro",
+        ],
+        datasets: [
+          {
+            label: "Desaparecidos em 2022 (RS)",
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            data: [20, 15, 25, 18, 22, 19, 16, 21, 27, 30, 24, 17],
+          },
+        ],
+      };
+
+      const config = {
+        type: "bar",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: "Desaparecidos no Rio Grande do Sul em 2022",
+              font: {
+                size: 20,
+              },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Número de Pessoas",
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Mês",
+              },
+            },
+          },
+        },
+      };
+
+      var myChart = new Chart(
+        document.getElementById("desaparecidosChart"),
+        config
+      );
     </script>
   </body>
 </html>
