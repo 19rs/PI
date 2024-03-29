@@ -14,27 +14,68 @@ function listarDesaparecidos() {
   fetch("http://localhost:3000/pessoas")
     .then((response) => response.json())
     .then(function (data) {
-      criarCardsPessoas(data)
-    })      
-    .catch((error) => console.error("Erro:", error))
+      criarCardsPessoas(data);
+    })
+    .catch((error) => console.error("Erro:", error));
 }
 
 function criarCardsPessoas(data) {
   let listaDesparecidos = document.getElementById("listaDesparecidos");
-  console.log(listaDesparecidos)
-  listaDesparecidos.innerHTML = ''
+  console.log(listaDesparecidos);
+  listaDesparecidos.innerHTML = "";
 
   data.forEach((pessoa) => {
     let div = document.createElement("div");
     // div.className = "shadow border border-gray-300 rounded cursor-pointer";
-    div.className = "shadow-md rounded cursor-pointer border border-gray-100";
-    div.addEventListener("click", function () {
-      renderItem(pessoa)
-    });
+    div.className = "shadow-md rounded cursor-pointer border border-gray-100 relative  ";
 
-    listaDesparecidos.appendChild(div)
+    let perfilUsuario = sessionStorage.getItem("userProfile");
+    let mostrarBotoes = parseInt(perfilUsuario) === 1;
+
+    div.addEventListener("mouseover", function () {
+      mostrarBotoes ?  div.querySelector('#teste').style.display='block' :  div.addEventListener("click", function () { renderItem(pessoa.id)
+        });
+     
+     });
+ 
+     div.addEventListener("mouseleave", function () {
+       div.querySelector('#teste').style.display='none';
+     });
+
+
+    // div.addEventListener("click", function () {
+    //   renderItem(pessoa.id);
+    // });
+
+    listaDesparecidos.appendChild(div);
 
     div.innerHTML += `
+                    <div id="teste" class="hidden absolute w-full ml-6 mt-2 }">
+                    <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
+                    <button onclick="alterar(${pessoa.id})"
+                  
+                    class="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative"
+                    >
+                    Editar
+                    </button>
+                  
+                    <button  onclick="renderItem(${pessoa.id})"
+               
+                    class="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative"
+                    >
+                    Ver
+                    </button>
+                  
+                    <button onclick="deleteDesaparecido(${pessoa.id})"
+                   
+                    class="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative"
+                    >
+                    Deletar
+                    </button>
+                    </span>
+
+                    </div>
+
       <div class='h-64 w-64 flex justify-center'>
           <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${
             pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
@@ -57,82 +98,119 @@ function criarCardsPessoas(data) {
             pessoa.local_desaparecimento
           }</b></h2>
       </div>
-      `
-    })
+      `;
+ 
+
+  });
+
 }
 
+async function getPessoaById(id) {
+  try {
+    const response = await fetch(`http://localhost:3000/pessoa/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
 
-function renderItem(pessoa) {
+    if (!response.ok) {
+      throw new Error('Erro ao buscar pessoa');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar pessoa:", error);
+    throw error;
+  }
+}
+
+async function renderItem(id) {
   const modal = document.getElementById("modal");
   const overlay = document.getElementById("overlay");
   let perfilUsuario = sessionStorage.getItem("userProfile");
   let mostrarBotoes = parseInt(perfilUsuario) === 1;
 
+  const pessoa = await getPessoaById(id)
   const anoAtual = new Date().getFullYear();
 
   const anoNascimento = pessoa.data_nascimento.substring(0, 4);
   let idade = anoAtual - anoNascimento;
 
+
   modal.innerHTML = ` `;
 
   modal.innerHTML = `
- <div class='bg-[#191919] p-10 rounded-lg  w-[70vw] '>
+ <div  id='pdf-content' class='bg-[#191919] p-10 rounded-lg  w-[85vw]  '>
 
   <div class='flex '>
-  <div class='w-8/12' >
-  <img src='${
-    pessoa.foto
-  }' class='rounded-md  ' >
-  </div>
+          <div class='w-8/12' >
+          <img src='${pessoa.foto}' class='rounded-md  ' >
+          </div>
              
 
-      <div class='flex flex-col gap-10 items-center w-full justify-center ' >
+      <div class='flex flex-col gap-10 items-center w-full justify-center  ' >
                  
-              <div class='flex gap-10 ' >
-                      <div class='flex-col '>
+              <div class='flex gap-10  ' >
+                      <div class='flex-col'>
                       <div class="flow-root w-full">
-                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-80">
+                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-96">
                          
-                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ">
                             <dt class="font-medium">Nome</dt>
-                            <dd class="sm:col-span-2 capitalize">${pessoa.nome}</dd>
+                            <dd class="sm:col-span-2 capitalize">${
+                              pessoa.nome
+                            }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Altura</dt>
                             <dd class=" sm:col-span-2">${
-                              pessoa.altura_estimada ? pessoa.altura_estimada : 'N/A'
+                              pessoa.altura_estimada
+                                ? pessoa.altura_estimada
+                                : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Cabelo</dt>
-                            <dd class=" sm:col-span-2 capitalize">${pessoa.cabelo ? pessoa.cabelo : 'N/A'}</dd>
+                            <dd class=" sm:col-span-2 capitalize">${
+                              pessoa.cabelo ? pessoa.cabelo : "N/A"
+                            }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Caracteristicas</dt>
                             <dd class=" sm:col-span-2 capitalize" >${
-                              pessoa.caracteristicas_fisicas ?  pessoa.caracteristicas_fisicas : "N/A"
+                              pessoa.caracteristicas_fisicas
+                                ? pessoa.caracteristicas_fisicas
+                                : "N/A"
                             }</dd>
                           </div>
 
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Genero</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.genero ? pessoa.genero:'N/A'}</dd>
+                          <dd class=" sm:col-span-2 capitalize">${
+                            pessoa.genero ? pessoa.genero : "N/A"
+                          }</dd>
                         </div>
 
 
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Residente</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.residente_em ? pessoa.residente_em : "N/A"}</dd>
+                          <dd class=" sm:col-span-2 capitalize">${
+                            pessoa.residente_em ? pessoa.residente_em : "N/A"
+                          }</dd>
                         </div>
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Idade</dt>
-                          <dd class=" sm:col-span-2">${idade ? idade :"N/A"}</dd>
+                          <dd class=" sm:col-span-2">${
+                            idade ? idade : "N/A"
+                          }</dd>
                         </div>
               </dl>
 </div>
@@ -144,51 +222,73 @@ function renderItem(pessoa) {
                     
                     
                       <div class="flow-root w-full">
-                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-80">
+                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-96">
                          
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium">Nascimento</dt>
                             <dd class="sm:col-span-2">${
-                              pessoa.data_nascimento ?  pessoa.data_nascimento.split("-").reverse().join("/"):'N/A'
+                              pessoa.data_nascimento
+                                ? pessoa.data_nascimento
+                                    .split("-")
+                                    .reverse()
+                                    .join("/")
+                                : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Desapareu</dt>
                             <dd class=" sm:col-span-2 " >${
-                              pessoa.data_desaparecimento ? pessoa.data_desaparecimento.split("-").reverse().join("/") : "N/A"
+                              pessoa.data_desaparecimento
+                                ? pessoa.data_desaparecimento
+                                    .split("-")
+                                    .reverse()
+                                    .join("/")
+                                : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                           <dt class="font-medium ">Local:</dt>
-                          <dd class=" sm:col-span-2 capitalize">${pessoa.local_desaparecimento ? pessoa.local_desaparecimento : "N/A"}</dd>
+                          <dd class=" sm:col-span-2 capitalize">${
+                            pessoa.local_desaparecimento
+                              ? pessoa.local_desaparecimento
+                              : "N/A"
+                          }</dd>
                         </div>
 
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Olhos</dt>
                             <dd class=" sm:col-span-2 capitalize">${
-                              pessoa.olhos ?  pessoa.olhos:'N/A'
+                              pessoa.olhos ? pessoa.olhos : "N/A"
                             }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                             <dt class="font-medium ">Peso</dt>
                             <dd class=" sm:col-span-2">${
-                              pessoa.peso_estimado ?  pessoa.peso_estimado : "N/A"
+                              pessoa.peso_estimado
+                                ? pessoa.peso_estimado
+                                : "N/A"
                             }</dd> 
                           </div>
 
-                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ${mostrarBotoes ? '' : 'hidden'}">
-                          <dt class="font-medium ">Contato</dt>
-                          <dd class=" sm:col-span-2">${pessoa.contato? pessoa.contato:'N/A' }</dd>
-                        </div>
+                          <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ${
+                            mostrarBotoes ? "" : "hidden"
+                          }">
+                            <dt class="font-medium ">Contato</dt>
+                           <dd class=" sm:col-span-2">${
+                             pessoa.contato ? pessoa.contato : "N/A"
+                           }</dd>
+                            </div>
 
                         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                         <dt class="font-medium ">Detalhes</dt>
                         <dd class=" sm:col-span-2 capitalize">${
-                          pessoa.detalhes_desaparecimento ? pessoa.detalhes_desaparecimento:"N/A"
+                          pessoa.detalhes_desaparecimento
+                            ? pessoa.detalhes_desaparecimento
+                            : "N/A"
                         }</dd>
                       </div>
               </dl>
@@ -196,13 +296,6 @@ function renderItem(pessoa) {
                     
                     
                     
-                    
-                    
-                    
-                    
-
-
-
 
                       </div>
                  
@@ -210,24 +303,13 @@ function renderItem(pessoa) {
               </div>
     
    
-                 
-                <div class=' p-5 rounded-lg' ${mostrarBotoes ? "" : "hidden"} >
-              <div class='text-center flex gap-5'>
-              <a
-              id="btn"
-              class="block rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-105 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
-              href="#" >
-              Alterar
-                </a>
+              
             
-              <a
-              id="deletar"
-              class="block rounded bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-105 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
-              href="#" >
-              Excluir
-                </a>
-              </div>
+                        <div>
+                      
+                        <input type="submit" onclick="gerarPDF(${pessoa.id})" value="Gerar PDF"  class=" w-full  mt-5 cursor-pointer block rounded bg-[#252525] px-8 py-3 text-sm font-medium text-white transition hover:scale-[1.05] hover:shadow-xl focus:outline-none" >
 
+                        </div>
 
               
                 </div>
@@ -240,14 +322,8 @@ function renderItem(pessoa) {
           
    `;
 
-  document.getElementById(`btn`).onclick = function () {
-    alterar(pessoa);
-  };
 
-   document.getElementById(`deletar`).onclick = function () {
-    deleteDesaparecido(pessoa.id);
-  };
-  
+
   modal.style.display = "flex";
   overlay.style.display = "block";
 
@@ -257,9 +333,178 @@ function renderItem(pessoa) {
   };
 }
 
-function alterar(pessoa) {
+async function gerarPDF(id) {
+  
+  const pessoa = await getPessoaById(id)
+  const div = document.createElement('div')
+  
+  div.innerHTML += `
+    <div class='flex flex-col  justify-center'> 
+    <div class='h-26' style='display: flex; justify-content: center; align-items: center;'>
+    <img src='${pessoa.foto}' class='w-full h-full' />
+</div>
+
+    
+  
+        <div class="flow-root py-2 ">
+            <dl class="-my-3 divide-y divide-gray-100 text-lg ">
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ">
+                <dt class="font-medium ">Nome</dt>
+                <dd class="sm:col-span-2 capitalize">${
+                  pessoa.nome
+                }</dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium">Altura</dt>
+                <dd class="sm:col-span-2 capitalize">${
+                  pessoa.altura_estimada
+                  ? pessoa.altura_estimada
+                  : "N/A"
+                }</dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium">Cabelo</dt>
+                <dd class="sm:col-span-2 capitalize">${
+                  pessoa.cabelo ? pessoa.cabelo : "N/A"
+                }</dd>
+                </div>
+
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium ">Caracteristicas</dt>
+                <dd class=" sm:col-span-2 capitalize" >${
+                pessoa.caracteristicas_fisicas
+                ? pessoa.caracteristicas_fisicas
+                : "N/A"
+                }</dd>
+                 </div>
+
+                 <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                 <dt class="font-medium ">Genero</dt>
+                 <dd class=" sm:col-span-2 capitalize">${
+                   pessoa.genero ? pessoa.genero : "N/A"
+                 }</dd>
+               </div>
+
+               <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+               <dt class="font-medium ">Residente</dt>
+               <dd class=" sm:col-span-2 capitalize">${
+                 pessoa.residente_em ? pessoa.residente_em : "N/A"
+               }</dd>
+             </div>
+
+             <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+             <dt class="font-medium ">Idade</dt>
+             <dd class=" sm:col-span-2">${
+               pessoa.idade ? pessoa.idade : "N/A"
+             }</dd>
+           </div>
+
+           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+           <dt class="font-medium">Nascimento</dt>
+           <dd class="sm:col-span-2">${
+             pessoa.data_nascimento
+               ? pessoa.data_nascimento
+                   .split("-")
+                   .reverse()
+                   .join("/")
+               : "N/A"
+           }</dd>
+         </div>
+
+         <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+         <dt class="font-medium ">Desapareu</dt>
+         <dd class=" sm:col-span-2 " >${
+           pessoa.data_desaparecimento
+             ? pessoa.data_desaparecimento
+                 .split("-")
+                 .reverse()
+                 .join("/")
+             : "N/A"
+         }</dd>
+       </div>
+
+
+       <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+       <dt class="font-medium ">Local:</dt>
+       <dd class=" sm:col-span-2 capitalize">${
+         pessoa.local_desaparecimento
+           ? pessoa.local_desaparecimento
+           : "N/A"
+       }</dd>
+     </div>
+
+     <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+     <dt class="font-medium ">Olhos</dt>
+     <dd class=" sm:col-span-2 capitalize">${
+       pessoa.olhos ? pessoa.olhos : "N/A"
+     }</dd>
+   </div>
+
+
+   <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+   <dt class="font-medium ">Peso</dt>
+   <dd class=" sm:col-span-2">${
+     pessoa.peso_estimado
+       ? pessoa.peso_estimado
+       : "N/A"
+   }</dd> 
+ </div>
+
+ <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+ <dt class="font-medium ">Contato</dt>
+ <dd class=" sm:col-span-2">${
+   pessoa.contato
+     ? pessoa.contato
+     : "N/A"
+ }</dd> 
+</div>
+
+
+<div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+<dt class="font-medium ">Detalhes</dt>
+<dd class=" sm:col-span-2 capitalize">${
+  pessoa.detalhes_desaparecimento
+    ? pessoa.detalhes_desaparecimento
+    : "N/A"
+}</dd>
+</div>
+
+
+                </dl>
+        </div>
+
+    </div>
+  `
+  
+  
+  const options = {
+    margin: 10,
+    filename: `${pessoa.nome}.pdf`,
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().from(div).set(options).save();
+  
+}
+
+
+
+
+
+async function alterar(id) {
   const modal = document.getElementById("modal");
   const overlay = document.getElementById("overlay");
+
+  modal.style.display='block'
+  overlay.style.display='block'
+
+  const pessoa = await getPessoaById(id)
+  console.log(pessoa);
 
   modal.innerHTML = "";
 
@@ -554,10 +799,9 @@ function alterar(pessoa) {
   `;
 
   document.getElementById("AlterButton").addEventListener("click", function (evt) {
-    evt.preventDefault()
-    updateDesaparecido(pessoa.id);
-    
-  });
+      evt.preventDefault();
+      updateDesaparecido(pessoa.id);
+    });
 
   document.getElementById("nomeAlterar").value = pessoa.nome;
   document.getElementById("cpfAlterar").value = pessoa.cpf;
@@ -586,7 +830,6 @@ function alterar(pessoa) {
 }
 
 function addDesaparecidos() {
-  
   const nome = document.getElementById("nome").value;
   const data_nascimento = document.getElementById("dataNascimento").value;
   const genero = document.getElementById("genero").value;
@@ -648,14 +891,12 @@ function addDesaparecidos() {
   })
     .then((response) => response.json())
     .then((data) => {
-     
       // alert("tudo certo pai");
       Swal.fire({
         title: "Sucesso",
         timer: 10000,
-        icon:'success'
-      })
-
+        icon: "success",
+      });
     })
     .catch((error) => console.log("Erro:" + error));
 }
@@ -671,30 +912,30 @@ function deleteDesaparecido(id) {
     cancelButtonText: "Nao, cancelar",
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Sim, tenho certeza"
+    confirmButtonText: "Sim, tenho certeza",
   }).then((result) => {
     if (result.isConfirmed) {
       fetch(`http://localhost:3000/pessoa/${conv}`, {
         method: "DELETE",
-      }).then((data) => {
-        Swal.fire({
-          title: "Deletado!",
-          text: "Deletado com Sucesso.",
-          icon: "success"
-        });
       })
-      .catch((error) => {
-        console.error("Erro ao excluir pessoa:", error);
-        Swal.fire({
-          title: "Erro",
-          text: "Erro ao deletar.",
-          icon: "error"
+        .then((data) => {
+          Swal.fire({
+            title: "Deletado!",
+            text: "Deletado com Sucesso.",
+            icon: "success",
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao excluir pessoa:", error);
+          Swal.fire({
+            title: "Erro",
+            text: "Erro ao deletar.",
+            icon: "error",
+          });
         });
-      });
     }
   });
 }
-
 
 function updateDesaparecido(id) {
   const conv = parseInt(id);
@@ -740,7 +981,6 @@ function updateDesaparecido(id) {
   );
   formData.append("contato", document.getElementById("contatoAlterar").value);
 
-
   Swal.fire({
     title: "Confirmar Alterações?",
     icon: "warning",
@@ -748,31 +988,30 @@ function updateDesaparecido(id) {
     cancelButtonText: "Cancelar",
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Confirmar"
+    confirmButtonText: "Confirmar",
   }).then((result) => {
     if (result.isConfirmed) {
       fetch(`http://localhost:3000/pessoa/${conv}`, {
         method: "PUT",
         body: formData,
-      }).then((data) => {
-        Swal.fire({
-          title: "Alterado!",
-          text: "Alterado com Sucesso.",
-          icon: "success"
-        });
       })
-      .catch((error) => {
-        console.error("Erro ao excluir pessoa:", error);
-        Swal.fire({
-          title: "Erro",
-          text: "Erro ao Alterar.",
-          icon: "error"
+        .then((data) => {
+          Swal.fire({
+            title: "Alterado!",
+            text: "Alterado com Sucesso.",
+            icon: "success",
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao excluir pessoa:", error);
+          Swal.fire({
+            title: "Erro",
+            text: "Erro ao Alterar.",
+            icon: "error",
+          });
         });
-      });
     }
   });
-
-
 
   // fetch(`http://localhost:3000/pessoa/${conv}`, {
   //   method: "PUT",
@@ -787,19 +1026,21 @@ function updateDesaparecido(id) {
   //   .catch((error) => console.log("Erro:" + error));
 }
 
-
-
 function filtrarDesaparecidos() {
-  let nome = document.getElementById("filtroNome").value
-  let localDesaparecimento = document.getElementById("filtroLocalDesaparecimento").value
-  let genero = document.getElementById("filtroGenero").value
-  let idadeMin = document.getElementById("filtroIdadeMin").value
-  let idadeMax = document.getElementById("filtroIdadeMax").value
+  let nome = document.getElementById("filtroNome").value;
+  let localDesaparecimento = document.getElementById(
+    "filtroLocalDesaparecimento"
+  ).value;
+  let genero = document.getElementById("filtroGenero").value;
+  let idadeMin = document.getElementById("filtroIdadeMin").value;
+  let idadeMax = document.getElementById("filtroIdadeMax").value;
 
-  fetch(`http://localhost:3000/pessoas/filtrar?nome=${nome}&local_desaparecimento=${localDesaparecimento}&genero=${genero}&idadeMin=${idadeMin}&idadeMax=${idadeMax}`)
-  .then((response) => response.json())
-  .then((data) => {
-      criarCardsPessoas(data)    
+  fetch(
+    `http://localhost:3000/pessoas/filtrar?nome=${nome}&local_desaparecimento=${localDesaparecimento}&genero=${genero}&idadeMin=${idadeMin}&idadeMax=${idadeMax}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      criarCardsPessoas(data);
     })
     .catch((error) => console.error("Erro:", error));
 }

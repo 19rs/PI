@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
 
     <title>Reconectando Vidas</title>
 </head>
@@ -156,7 +158,11 @@
                     Para entrar em contato conosco, envie um e-mail para reconectar@reconectar.com. 
                     Estamos aqui para ajudar em qualquer questão relacionada a pessoas desaparecidas e 
                     responderemos o mais rápido possível.
+
+                    
                   </p>
+
+                 
                 </div>
     
     
@@ -320,6 +326,7 @@
     
     <script src="../clients/authClient.js"></script>
     <script src="../clients/desaparecidosClient.js"></script>
+    <script src="../cartaz.js"></script>
 
     <script>
         document.onload = carregarMenu()
@@ -343,6 +350,15 @@
             idadeMax.value = ""
             filtrarDesaparecidos()
         }
+
+
+
+
+
+        
+
+
+
     </script>
 
 
