@@ -187,7 +187,7 @@
       </section>
 
       <section>
-        <h2>Estatísticas de Desaparecidos no Rio Grande do Sul em 2022</h2>
+        <h2>Estatísticas de Desaparecidos no Brasil</h2>
         <div class="chart-container">
           <canvas id="desaparecidosChart"></canvas>
         </div>
@@ -342,26 +342,28 @@
     <script>
       const data = {
         labels: [
-          "Janeiro",
-          "Fevereiro",
-          "Março",
-          "Abril",
-          "Maio",
-          "Junho",
-          "Julho",
-          "Agosto",
-          "Setembro",
-          "Outubro",
-          "Novembro",
-          "Dezembro",
+          "2010",
+          "2011",
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
         ],
         datasets: [
           {
-            label: "Desaparecidos em 2022 (RS)",
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
-            borderColor: "rgba(255, 99, 132, 1)",
+            label: "Gráfico de desaparecidos do Brasil",
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1,
-            data: [20000, 15000, 25000, 18000, 22000, 19000, 16000, 21000, 27000, 30000, 24000, 17000],
+            data: [
+              58764, 67308, 88618, 90301, 94101, 86169, 71796, 83701, 77907,
+              79608, 62913,
+            ],
           },
         ],
       };
@@ -374,7 +376,7 @@
           plugins: {
             title: {
               display: true,
-              text: "Desaparecidos no Rio Grande do Sul em 2022",
+              text: "Desaparecidos no Brasil 2010-2020",
               font: {
                 size: 20,
               },
@@ -391,7 +393,7 @@
             x: {
               title: {
                 display: true,
-                text: "Mês",
+                text: "Ano",
               },
             },
           },
