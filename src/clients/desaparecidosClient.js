@@ -518,7 +518,6 @@ async function compartilharPDF(id,plataforma) {
     const linkWhatsApp = `https://api.whatsapp.com/send?text=${pessoa.nome + " " + mensagem}`;
     window.open(linkWhatsApp);
   }else if (plataforma === 'insta'){
-    const linkInstagram = `https://www.instagram.com/`; 
 
     modal.innerHTML = '' 
 
@@ -531,8 +530,8 @@ async function compartilharPDF(id,plataforma) {
           <li class='mb-2'>1 - Copiar esse link -
             <span class='underline'>${mensagem}</span>
           </li>
-          <li>2 - Pronto agora e so acessar o <a class='underline font-bold' href='${linkInstagram} target='blank'>Instagram</a></li>
-        </ol>
+          <li>2 - Pronto agora e só acessar o <a class='underline font-bold' href='https://www.instagram.com/' target='_blank'>Instagram</a></li>
+          </ol>
       
       </div>
   
