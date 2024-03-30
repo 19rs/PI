@@ -19,6 +19,3 @@ function listaMensagens() {
     })
     .catch((error) => console.error("Erro:", error));
 }
-
-//sionista
-//all lives matter
