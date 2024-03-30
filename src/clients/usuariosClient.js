@@ -90,29 +90,44 @@ function addUsuario() {
   const username = document.getElementById("username").value;
   const senha = document.getElementById("senha").value;
 
-  const formData = new FormData();
+ 
+  fetch(`http://localhost:3000/usuarios`)
+    .then(response => response.json())
+    .then(data => {
+      const emailExists = data.find(usuario => usuario.email === email);
+      if (emailExists) {
+        Swal.fire({
+          title: "Erro",
+          text: "Este email já está em uso.",
+          icon: "error"
+        });
+      } else {
+        const formData = new FormData();
+        formData.append("nome", nome);
+        formData.append("email", email);
+        formData.append("username", username);
+        formData.append("perfil", 2);
+        formData.append("senha", senha);
 
-  formData.append("nome", nome);
-  formData.append("email", email);
-  formData.append("username", username);
-  formData.append("perfil", 2);
-  formData.append("senha", senha);
-
-  fetch("http://localhost:3000/usuario", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-    
-      Swal.fire({
-        title: "Sucesso",
-        timer: 10000,
-        icon:'success'
-      })
+        fetch("http://localhost:3000/usuario", {
+          method: "POST",
+          body: formData,
+        })
+          .then(response => response.json())
+          .then(data => {
+            Swal.fire({
+              title: "Sucesso",
+              timer: 10000,
+              icon: 'success'
+            });
+          })
+          .catch(error => console.log("Erro:" + error));
+      }
     })
-    .catch((error) => console.log("Erro:" + error));
+    .catch(error => console.log("Erro ao verificar o email:" + error));
 }
+
+
 
 function deletarUsuario(usuario) {
   let confirmacao = `Confirma a exclusão desse Usuário?\n\nID: ${usuario.id}\nNome: ${usuario.nome}\nUsername: ${usuario.username}\nEmail: ${usuario.email}`;

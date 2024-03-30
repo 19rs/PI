@@ -515,8 +515,30 @@ async function compartilharPDF(id,plataforma) {
   const overlay = document.getElementById("overlay");
 
   if(plataforma === 'whats'){
+    let timerInterval;
+  Swal.fire({
+  title: "Redirecionando",
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+    const timer = Swal.getPopup().querySelector("b");
+    timerInterval = setInterval(() => {
+      timer.textContent = `${Swal.getTimerLeft()}`;
+    }, 100);
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log("I was closed by the timer");
     const linkWhatsApp = `https://api.whatsapp.com/send?text=${pessoa.nome + " " + mensagem}`;
     window.open(linkWhatsApp);
+  }
+});
+   
   }else if (plataforma === 'insta'){
 
     modal.innerHTML = '' 
