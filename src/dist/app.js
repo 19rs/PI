@@ -18,6 +18,7 @@ app.use(usuarioRouter)
 app.use(mensagemRouter)
 
 
+
 app.listen(3000, () => {
     console.log('Servidor escutando porta 3000');
 });
