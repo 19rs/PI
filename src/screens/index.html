@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -24,6 +25,11 @@
         padding: 0;
       }
 
+      .chart-container {
+        width: 800px;
+        height: 400px;
+        margin: auto;
+      }
      
       main {
         padding: 2rem 1rem;
@@ -155,37 +161,10 @@
         </div>
       </section>
 
-      <section class="px-2 mb-10">
-        <div class="mt-10">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <a href="./img/estatistica/estatistica.png" target="_blank">
-              <img
-                src="./img/estatistica/estatistica.png"
-                alt="Imagem 1"
-                class="w-full h-full object-cover"
-              />
-            </a>
-            </div>
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <a href="./img/estatistica/estatisticars.png" target="_blank">
-              <img
-                src="./img/estatistica/estatisticars.png"
-                alt="Imagem 2"
-                class="w-full h-full object-cover"
-              />
-            </a>
-            </div>
-            <div class="rounded-lg overflow-hidden shadow-md h-auto">
-              <a href="./img/estatistica/estatisticabrasil.png" target="_blank">
-              <img
-                src="./img/estatistica/estatisticabrasil.png"
-                alt="Imagem 3"
-                class="w-full h-full object-cover"
-              />
-            </a>
-            </div>
-          </div>
+      <section>
+        <h2>Estatísticas de Desaparecidos no Brasil</h2>
+        <div class="chart-container">
+          <canvas id="desaparecidosChart"></canvas>
         </div>
       </section>
 
@@ -554,5 +533,72 @@
     <script>
       document.onload = carregarMenu();
     </script>
+
+<script>
+  const data = {
+    labels: [
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+    ],
+    datasets: [
+      {
+        label: "Gráfico de desaparecidos do Brasil",
+        backgroundColor: "rgba(54, 162, 235, 0.5)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+        data: [
+          58764, 67308, 88618, 90301, 94101, 86169, 71796, 83701, 77907,
+          79608, 62913,
+        ],
+      },
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: "Desaparecidos no Brasil 2010-2020",
+          font: {
+            size: 20,
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Número de Pessoas",
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: "Ano",
+          },
+        },
+      },
+    },
+  };
+
+  var myChart = new Chart(
+    document.getElementById("desaparecidosChart"),
+    config
+  );
+</script>
   </body>
 </html>
