@@ -49,31 +49,31 @@
             <div class="relative group">
                 <input type="search" name="filtroNome" id="filtroNome" class="w-56 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
     
-                <label for="filtroNome" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Nome</label>
+                <label for="filtroNome" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Nome</label>
             </div>
 
             <div class="relative group">
                 <input type="search" name="filtroLocalDesaparecimento" id="filtroLocalDesaparecimento" class="w-56 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
     
-                <label for="filtroLocalDesaparecimento" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Local Desaparecimento</label>
+                <label for="filtroLocalDesaparecimento" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Local Desaparecimento</label>
             </div>
 
             <div class="relative group">
                 <input type="search" name="filtroGenero" id="filtroGenero" class="p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
     
-                <label for="filtroGenero" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Gênero</label>
+                <label for="filtroGenero" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Gênero</label>
             </div>
 
             <div class="relative group">
                 <input type="number" name="filtroIdadeMin" id="filtroIdadeMin" class="w-28 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " />
     
-                <label for="filtroIdadeMin" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Idade Mínima</label>
+                <label for="filtroIdadeMin" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Idade Mínima</label>
             </div>
 
             <div class="relative group">
                 <input type="number" name="filtroIdadeMax" id="filtroIdadeMax" class="w-28 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " />
     
-                <label for="filtroIdadeMax" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5">Idade Máxima</label>
+                <label for="filtroIdadeMax" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Idade Máxima</label>
             </div>
 
             <button onclick="filtrarDesaparecidos()" class="ml-4 flex items-center border text-white px-2.5 py-1 rounded gap-x-1 text-sm bg-[#191919] hover:bg-gray-600">
@@ -91,6 +91,13 @@
         <section id="listaDesparecidos" class="container mx-auto px-10 flex flex-wrap gap-x-8 gap-y-8 justify-center mb-20">
            
         </section>
+
+        <section id="paginacao" class="flex justify-center gap-x-10 mb-20">
+          <button id="botaoPaginaAnterior" class="text-gray-300" onclick="voltarPagina()" disabled>Anterior</button>
+          <span id="spanPagina"></span>
+          <button id="botaoProximaPagina" class="hover:underline hover:underline-offset-4" onclick="avancarPagina()">Próxima</button>  
+        </section>
+
         <div id="modal" class=" hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-auto bg-cover text-white z-1000"></div>
             <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-999"></div>
     </main>
@@ -326,10 +333,12 @@
         document.onload = listarDesaparecidos()
 
         function limparPesquisa() {
+            pagina = 1
             filtrarDesaparecidos()
         }
 
         function limparFiltros() {
+            pagina = 1
             let nome = document.getElementById("filtroNome")
             let localDesaparecimento = document.getElementById("filtroLocalDesaparecimento")
             let genero = document.getElementById("filtroGenero")
