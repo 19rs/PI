@@ -8,7 +8,7 @@ function cadastrarDesaparecido() {
     alert("Proibido");
     return;
   } else {
-    // criarDialogCadastroDesaparecido()
+    
     window.location.href = "../screens/cadastrarDesaparecido.html";
   }
 }
