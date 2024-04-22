@@ -36,13 +36,37 @@ export async function createTablePessoas() {
 export async function selectPessoas(req, res) {
   const db = await openDB();
   let stmt = null;
+  
+  const pagina = parseInt(req.query.pagina) || 1
+  const limit = 20
+  let offset = (pagina - 1) * limit
+
+  let pessoas = null
 
   try {
     stmt = await db.prepare(
-      "SELECT * FROM Pessoas WHERE status = 0 ORDER BY data_desaparecimento DESC LIMIT 20"
+      "SELECT * FROM Pessoas WHERE status = 0 ORDER BY data_desaparecimento DESC LIMIT ? OFFSET ?"
     );
-    const pessoas = await stmt.all();
-    return res.json(pessoas);
+    pessoas = await stmt.all(limit, offset);
+
+    // return res.json(pessoas);
+  } catch (error) {
+    console.error("Erro ao selecionar pessoas:", error);
+    throw error;
+  } finally {
+    stmt ? await stmt.finalize() : null;
+    // await db.close();
+  }
+
+  try {
+    stmt = await db.prepare(
+      "SELECT COUNT(*) AS contagem FROM Pessoas WHERE status = 0"
+    );
+    const resultado = await stmt.get();
+    const totalPessoas = resultado.contagem;
+    const totalPaginas = Math.ceil(totalPessoas / parseInt(limit))
+
+    return res.json({pessoas, totalPaginas});
   } catch (error) {
     console.error("Erro ao selecionar pessoas:", error);
     throw error;
@@ -51,6 +75,7 @@ export async function selectPessoas(req, res) {
     await db.close();
   }
 }
+
 
 export async function selectPessoa(req, res) {
  // let id = req.body.id;
@@ -82,19 +107,24 @@ export async function filtrarPessoas(req, res) {
   const db = await openDB()
   let stmt = null
 
+  const pagina = parseInt(req.query.pagina) || 1
+  const limit = 20
+  const offset = (pagina - 1) * limit
+  let pessoas = null
+
+  let sql = 'SELECT * FROM Pessoas WHERE status = 0'
+
   try {
-      let sql = 'SELECT * FROM Pessoas WHERE status = 0'
-  
       if(req.query.nome) {
-          sql += ` AND nome LIKE '%${req.query.nome}%'`
+          sql += ` AND nome LIKE '%${req.query.nome.trim()}%'`
       }
 
       if(req.query.local_desaparecimento) {
-        sql += ` AND local_desaparecimento LIKE '%${req.query.local_desaparecimento}%'`
+        sql += ` AND local_desaparecimento LIKE '%${req.query.local_desaparecimento.trim()}%'`
       }
 
       if(req.query.genero) {
-        sql += ` AND genero LIKE '%${req.query.genero}%'`
+        sql += ` AND genero LIKE '%${req.query.genero.trim()}%'`
       }
 
       if(req.query.idadeMin) {
@@ -105,17 +135,36 @@ export async function filtrarPessoas(req, res) {
         sql += ` AND DATE('NOW') - data_nascimento <= ${req.query.idadeMax}`
       }
 
-      sql += ' ORDER BY data_desaparecimento DESC'
-      console.log(sql)
+      sql += ' ORDER BY data_desaparecimento DESC LIMIT ? OFFSET ?'
+      
       stmt = await db.prepare(sql)
-      const pessoas = await stmt.all()
-      return res.json(pessoas)
+      pessoas = await stmt.all(limit, offset)
+
+      // return res.json(pessoas)
   } catch(error) {
       console.error('Erro ao selecionar pessoas:', error)
       throw error
   } finally {
       stmt ? await stmt.finalize() : null
-      await db.close()
+      // await db.close()
+  }
+
+  try {
+    sql = sql.replace("SELECT *", "SELECT COUNT(*) AS contagem")
+    sql = sql.replace("ORDER BY data_desaparecimento DESC LIMIT ? OFFSET ?", "")
+    stmt = await db.prepare(sql);
+
+    const resultado = await stmt.get();
+    const totalPessoas = resultado.contagem;
+    const totalPaginas = Math.ceil(totalPessoas / parseInt(limit))
+    // console.log(sql)
+    return res.json({pessoas, totalPaginas});
+  } catch (error) {
+    console.error("Erro ao selecionar o total de pessoas:", error);
+    throw error;
+  } finally {
+    stmt ? await stmt.finalize() : null;
+    await db.close();
   }
 }
 

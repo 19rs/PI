@@ -12,6 +12,6 @@ pessoasRouter.post('/pessoas', insertPessoa)
 pessoasRouter.put('/pessoa/:id', updatePessoa)
 pessoasRouter.delete('/pessoa/:id', deletePessoa)
 
-pessoasRouter.get('/pessoas/filtrar/:nome?/:local_desaparecimento?', filtrarPessoas)
+pessoasRouter.get('/pessoas/filtrar', filtrarPessoas)
 
 export default pessoasRouter
