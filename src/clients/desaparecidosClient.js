@@ -1,3 +1,6 @@
+let pagina = 1
+let totalPaginas = null
+
 function cadastrarDesaparecido() {
   let perfilUsuario = sessionStorage.getItem("userProfile");
 
@@ -11,12 +14,74 @@ function cadastrarDesaparecido() {
 }
 
 function listarDesaparecidos() {
-  fetch("http://localhost:3000/pessoas")
+  fetch(`http://localhost:3000/pessoas/?pagina=${pagina}`)
     .then((response) => response.json())
     .then(function (data) {
-      criarCardsPessoas(data);
-    })
-    .catch((error) => console.error("Erro:", error));
+      criarCardsPessoas(data.pessoas)
+      totalPaginas = data.totalPaginas
+      mostrarTotalPaginas()
+    })      
+    .catch((error) => console.error("Erro:", error))
+}
+
+function mostrarTotalPaginas() {
+  let paginacao = document.getElementById('paginacao')
+  paginacao.className = paginacao.className.replace('hidden', '')
+
+  let spanPagina = document.getElementById('spanPagina')
+  spanPagina.innerHTML = pagina + ' de ' + totalPaginas
+
+  let botaoPaginaAnterior = document.getElementById('botaoPaginaAnterior')
+  let botaoProximaPagina = document.getElementById('botaoProximaPagina')
+
+  if(totalPaginas == 1) {
+    botaoPaginaAnterior.setAttribute('disabled', 'true')
+    botaoPaginaAnterior.className = 'text-gray-300'
+    
+    botaoProximaPagina.setAttribute('disabled', 'true')
+    botaoProximaPagina.className = 'text-gray-300'
+  } else if(pagina != totalPaginas) {
+    botaoProximaPagina.removeAttribute('disabled')
+    botaoProximaPagina.className = 'text-black hover:underline hover:underline-offset-4'
+  }
+}
+
+function avancarPagina() {
+  pagina ++
+
+  if(pagina == totalPaginas) {
+    let botaoProximaPagina = document.getElementById('botaoProximaPagina')
+    botaoProximaPagina.setAttribute('disabled', 'true')
+    botaoProximaPagina.className = 'text-gray-300'
+  }
+
+  let botaoPaginaAnterior = document.getElementById('botaoPaginaAnterior')
+  botaoPaginaAnterior.removeAttribute('disabled')
+  botaoPaginaAnterior.className = 'text-black hover:underline hover:underline-offset-4'
+
+  mostrarTotalPaginas()
+
+  filtrarDesaparecidos()
+  window.scrollTo({top: 0, behavior: 'smooth'})
+}
+
+function voltarPagina() {
+  pagina --
+
+  if(pagina == 1) {
+    let botaoPaginaAnterior = document.getElementById('botaoPaginaAnterior')
+    botaoPaginaAnterior.setAttribute('disabled', 'true')
+    botaoPaginaAnterior.className = 'text-gray-300'
+  }
+
+  let botaoProximaPagina = document.getElementById('botaoProximaPagina')
+  botaoProximaPagina.removeAttribute('disabled')
+  botaoProximaPagina.className = 'text-black hover:underline hover:underline-offset-4'
+
+  mostrarTotalPaginas()
+
+  filtrarDesaparecidos()
+  window.scrollTo({top: 0, behavior: 'smooth'})
 }
 
 function criarCardsPessoas(data) {
@@ -102,7 +167,6 @@ function criarCardsPessoas(data) {
  
 
   });
-
 }
 
 async function getPessoaById(id) {
@@ -125,6 +189,7 @@ async function getPessoaById(id) {
     throw error;
   }
 }
+
 
 async function renderItem(id) {
   const modal = document.getElementById("modal");
@@ -1098,21 +1163,29 @@ function updateDesaparecido(id) {
   //   .catch((error) => console.log("Erro:" + error));
 }
 
-function filtrarDesaparecidos() {
-  let nome = document.getElementById("filtroNome").value;
-  let localDesaparecimento = document.getElementById(
-    "filtroLocalDesaparecimento"
-  ).value;
-  let genero = document.getElementById("filtroGenero").value;
-  let idadeMin = document.getElementById("filtroIdadeMin").value;
-  let idadeMax = document.getElementById("filtroIdadeMax").value;
 
-  fetch(
-    `http://localhost:3000/pessoas/filtrar?nome=${nome}&local_desaparecimento=${localDesaparecimento}&genero=${genero}&idadeMin=${idadeMin}&idadeMax=${idadeMax}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      criarCardsPessoas(data);
+
+function filtrarDesaparecidos() {
+  let nome = document.getElementById("filtroNome").value
+  let localDesaparecimento = document.getElementById("filtroLocalDesaparecimento").value
+  let genero = document.getElementById("filtroGenero").value
+  let idadeMin = document.getElementById("filtroIdadeMin").value
+  let idadeMax = document.getElementById("filtroIdadeMax").value
+
+  fetch(`http://localhost:3000/pessoas/filtrar?nome=${nome}&local_desaparecimento=${localDesaparecimento}&genero=${genero}&idadeMin=${idadeMin}&idadeMax=${idadeMax}&pagina=${pagina}`)
+  .then((response) => response.json())
+  .then((data) => {
+    if(!data.pessoas.length) {
+      let paginacao = document.getElementById('paginacao')
+      paginacao.className = paginacao.className += ' hidden'
+
+      let listaDesparecidos = document.getElementById('listaDesparecidos')
+      listaDesparecidos.innerHTML = '<h1>Sem resultados</h1>'
+    } else {
+      criarCardsPessoas(data.pessoas)  
+      totalPaginas = data.totalPaginas
+      mostrarTotalPaginas()
+    }
     })
     .catch((error) => console.error("Erro:", error));
 }
