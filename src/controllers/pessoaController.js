@@ -78,7 +78,8 @@ export async function selectPessoas(req, res) {
 
 
 export async function selectPessoa(req, res) {
-  let id = req.body.id;
+ // let id = req.body.id;
+  let id = req.params.id
   const db = await openDB();
   let stmt = null;
 

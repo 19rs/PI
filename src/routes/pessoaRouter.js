@@ -7,7 +7,7 @@ createTablePessoas()
 const pessoasRouter = Router()
 
 pessoasRouter.get('/pessoas', selectPessoas)
-pessoasRouter.get('/pessoa', selectPessoa)
+pessoasRouter.get('/pessoa/:id', selectPessoa)
 pessoasRouter.post('/pessoas', insertPessoa)
 pessoasRouter.put('/pessoa/:id', updatePessoa)
 pessoasRouter.delete('/pessoa/:id', deletePessoa)
