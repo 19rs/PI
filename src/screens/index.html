@@ -269,14 +269,23 @@
         </div>
       </section>
 
+      <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-999"></div>
+      <div id="modal" class="hidden  fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-auto bg-cover text-white z-1000 rounded-lg"></div>
+
       <section class="px-4 mb-8">
         <div class="mt-8">
           <h2 class="text-3xl font-bold mb-6">Você quer cadastrar um desaparecido?</h2>
+         
           <p class="text-xl leading-relaxed mb-6">
             Se você precisa de ajuda para localizar um ente querido desaparecido
             ou deseja apoiar nossa causa, não hesite em nos contatar. Estamos
             aqui para ajudar e apreciamos qualquer forma de colaboração.
+            <strong class="underline cursor-pointer" id="gif">Como Cadastro uma Pessoa?</strong>
+         
           </p>
+
+        
+
           <p class="text-xl leading-relaxed mb-6">
             Em Reconectando Vidas, acreditamos na importância de ajudar o
             próximo. Nosso projeto visa oferecer suporte àqueles que enfrentam a
@@ -537,6 +546,27 @@
     </script>
 
 <script>
+
+    document.getElementById(`gif`).addEventListener('click', function(){
+
+      const overlay = document.getElementById('overlay')
+       const modal =  document.getElementById('modal')
+       modal.innerHTML = `
+       <img src="../assets/gif/guia.gif" alt="">
+       `
+       modal.style.display = "flex";
+       overlay.style.display = "block";
+       
+
+     overlay.onclick = function () {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+     };
+    })
+
+
+
+
   const data = {
     labels: [
       "2010",
