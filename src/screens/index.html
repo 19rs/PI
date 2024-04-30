@@ -118,7 +118,32 @@
     </header>
 
     <main class="mt-24 container mx-auto">
-      <section class="px-4 mb-8">
+
+    <!-- banner com imagem, retirei o texto pois não tem como ler de uma forma fácil, adicionei a imagem people nem img/pessoas/people.png para o banner -->
+
+      <section class="relative bg-cover bg-center bg-no-repeat h-[600px] sm:h-[600px]" style="background-image: url('img/pessoas/people.png'); background-position: 50% 50%; width: 100%; border-radius: 20px;">
+        <div class="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25" style="border-radius: 20px;"></div>
+        
+        <div class="relative mx-auto max-w-screen-lg px-4 py-20 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+            <div class="max-w-md mx-auto text-center sm:text-left mb-auto">
+                <h1 class="text-4xl font-bold sm:text-4xl text-white">
+                    
+                    <strong class="block font-bold text-black">Reconectando Vidas</strong>
+                </h1>
+    
+
+    
+                <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+      <section class="px-5 mb-8 mt-10" >
         <h1 class="text-5xl font-bold mb-10">Reconectando Vidas</h1>
         <p class="text-xl leading-relaxed mb-8">
           Na Reconectando Vidas, nosso compromisso é ajudar a encontrar pessoas
@@ -297,7 +322,103 @@
           </ul>
         </div>
       </section>
+
+      <!-- FAQ para ajudar a pessoa cadastrar um usuário -->
+
+      <div class="space-y-4">
+        <details class="group rounded-lg bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden" open>
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-gray-900">
+            <h2 class="font-medium">Lorem ipsum dolor sit amet consectetur adipisicing?</h2>
+      
+            <span class="relative size-5 shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 size-5 opacity-100 group-open:opacity-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+      
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 size-5 opacity-0 group-open:opacity-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          </summary>
+      
+          <p class="mt-4 leading-relaxed text-gray-700">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in,
+            recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo
+            consequuntur distinctio corporis earum similique!
+          </p>
+        </details>
+      
+        <details class="group rounded-lg bg-gray-50 p-6 [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-gray-900">
+            <h2 class="font-medium">Lorem ipsum dolor sit amet consectetur adipisicing?</h2>
+      
+            <span class="relative size-5 shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 opacity-100 group-open:opacity-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+      
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 opacity-0 group-open:opacity-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          </summary>
+      
+          <p class="mt-4 leading-relaxed text-gray-700">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in,
+            recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo
+            consequuntur distinctio corporis earum similique!
+          </p>
+        </details>
+      </div>
+
+
+
     </main>
+    
 
     <!-- <footer class="bg-black text-white py-2">
       <div class="container mx-auto flex justify-between items-center">

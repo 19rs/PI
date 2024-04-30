@@ -18,7 +18,7 @@ export async function createTableUsuarios() {
   } finally {
     await db.close();
   }
-}
+} 
 
 // hash, npm install bycrpto
 
