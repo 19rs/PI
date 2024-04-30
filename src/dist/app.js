@@ -5,6 +5,8 @@ import pessoasRouter from '../routes/pessoaRouter.js'
 import fileUpload from "express-fileupload"
 import usuarioRouter from '../routes/usuarioRouter.js'
 import mensagemRouter from '../routes/mensagemRouter.js'
+import respostaRouter from '../routes/respostaRouter.js'
+
 
 const app = express();
 
@@ -16,7 +18,7 @@ app.use(authRouter)
 app.use(pessoasRouter)
 app.use(usuarioRouter)
 app.use(mensagemRouter)
-
+app.use(respostaRouter)
 
 
 app.listen(3000, () => {

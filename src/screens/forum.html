@@ -49,49 +49,16 @@
     </header>
 
     <main class="mt-24 container mx-auto">
-      <section id="forum" class="px-4 mb-8">
+      <section class="px-4 mb-8">
         <h1 class=" text-2xl font-bold text-center text-[#1f2937] mb-8">Fórum</h1>
-        <h2 class="bg-blue-500 p-3 text-lg text-white font-bold">Mensagens</h2>
-
-
-        <div class="grid grid-cols-4 p-5 mb-0.5 bg-white shadow-md">
-            <div class="flex flex-col col-span-2 gap-y-1">
-                <h3 class="font-semibold">Clock da placa de vídeo caindo de 1550mhz pra 1380 e fps caindo pra 90</h3>
-                <h4 class="font-thin">Por peagado7, 38 minutos atrás</h4>
-            </div>
-            <div class="flex flex-col items-end justify-center">
-                <h4>0 respostas</h4>
-                <h4>43 visualizações</h4>
-            </div>
-            <div class="flex flex-row items-center ml-14 gap-x-3">
-                <div class="rounded-full w-12 h-12 content-center justify-center bg-red-500">
-                    <h2 class="font-semibold text-center text-2xl text-white">P</h2>
-                </div>
-                <div>
-                    <h4 class="font-semibold">peagado7</h4>
-                    <h4 class="font-thin text-sm">38 minutos atrás</h4>
-                </div>
-            </div>
+        
+        <div class="flex justify-end">
+          <button class="bg-blue-500 text-white font-semibold px-8 py-2.5 mb-5 hover:bg-blue-400">Nova Mensagem</button>
         </div>
+        <!-- <h2 class="bg-blue-500 p-3 text-lg text-white font-bold">Mensagens</h2> -->
+        <h2 class="bg-[#454545] p-3 text-lg text-white font-bold">Mensagens</h2>
+        <div id="forum">
 
-        <div class="grid grid-cols-4 p-5 mb-0.5 bg-white shadow-md">
-            <div class="flex flex-col col-span-2 gap-y-1">
-                <h3 class="font-semibold">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse, aperiam cumque magnam id quos harum minima, adipisci quo odio tempora, sunt excepturi quae similique odit mollitia! Iusto tempore quo maiores.</h3>
-                <h4 class="font-thin">Por Fulano da Silva, 22/04/2024</h4>
-            </div>
-            <div class="flex flex-col items-end justify-center">
-                <h4>2 respostas</h4>
-                <h4>10 visualizações</h4>
-            </div>
-            <div class="flex flex-row items-center ml-14 gap-x-3">
-                <div class="rounded-full w-12 h-12 content-center justify-center bg-blue-500">
-                    <h2 class="font-semibold text-center text-2xl text-white">F</h2>
-                </div>
-                <div>
-                    <h4 class="font-semibold">Fulano</h4>
-                    <h4 class="font-thin text-sm">22/04/2024</h4>
-                </div>
-            </div>
         </div>
       </section>
     </main>
@@ -317,9 +284,11 @@
     </footer>
 
     <script src="../clients/authClient.js"></script>
+    <script src="../clients/mensagensClient.js"></script>
 
     <script>
-      document.onload = carregarMenu();
+      document.onload = carregarMenu()
+      document.onload = listarMensagens()
     </script>
   </body>
 </html>

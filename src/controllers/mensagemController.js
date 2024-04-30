@@ -6,7 +6,7 @@ export async function createTableMensagens() {
         await db.exec(`CREATE TABLE IF NOT EXISTS Mensagens (
             id INTEGER PRIMARY KEY NOT NULL,
             autor_id INT NOT NULL,
-            data DATE NOT NULL,
+            data_postagem DATE NOT NULL,
             titulo VARCHAR(100) NOT NULL,
             conteudo VARCHAR(255) NOT NULL,
             visualizacoes INT DEFAULT 0,
@@ -26,7 +26,14 @@ export async function selectMensagens(req, res) {
     let stmt = null
 
     try {
-        stmt = await db.prepare('SELECT * FROM Mensagens ORDER BY data DESC LIMIT 20')
+        // stmt = await db.prepare('SELECT * FROM Mensagens ORDER BY data_postagem DESC LIMIT 20')
+        stmt = await db.prepare(`SELECT m.data_postagem, m.titulo, m.conteudo, m.visualizacoes, u.nome AS nome_autor, u.username AS username_autor, u.perfil AS perfil_autor, COUNT(r.id) AS respostas  FROM Mensagens m 
+        INNER JOIN Usuarios u 
+        ON u.id = m.autor_id 
+        LEFT JOIN Respostas r 
+        ON r.mensagem_id = m.id 
+        GROUP BY m.id
+        ORDER BY m.data_postagem DESC;`)
         const mensagens = await stmt.all()
         return res.json(mensagens)
     } catch(error) {
@@ -35,8 +42,6 @@ export async function selectMensagens(req, res) {
     } finally {
         stmt ? await stmt.finalize() : null
         await db.close()
-
-        updateViewsMensagem();
     }
 }
 
@@ -61,6 +66,8 @@ export async function selectMensagem(req, res) {
     } finally {
         stmt ? await stmt.finalize() : null
         await db.close()
+
+        updateViewsMensagem()
     }
 }
 
