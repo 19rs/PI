@@ -141,12 +141,12 @@ function criarCardsPessoas(data) {
 
                     </div>
 
-      <div class='h-64 w-64 flex justify-center'>
-          <img class='max-h-64 max-w-64 rounded-tl-sm rounded-tr-sm'  src=${
+      <div class='md:size-72'>
+          <img class='h-full w-full rounded-tl-sm rounded-tr-sm'  src=${
             pessoa.foto ? pessoa.foto : "img/pessoas/SemFoto.png"
           } alt="foto desaparecido">
       </div>
-      <div class="w-full max-w-64">
+      <div class="w-full ">
           <h1 class='px-2 text-center font-bold text-lg border-gray-300 bg-gray-200 py-3 truncate'>${
             pessoa.nome
           }</h1>
@@ -207,7 +207,7 @@ async function renderItem(id) {
   modal.innerHTML = ` `;
 
   modal.innerHTML = `
- <div  id='pdf-content' class='bg-[#191919] p-10 rounded-lg  w-[85vw]  '>
+ <div  id='pdf-content' class='bg-[#191919] p-10 rounded-lg md:w-[85vw] '>
 
   <div class='flex '>
           <div class='w-8/12' >
@@ -217,10 +217,10 @@ async function renderItem(id) {
 
       <div class='flex flex-col gap-10 items-center w-full justify-around  ' >
                  
-              <div class='flex gap-10  ' >
+              <div class='md:flex gap-10  ' >
                       <div class='flex-col'>
                       <div class="flow-root w-full">
-                      <dl class="-my-3 divide-y divide-gray-100 text-sm w-96">
+                      <dl class="-my-3 divide-y divide-gray-100 text-sm md:w-96">
                          
                           <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4 ">
                             <dt class="font-medium">Nome</dt>
