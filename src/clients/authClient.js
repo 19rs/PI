@@ -109,6 +109,11 @@ function logar() {
             if(parseInt(data.userProfile) === 1) {
                 carregarMenu()
             }
+
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000);
+           
         } else {
             let spanErro = document.getElementById('spanErro')
             spanErro.className = spanErro.className.replace('hidden', 'block') 

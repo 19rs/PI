@@ -7,16 +7,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=REM:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <title>Reconectando Vidas</title>
 </head>
 <style>
     
-    #header{
-        font-family: "Montserrat", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 500;
+    *{
+       
+        font-family: "REM", sans-serif;
+  font-optical-sizing: auto;
+
       }
   
   
@@ -24,7 +28,7 @@
    
     
     </style>
-<body>
+<body class="antialiased">
     <header id="header" class="bg-black/90 flex justify-between items-center fixed top-0 left-0 w-full px-5 py-5 shadow-lg h-20">
         <a href="./index.html" >
             <img class="h-10" src="img/newLogo.png" alt="logo">
@@ -34,110 +38,31 @@
         </nav>
     </header>
 
-    <main class="mt-32 container mx-auto">
-        <section id="forum">
-            <h2 class="text-2xl font-bold mb-4">Fórum</h2>
-            <div id="messages"></div>
-            <form id="messageForm" class="mt-4">
-                <textarea id="messageInput" class="w-full h-20 p-2 border border-gray-300 rounded" placeholder="Digite sua mensagem aqui"></textarea>
-                <button type="submit" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Enviar</button>
-            </form>
+    <main class="mt-32 container mx-auto pb-5">
+            <div class="w-full flex items-end justify-end my-5">
+                <div class=" bg-[#191919] inline-flex p-3 rounded"> 
+                    <button class="tracking-wider text-zinc-50 font-medium capitalize" id="btnCriar">criar nova publicação</button>
+                </div>
+            </div>
+       
+            <div id="modal" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-y-auto bg-cover text-white z-1000 overflow-auto  "></div>
+            <div id="overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-999"></div>
+      
+        
+        <section id="forum" class="flex flex-col" >
+          
+            
+          
+           
         </section>
     </main>
 
     <script src="../clients/authClient.js"></script>
-    <script src="../clients/desaparecidosClient.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            carregarMenu();
-            carregarMensagens();
-            
-            document.getElementById("messageForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                enviarMensagem();
-            });
-
-            document.getElementById("messages").addEventListener("click", function(event) {
-                if (event.target.classList.contains("reply-button")) {
-                    const replyTo = event.target.dataset.replyTo;
-                    const replyMessage = prompt("Digite sua resposta:");
-                    if (replyMessage !== null && replyMessage.trim() !== "") {
-                        // Aqui você enviaria a resposta para o servidor
-                        // Por enquanto, vamos apenas adicionar a resposta na página
-                        adicionarResposta(replyTo, replyMessage);
-                    }
-                }
-            });
-        });
-
-        function carregarMensagens() {
-            // Aqui você pode carregar as mensagens do servidor e exibi-las na div #messages
-            // Por enquanto, vamos simular algumas mensagens:
-            const mensagens = [
-                { id: 1, texto: "Primeira mensagem", respostas: [] },
-                { id: 2, texto: "Segunda mensagem", respostas: [] },
-                { id: 3, texto: "Terceira mensagem", respostas: [] }
-            ];
-
-            const messagesDiv = document.getElementById("messages");
-            messagesDiv.innerHTML = ""; // Limpa as mensagens existentes antes de adicionar novas
-            
-            mensagens.forEach(mensagem => {
-                const mensagemElement = document.createElement("div");
-                mensagemElement.textContent = mensagem.texto;
-                mensagemElement.classList.add("bg-gray-100", "p-2", "my-2", "rounded");
-
-                const replyButton = document.createElement("button");
-                replyButton.textContent = "Responder";
-                replyButton.classList.add("ml-2", "text-blue-500", "underline", "focus:outline-none", "reply-button");
-                replyButton.dataset.replyTo = mensagem.id;
-
-                mensagemElement.appendChild(replyButton);
-
-                messagesDiv.appendChild(mensagemElement);
-
-                mensagem.respostas.forEach(resposta => {
-                    adicionarResposta(mensagem.id, resposta);
-                });
-            });
-        }
-
-        function enviarMensagem() {
-            const mensagemInput = document.getElementById("messageInput").value;
-            if (mensagemInput.trim() !== "") {
-                // Aqui você enviaria a mensagem para o servidor
-                // Por enquanto, vamos apenas adicionar a mensagem na página
-                const newMessageId = Math.floor(Math.random() * 1000); // Simulando um ID único
-                adicionarMensagem(newMessageId, mensagemInput);
-                document.getElementById("messageInput").value = ""; // Limpa o campo de entrada após o envio
-            } else {
-                alert("Por favor, digite uma mensagem antes de enviar.");
-            }
-        }
-
-        function adicionarMensagem(id, texto) {
-            const messagesDiv = document.getElementById("messages");
-            const mensagemElement = document.createElement("div");
-            mensagemElement.textContent = texto;
-            mensagemElement.classList.add("bg-gray-100", "p-2", "my-2", "rounded");
-
-            const replyButton = document.createElement("button");
-            replyButton.textContent = "Responder";
-            replyButton.classList.add("ml-2", "text-blue-500", "underline", "focus:outline-none", "reply-button");
-            replyButton.dataset.replyTo = id;
-
-            mensagemElement.appendChild(replyButton);
-
-            messagesDiv.appendChild(mensagemElement);
-        }
-
-        function adicionarResposta(replyTo, texto) {
-            const replyMessageDiv = document.createElement("div");
-            replyMessageDiv.textContent = `Resposta: ${texto}`;
-            replyMessageDiv.classList.add("bg-gray-200", "p-2", "ml-8", "my-2", "rounded");
-            document.querySelector(`[data-reply-to="${replyTo}"]`).appendChild(replyMessageDiv);
-        }
-    </script>
+    <script src="../clients/mensagensClient.js"></script>
+    <script src="../operacoes/opMensagens.js"></script>
+    <script src="../operacoes/opResposta.js"></script>
+    <script src="../operacoes/opReposta_Reposta.js"></script>
+    
+       
 </body>
 </html>
