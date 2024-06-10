@@ -85,15 +85,15 @@ function logar() {
     .then(data => {
         console.log(data)
         if(data.sucesso) {
-           // alert(data.sucesso) //usar sweetAlert2? //mandar uma mensagem de Bem Vindo Usuario?
+           alert(data.sucesso) //usar sweetAlert2? //mandar uma mensagem de Bem Vindo Usuario?
             
-            Swal.fire({
-                position: "top",
-                icon: "success",
-                title: "Login Bem-Sucedido",
-                showConfirmButton: false,
-                timer: 2000
-              });
+            // Swal.fire({
+            //     position: "top",
+            //     icon: "success",
+            //     title: "Login Bem-Sucedido",
+            //     showConfirmButton: false,
+            //     timer: 2000
+            //   });
             
             
             
