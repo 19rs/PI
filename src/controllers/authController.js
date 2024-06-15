@@ -4,6 +4,9 @@ import { openDB } from "../dist/configDB.js";
 export async function createTableUsuarios() {
   const db = await openDB();
   try {
+
+      //await db.exec(`DROP TABLE IF EXISTS Usuarios`);
+
     await db.exec(`CREATE TABLE IF NOT EXISTS Usuarios (
             id INTEGER PRIMARY KEY NOT NULL, 
             nome VARCHAR(255) NOT NULL, 
@@ -37,7 +40,7 @@ export async function insertUsuario(req, res) {
       "@nome": pessoa.nome,
       "@email": pessoa.email,
       "@username": pessoa.username,
-      "@perfil": 2,
+      "@perfil": pessoa.perfil,
       "@senha": hashedSenha,
     });
     await stmt.run();

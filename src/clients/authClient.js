@@ -1,4 +1,5 @@
 //Depois melhorar o login, usar o express-session?
+
 function loginLogout() {
     let isUsuarioLogado = sessionStorage.getItem('userID')
 
@@ -67,9 +68,13 @@ function criarDialogLogin() {
 
 
 
-function logar() {
+async function logar() {
+
     let email = document.getElementById('emailLogin').value
     let senha = document.getElementById('senhaLogin').value
+    
+
+    
 
     fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -87,13 +92,13 @@ function logar() {
         if(data.sucesso) {
            // alert(data.sucesso) //usar sweetAlert2? //mandar uma mensagem de Bem Vindo Usuario?
             
-            Swal.fire({
-                position: "top",
-                icon: "success",
-                title: "Login Bem-Sucedido",
-                showConfirmButton: false,
-                timer: 2000
-              });
+            // Swal.fire({
+            //     position: "top",
+            //     icon: "success",
+            //     title: "Login Bem-Sucedido",
+            //     showConfirmButton: false,
+            //     timer: 2000
+            //   });
             
             
             

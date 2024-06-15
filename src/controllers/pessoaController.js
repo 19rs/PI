@@ -3,24 +3,27 @@ import { openDB } from "../dist/configDB.js";
 export async function createTablePessoas() {
   const db = await openDB();
   try {
+
+        //await db.exec(`DROP TABLE IF EXISTS Pessoas`);
+
     await db.exec(`
     CREATE TABLE IF NOT EXISTS Pessoas (
             id INTEGER PRIMARY KEY NOT NULL, 
             nome VARCHAR(255) NOT NULL,
-            cpf VARCHAR(80),
+            cpf VARCHAR(80) NOT NULL,
             data_nascimento DATE,
             idade INTEGER,
-            genero VARCHAR(25),
+            genero VARCHAR(25) NOT NULL,
             olhos VARCHAR(25),
-            altura_estimada VARCHAR(10),
-            peso_estimado VARCHAR(10),
+            altura VARCHAR(10),
+            peso VARCHAR(10),
             cabelo VARCHAR(25),
-            caracteristicas_fisicas VARCHAR(255),
+            caracte VARCHAR(255),
             vestimentas VARCHAR(255),
-            residente_em VARCHAR(255),
+            residente VARCHAR(255),
             foto TEXT,
-            data_desaparecimento DATE NOT NULL,
-            local_desaparecimento VARCHAR(255) NOT NULL,
+            data_desaparecimento DATE ,
+            local_desaparecimento VARCHAR(255),
             detalhes_desaparecimento VARCHAR(255),
             contato VARCHAR(255),
             status TINYINT(1) DEFAULT '0'
@@ -199,21 +202,21 @@ export async function insertPessoa(req, res) {
 
   try {
     stmt = await db.prepare(
-      `INSERT INTO Pessoas (nome, cpf, genero, olhos, altura_estimada,  data_nascimento, idade, peso_estimado, cabelo, caracteristicas_fisicas, vestimentas, residente_em, foto, data_desaparecimento, local_desaparecimento, detalhes_desaparecimento, contato) VALUES(@nome, @cpf, @genero, @olhos, @altura_estimada,@data_nascimento,@idade, @peso_estimado, @cabelo, @caracteristicas_fisicas, @vestimentas, @residente_em, @foto, @data_desaparecimento, @local_desaparecimento, @detalhes_desaparecimento, @contato)`
+      `INSERT INTO Pessoas (nome, cpf, genero, olhos, altura,  data_nascimento, idade, peso, cabelo, caracte, vestimentas, residente, foto, data_desaparecimento, local_desaparecimento, detalhes_desaparecimento, contato) VALUES(@nome, @cpf, @genero, @olhos, @altura,@data_nascimento,@idade, @peso, @cabelo, @caracte, @vestimentas, @residente, @foto, @data_desaparecimento, @local_desaparecimento, @detalhes_desaparecimento, @contato)`
     );
     await stmt.bind({
       "@nome": pessoa.nome,
       "@cpf": pessoa.cpf,
       "@genero": pessoa.genero,
       "@olhos": pessoa.olhos,
-      "@altura_estimada": pessoa.altura_estimada,
+      "@altura": pessoa.altura,
       "@data_nascimento": pessoa.data_nascimento,
       "@idade": pessoa.idade,
-      "@peso_estimado": pessoa.peso_estimado,
+      "@peso": pessoa.peso,
       "@cabelo": pessoa.cabelo,
-      "@caracteristicas_fisicas": pessoa.caracteristicas_fisicas,
+      "@caracte": pessoa.caracte,
       "@vestimentas": pessoa.vestimentas,
-      "@residente_em": pessoa.residente_em,
+      "@residente": pessoa.residente,
       "@foto": pessoa.foto,
       "@data_desaparecimento": pessoa.data_desaparecimento,
       "@local_desaparecimento": pessoa.local_desaparecimento,
@@ -238,37 +241,43 @@ export async function updatePessoa(req, res) {
 
   const pessoa = req.body;
 
+  let query = `UPDATE Pessoas SET nome = ?, genero = ?, olhos = ?, peso = ?, cabelo = ?, caracte = ?, vestimentas = ?, residente = ?, data_desaparecimento = ?, local_desaparecimento = ?, detalhes_desaparecimento = ?, contato = ?, data_nascimento = ? , altura = ?`;
+  const params = [
+    pessoa.nome,
+    pessoa.genero,
+    pessoa.olhos,
+    pessoa.peso,
+    pessoa.cabelo,
+    pessoa.caracte,
+    pessoa.vestimentas,
+    pessoa.residente,
+    pessoa.data_desaparecimento,
+    pessoa.local_desaparecimento,
+    pessoa.detalhes_desaparecimento,
+    pessoa.contato,
+    pessoa.data_nascimento,
+    pessoa.altura
+    
+  ];
+
+
+  query += ` WHERE id = ?`;
+  params.push(pessoa.id);
+
   try {
-    stmt = await db.prepare(
-      `UPDATE Pessoas SET nome = ?, cpf = ?, genero = ?, olhos = ?, altura_estimada = ?, peso_estimado = ?, cabelo = ?, caracteristicas_fisicas = ?, vestimentas = ?, residente_em = ?,  data_desaparecimento = ?, local_desaparecimento = ?, detalhes_desaparecimento = ?, contato = ? WHERE id = ?`
-    );
-    await stmt.bind([
-      pessoa.nome,
-      pessoa.cpf,
-      pessoa.genero,
-      pessoa.olhos,
-      pessoa.altura_estimada,
-      pessoa.peso_estimado,
-      pessoa.cabelo,
-      pessoa.caracteristicas_fisicas,
-      pessoa.vestimentas,
-      pessoa.residente_em,
-      pessoa.data_desaparecimento,
-      pessoa.local_desaparecimento,
-      pessoa.detalhes_desaparecimento,
-      pessoa.contato,
-      pessoa.id,
-    ]);
+    stmt = await db.prepare(query);
+    await stmt.bind(params);
     await stmt.run();
     res.status(201).json({ message: "Pessoa atualizada com sucesso" });
   } catch (error) {
     console.error("Erro ao atualizar Pessoa:", error);
-    throw error;
+    res.status(500).json({ message: "Erro ao atualizar Pessoa" });
   } finally {
     stmt ? await stmt.finalize() : null;
     await db.close();
   }
 }
+
 
 export async function deletePessoa(req, res) {
   const db = await openDB();
