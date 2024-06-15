@@ -12,7 +12,6 @@ export async function createTablePessoas() {
             nome VARCHAR(255) NOT NULL,
             cpf VARCHAR(80) NOT NULL,
             data_nascimento DATE,
-            idade INTEGER,
             genero VARCHAR(25) NOT NULL,
             olhos VARCHAR(25),
             altura VARCHAR(10),

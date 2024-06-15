@@ -242,14 +242,16 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Nome</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          pessoa.nome !== "null" ? pessoa.nome : "Nao Informado."
+                            pessoa.nome !== null && pessoa.nome !== "null" ? pessoa.nome : "Nao Informado."
+
                           }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Gênero</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          pessoa.genero !== "null" ? pessoa.genero : "Nao Informado."
+                            pessoa.genero !== null && pessoa.genero !== "null" ? pessoa.genero : "Nao Informado."
+
                           }</dd>
                           </div>
 
@@ -263,18 +265,14 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Residente</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          pessoa.residente !== "null"
-                          ? pessoa.residente
-                          : "Nao Informado."
+                             pessoa.residente !== null && pessoa.residente !== "null" ? pessoa.residente : "Nao Informado."
                           }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Data Nascimento</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                          pessoa.data_nascimento !== "null"
-                          ? pessoa.data_nascimento
-                          : "Nao Informado."
+                          pessoa.data_nascimento !== null && pessoa.data_nascimento !== "null" ? pessoa.data_nascimento : "Nao Informado."
                           }</dd>
                           </div>
 
@@ -282,9 +280,7 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Contato</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          pessoa.contato !== "null"
-                          ? pessoa.contato
-                          : "Nao Informado."
+                            pessoa.contato !== null && pessoa.contato !== "null" ? pessoa.contato : "Nao Informado."
                           }</dd>
                           </div>
 
@@ -292,14 +288,14 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Olhos</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                          pessoa.olhos !== "null" ? pessoa.olhos : "Nao Informado."
+                          pessoa.olhos !== null && pessoa.olhos !== "null" ? pessoa.olhos : "Nao Informado."
                           }</dd>
                           </div>
 
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Altura</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          pessoa.altura !== "null" ? pessoa.altura : "Nao Informado."
+                          pessoa.altura !== null && pessoa.altura !== "null" ? pessoa.altura : "Nao Informado."
                           }</dd>
                           </div>
                       </dl>
@@ -311,23 +307,21 @@ async function renderItem(id) {
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Peso</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                              pessoa.peso !== "null" ? pessoa.peso : "Nao Informado."
+                               pessoa.peso !== null && pessoa.peso !== "null" ? pessoa.peso : "Nao Informado."
                               }</dd>
                               </div>
 
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Cabelo</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                              pessoa.cabelo !== "null" ? pessoa.cabelo : "Nao Informado."
+                               pessoa.cabelo !== null && pessoa.cabelo !== "null" ? pessoa.cabelo : "Nao Informado."
                               }</dd>
                               </div>
 
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Características</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">  ${
-                              pessoa.caracte !== "null"
-                              ? pessoa.caracte
-                              : "Nao Informado."
+                              pessoa.caracte !== null && pessoa.caracte !== "null" ? pessoa.caracte : "Nao Informado."
                               }</dd>
                               </div>
 
@@ -335,18 +329,14 @@ async function renderItem(id) {
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Vestimentas</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                              pessoa.vestimentas !== "null"
-                              ? pessoa.vestimentas
-                              : "Nao Informado."
+                                pessoa.vestimentas !== null && pessoa.vestimentas !== "null" ? pessoa.vestimentas : "Nao Informado."
                               }</dd>
                               </div>
 
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Local do Desaparecimento</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                              pessoa.local_desaparecimento !== "null"
-                              ? pessoa.local_desaparecimento
-                              : "Nao Informado."
+                              pessoa.local_desaparecimento !== null && pessoa.local_desaparecimento !== "null" ? pessoa.local_desaparecimento : "Nao Informado."
                               }</dd>
                               </div>
 
@@ -354,9 +344,7 @@ async function renderItem(id) {
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Data do Desaparecimento</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                              pessoa.data_desaparecimento !== "null"
-                              ? pessoa.data_desaparecimento
-                              : "Nao Informado."
+                             pessoa.data_desaparecimento !== null && pessoa.data_desaparecimento !== "null" ? pessoa.data_desaparecimento : "Nao Informado."
                               }</dd>
                               </div>
 
@@ -364,9 +352,7 @@ async function renderItem(id) {
                               <dt class="font-bold text-gray-900">Detalhes</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2 h-10">
                               ${
-                              pessoa.detalhes_desaparecimento !== "null"
-                              ? pessoa.detalhes_desaparecimento
-                              : "Nao Informado."
+                              pessoa.detalhes_desaparecimento !== null && pessoa.detalhes_desaparecimento !== "null" ? pessoa.detalhes_desaparecimento : "Nao Informado."
                               }
                               </dd>
                               </div>
@@ -1023,9 +1009,7 @@ function maisopcoes2() {
 }
 
 function addDesaparecidos() {
-
-  if(validar()) return
-
+  if (validar()) return;
 
   const campos = [
     "nome",
@@ -1044,15 +1028,16 @@ function addDesaparecidos() {
     "local_desaparecimento",
     "detalhes_desaparecimento",
   ];
+  
   const formData = new FormData();
 
   campos.forEach((camp) => {
     const value = sessionStorage.getItem(camp);
-    formData.append(camp, value);
+    formData.append(camp, value ? value : null);
   });
 
   const inputFoto = document.getElementById("fotoDesaparecido");
-  let foto = "";
+  let foto = null;
 
   if (inputFoto.files[0]) {
     foto = inputFoto.files[0];
@@ -1074,6 +1059,7 @@ function addDesaparecidos() {
     })
     .catch((error) => console.log("Erro:" + error));
 }
+
 
 function deleteDesaparecido(id) {
   const conv = parseInt(id);
