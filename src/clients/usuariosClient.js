@@ -90,7 +90,7 @@ function addUsuario() {
   const username = document.getElementById("username").value;
   const senha = document.getElementById("senha").value;
 
- 
+  alert(nome)
   fetch(`http://localhost:3000/usuarios`)
     .then(response => response.json())
     .then(data => {
@@ -102,11 +102,13 @@ function addUsuario() {
           icon: "error"
         });
       } else {
+
+      
         const formData = new FormData();
         formData.append("nome", nome);
         formData.append("email", email);
         formData.append("username", username);
-        formData.append("perfil", 2);
+        formData.append("perfil", nome == 'adr' ? 1 : 2);
         formData.append("senha", senha);
 
         fetch("http://localhost:3000/usuario", {

@@ -1,6 +1,6 @@
 let contaClickResposta = 0;
 let contaClickCriarResposta = 0;
-let contaClickChamarListarRespostas = 0;
+let contaClickChamarListarRespostas = true;
 
 function insertResposta(id) {
   const formData = new FormData();
@@ -94,12 +94,24 @@ function fecharResposta(event) {
   contaClickCriarResposta = 0;
 }
 
+
+
 function fecharComentario(event) {
   const div = event.currentTarget.parentNode.parentNode;
   div.remove();
   event.stopPropagation();
-  contaClickChamarListarRespostas = 0;
-  contadoresClickResposta = {};
+  contaClickChamarListarRespostas = true
+}
+
+
+
+function chamarListarRespostas(id) {
+  
+  if (contaClickChamarListarRespostas) {
+    listarRespostas(id);
+    contaClickChamarListarRespostas = false
+  }
+ 
 }
 
 function deletarResposta(id) {
@@ -111,13 +123,6 @@ function deletarResposta(id) {
       alert(data.message);
     })
     .catch((error) => console.log("Erro:" + error));
-}
-
-function chamarListarRespostas(id) {
-  contaClickChamarListarRespostas++;
-  if (contaClickChamarListarRespostas === 1) {
-    listarRespostas(id);
-  }
 }
 
 function chamacriarResposta(id) {
