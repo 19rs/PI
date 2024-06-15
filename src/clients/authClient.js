@@ -90,7 +90,7 @@ async function logar() {
     .then(data => {
         console.log(data)
         if(data.sucesso) {
-           // alert(data.sucesso) //usar sweetAlert2? //mandar uma mensagem de Bem Vindo Usuario?
+           alert(data.sucesso) //usar sweetAlert2? //mandar uma mensagem de Bem Vindo Usuario?
             
             // Swal.fire({
             //     position: "top",
