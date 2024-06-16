@@ -45,32 +45,32 @@
     <main class="mt-24 container mx-auto min-h-[100vh]">
       <!-- depois colocar botao para abrir modal -->
       <!-- <button>Filtrar</button> -->
-      <section class="flex flex-col sm:flex-row justify-center items-center gap-y-5 gap-x-5 mb-8 text-xs py-8 rounded-md shadow">
+      <section class="flex flex-col sm:flex-row justify-center items-center gap-y-5 gap-x-5 mb-8 text-xs py-8 rounded-md shadow bg-gray-50">
           <h1 class="text-xl font-bold">Pesquisa:</h1>
           
           <div class="relative group w-full sm:w-auto">
               <input type="search" name="filtroNome" id="filtroNome" class="w-full sm:w-56 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
-              <label for="filtroNome" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Nome</label>
+              <label for="filtroNome" class="absolute px-1.5 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-1 z-2 origin-[0] peer-focus:left-1 bg-gray-50 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text peer-focus:bg-gray-50 peer-placeholder-shown:bg-white">Nome</label>
           </div>
   
           <div class="relative group w-full sm:w-auto">
               <input type="search" name="filtroLocalDesaparecimento" id="filtroLocalDesaparecimento" class="w-full sm:w-56 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
-              <label for="filtroLocalDesaparecimento" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Local Desaparecimento</label>
+              <label for="filtroLocalDesaparecimento" class="absolute px-1.5 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-1 z-2 origin-[0] peer-focus:left-1 bg-gray-50 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text peer-focus:bg-gray-50 peer-placeholder-shown:bg-white">Local Desaparecimento</label>
           </div>
   
           <div class="relative group w-full sm:w-auto">
               <input type="search" name="filtroGenero" id="filtroGenero" class="w-full sm:w-auto p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " onsearch="limparPesquisa()"/>
-              <label for="filtroGenero" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Gênero</label>
+              <label for="filtroGenero" class="absolute px-1.5 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-1 z-2 origin-[0] peer-focus:left-1 bg-gray-50 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text peer-focus:bg-gray-50 peer-placeholder-shown:bg-white">Gênero</label>
           </div>
   
           <div class="relative group w-full sm:w-auto">
               <input type="number" name="filtroIdadeMin" id="filtroIdadeMin" class="w-full sm:w-28 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " />
-              <label for="filtroIdadeMin" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Idade Mínima</label>
+              <label for="filtroIdadeMin" class="absolute px-1.5 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-1 z-2 origin-[0] peer-focus:left-1 bg-gray-50 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text peer-focus:bg-gray-50 peer-placeholder-shown:bg-white">Idade Mínima</label>
           </div>
   
           <div class="relative group w-full sm:w-auto">
               <input type="number" name="filtroIdadeMax" id="filtroIdadeMax" class="w-full sm:w-28 p-2 border appearance-none focus:outline-none focus:ring-1 focus:border-blue-600 peer" placeholder=" " />
-              <label for="filtroIdadeMax" class="absolute px-1 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-2 z-2 origin-[0] peer-focus:left-2 bg-white peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text">Idade Máxima</label>
+              <label for="filtroIdadeMax" class="absolute px-1.5 duration-300 transform -translate-y-5 scale-75 top-2.5 text-gray-400 start-1 z-2 origin-[0] peer-focus:left-1 bg-gray-50 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-5 hover:cursor-text peer-focus:bg-gray-50 peer-placeholder-shown:bg-white">Idade Máxima</label>
           </div>
   
           <button onclick="filtrarDesaparecidos()" class="ml-4 w-full sm:w-auto flex items-center border text-white px-2.5 py-1 rounded gap-x-1 text-sm bg-[#191919] hover:bg-gray-600">
