@@ -160,7 +160,7 @@ function criarCardsPessoas(data) {
           }</h1>
           <h2 class='px-3 py-3 border-b'>Nascimento: <b>${
             pessoa.data_nascimento !== "null"
-              ? pessoa.data_nascimento
+              ? pessoa.data_nascimento.split("-").reverse().join("/")
               : "Nao Definido"
           }</b></h2>
           
@@ -277,7 +277,7 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Data Nascimento</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2"> ${
-                          pessoa.data_nascimento !== null && pessoa.data_nascimento !== "null" ? pessoa.data_nascimento : "Nao Informado."
+                          pessoa.data_nascimento !== null && pessoa.data_nascimento !== "null" ? pessoa.data_nascimento.split("-").reverse().join("/") : "Nao Informado."
                           }</dd>
                           </div>
 
@@ -355,7 +355,7 @@ async function renderItem(id) {
                               <div class="grid grid-cols-1 gap-1 p-3 ">
                               <dt class="font-bold text-gray-900">Data do Desaparecimento</dt>
                               <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                             pessoa.data_desaparecimento !== null && pessoa.data_desaparecimento !== "null" ? pessoa.data_desaparecimento : "Nao Informado."
+                             pessoa.data_desaparecimento !== null && pessoa.data_desaparecimento !== "null" ? pessoa.data_desaparecimento.split("-").reverse().join("/") : "Nao Informado."
                               }</dd>
                               </div>
 
