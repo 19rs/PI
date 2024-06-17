@@ -92,7 +92,7 @@ function criarDivForum(data) {
   divForum.classList.add("flex", "gap-10","antialiased");
 
   divForum.innerHTML += `
-    <div id='box-${data.id}' class="flex flex-col border-2 rounded-md shadow p-3 bg-zinc-50">
+    <div id='box-${data.id}' class="flex flex-col border-2 rounded-md shadow p-3 bg-[rgba(0,0,0,0.02)] ">
           
             <div class='flex'>
               <div class=' h-full'>
