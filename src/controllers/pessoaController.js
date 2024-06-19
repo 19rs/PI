@@ -262,7 +262,7 @@ export async function updatePessoa(req, res) {
 
   query += ` WHERE id = ?`;
   params.push(pessoa.id);
-
+  //mudou pra que o codigo anterior? ¬¬
   try {
     stmt = await db.prepare(query);
     await stmt.bind(params);
