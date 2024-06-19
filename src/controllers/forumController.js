@@ -11,7 +11,7 @@ export async function createTableMensagens() {
             titulo VARCHAR(100) NOT NULL,
             conteudo VARCHAR(255) NOT NULL,
             data_atualizacao TEXT NOT NULL,
-            FOREIGN KEY (autor_id) REFERENCES Usuarios (id) ON DELETE CASCADE
+            FOREIGN KEY (autor_id) REFERENCES Usuarios (id)
         )`)
     } catch(error) {
         console.error('Não foi possível criar a tabela:', error)
@@ -33,9 +33,9 @@ export async function createTableRespostas() {
             data_postagem TEXT NOT NULL,
             data_atualizacao TEXT NOT NULL,
             resposta_id INT DEFAULT NULL,
-            FOREIGN KEY (autor_id) REFERENCES Usuarios (id) ON DELETE CASCADE,
-            FOREIGN KEY (mensagem_id) REFERENCES Mensagens (id) ON DELETE CASCADE,
-            FOREIGN KEY (resposta_id) REFERENCES Respostas (id) ON DELETE CASCADE
+            FOREIGN KEY (autor_id) REFERENCES Usuarios (id),
+            FOREIGN KEY (mensagem_id) REFERENCES Mensagens (id),
+            FOREIGN KEY (resposta_id) REFERENCES Respostas (id)
         )`)
     } catch(error) {
         console.error('Não foi possível criar a tabela:', error)
@@ -188,6 +188,7 @@ export async function deleteMensagem(req, res) {
     const id = req.params.id;
   
     try {
+        await db.run(`DELETE FROM Respostas WHERE mensagem_id = ?`, [id]);
         await db.run(`DELETE FROM Mensagens WHERE id = ?`, [id]);
         
         res.status(201).send({message: 'Mensagem Excluída'}); 
@@ -233,6 +234,7 @@ export async function deleteResposta(req, res) {
     const id = req.params.id;
   
     try {
+        await db.run(`DELETE FROM Respostas WHERE resposta_id = ?`, [id]);
         await db.run(`DELETE FROM Respostas WHERE id = ?`, [id]);
         
         res.status(201).send({message: 'Resposta Excluída'}); 
