@@ -296,7 +296,7 @@ async function renderItem(id) {
 
                           <div class="flex flex-col gap-2 p-3 ">
                           <dt class="font-bold text-gray-900">Compartilhar</dt>
-                          <img src='../assets/icon/whatsapp.png' class='size-11 border-2 rounded-lg border-black  cursor-pointer' onclick='compartilharPDF(${pessoa.id})'  />
+                          <img src='../assets/icon/whatsapp.png' class='size-11 border-2 rounded-lg  cursor-pointer' onclick='compartilharPDF(${pessoa.id})'  />
                           </div>
                       </dl>
                   </div>
