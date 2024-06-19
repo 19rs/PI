@@ -452,6 +452,14 @@ function deletarResposta(id) {
 }
 
 function criarResposta(id, id_resposta) {
+  let idUsuario = sessionStorage.getItem("userID")
+  if(idUsuario) {
+    // alert('siiiiiiiu')
+  } else {
+    // alert('naaaaaaah')
+    criarDialogLogin()
+    return
+  }
 
   console.log('id da msg:' + id)
   console.log('id da resposta:' + id_resposta)
