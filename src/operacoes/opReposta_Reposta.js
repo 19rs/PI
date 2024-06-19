@@ -119,6 +119,7 @@ function listarRespostasDasRespostas(resposta_id) {
 }
 
 function chamalistarRespostasDasRespostas(id) {
+  
   if (!contadoresClickResposta.hasOwnProperty(id)) {
     contadoresClickResposta[id] = 0;
   }

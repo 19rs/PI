@@ -1,5 +1,4 @@
-let contaClickResposta = 0;
-let contaClickCriarResposta = 0;
+let contaClickCriarResposta = true;
 let contaClickChamarListarRespostas = true;
 
 function insertResposta(id) {
@@ -91,22 +90,19 @@ function fecharResposta(event) {
   const div = event.currentTarget.parentNode.parentNode.parentNode;
   div.remove();
   event.stopPropagation();
-  contaClickCriarResposta = 0;
+  contaClickCriarResposta = true;
 }
-
-
 
 function fecharComentario(event) {
   const div = event.currentTarget.parentNode.parentNode;
   div.remove();
   event.stopPropagation();
   contaClickChamarListarRespostas = true
+   contadoresClickResposta = {};
 }
 
-
-
 function chamarListarRespostas(id) {
-  
+
   if (contaClickChamarListarRespostas) {
     listarRespostas(id);
     contaClickChamarListarRespostas = false
@@ -114,21 +110,11 @@ function chamarListarRespostas(id) {
  
 }
 
-function deletarResposta(id) {
-  fetch(`http://localhost:3000/resposta/${id}`, {
-    method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert(data.message);
-    })
-    .catch((error) => console.log("Erro:" + error));
-}
-
 function chamacriarResposta(id) {
-  contaClickCriarResposta++;
-  if (contaClickCriarResposta === 1) {
+ 
+  if (contaClickCriarResposta) {
     criarResposta(id);
+    contaClickCriarResposta = false
   }
 }
 
@@ -154,11 +140,6 @@ function listarRespostas(mensagem_id) {
 }
 
 function listarRespostasPorMensagem(mensagem_id, paiDetodos) {
-  if (contaClickComentarios > 1) {
-    contaClickComentarios = 0;
-    return;
-  }
-
   const pai = document.getElementById(`box-texto-${mensagem_id}`);
 
   fetch(`http://localhost:3000/resposta/${mensagem_id}`)
@@ -181,6 +162,7 @@ function listarRespostasPorMensagem(mensagem_id, paiDetodos) {
           },
           onClick: function () {}, // Callback after click
         }).showToast();
+        contaClickChamarListarRespostas = true
       } else {
         mostrarRespostas(data, paiDetodos, pai);
       }
@@ -189,7 +171,7 @@ function listarRespostasPorMensagem(mensagem_id, paiDetodos) {
       console.error("Erro ao obter respostas:", error);
     })
     .finally(() => {
-      contaClickComentarios = 0;
+    
     });
 }
 
@@ -243,4 +225,15 @@ function mostrarRespostas(data, paiDetodos, pai) {
   });
 
   pai.appendChild(paiDetodos);
+}
+
+function deletarResposta(id) {
+  fetch(`http://localhost:3000/resposta/${id}`, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      alert(data.message);
+    })
+    .catch((error) => console.log("Erro:" + error));
 }

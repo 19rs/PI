@@ -260,7 +260,7 @@ async function renderItem(id) {
                           <div class="grid grid-cols-1 gap-1 p-3 ">
                           <dt class="font-bold text-gray-900">Idade</dt>
                           <dd class="font-semibold text-gray-700 capitalize sm:col-span-2">${
-                          !isNaN(idade) ? idade : "Nao Informado."
+                          !isNaN(idade) ? idade + " anos"  : "Nao Informado."
                           }</dd>
                           </div>
 
@@ -296,7 +296,7 @@ async function renderItem(id) {
 
                           <div class="flex flex-col gap-2 p-3 ">
                           <dt class="font-bold text-gray-900">Compartilhar</dt>
-                          <img src='../assets/icon/whatsapp.png' class='size-11 border-2 rounded-lg  cursor-pointer' onclick='compartilharPDF(${pessoa.id})'  />
+                          <img src='../assets/icon/whatsapp.png' class='size-9 cursor-pointer' onclick='compartilharPDF(${pessoa.id})'  />
                           </div>
                       </dl>
                   </div>
@@ -419,54 +419,56 @@ async function gerarPDF(id) {
               <img src='${pessoa.foto}' style='width: 100%; height: auto; object-cover: cover;'/>
           </div>
           <div class='flex flex-col' style='margin-top:3rem;'>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Nome: </strong> ${pessoa.nome}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Nome: </strong> ${pessoa.nome !== null && pessoa.nome !== "null" ? pessoa.nome : "Nao Informado."} 
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Contato: </strong> ${pessoa.contato}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Contato: </strong> ${  pessoa.contato !== null && pessoa.contato !== "null" ? pessoa.contato : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Gênero: </strong> ${pessoa.genero}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Gênero: </strong> ${  pessoa.genero !== null && pessoa.genero !== "null" ? pessoa.genero : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Data Nascimento: </strong> ${pessoa.data_nascimento}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Data Nascimento: </strong> ${  pessoa.data_nascimento !== null && pessoa.data_nascimento !== "null" ?
+                 pessoa.data_nascimento.split("-").reverse().join("/") : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Idade: </strong>${idade}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Idade: </strong>${!isNaN(idade) ? idade + " anos"  : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Residente: </strong> ${pessoa.residente}
-              </span>
-          </div>
-          <div class='flex flex-col'>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Olhos: </strong>  ${pessoa.olhos}
-              </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Altura: </strong>  ${pessoa.altura}
-              </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Peso: </strong>  ${pessoa.peso}
-              </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Cabelo: </strong>  ${pessoa.cabelo}
-              </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Características: </strong>  ${pessoa.caracte}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Residente: </strong> ${pessoa.residente !== null && pessoa.residente !== "null" ? pessoa.residente : "Nao Informado."}
               </span>
           </div>
           <div class='flex flex-col'>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Detalhes do Desaparecimento: </strong>  ${pessoa.detalhes_desaparecimento}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Olhos: </strong>  ${pessoa.olhos !== null && pessoa.olhos !== "null" ? pessoa.olhos : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Vestimentas: </strong>  ${pessoa.vestimentas}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Altura: </strong>  ${  pessoa.altura !== null && pessoa.altura !== "null" ? pessoa.altura : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Local do Desaparecimento: </strong>  ${pessoa.local_desaparecimento}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Peso: </strong>  ${  pessoa.peso !== null && pessoa.peso !== "null" ? pessoa.peso : "Nao Informado."}
               </span>
-              <span class='font-semibold first-letter:capitalize p-1'>
-                  <strong class='font-bold tracking-wider'>Data do Desaparecimento: </strong>  ${pessoa.data_desaparecimento}
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Cabelo: </strong>  ${  pessoa.cabelo !== null && pessoa.cabelo !== "null" ? pessoa.cabelo : "Nao Informado."}
+              </span>
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Características: </strong>  ${  pessoa.caracte !== null && pessoa.caracte !== "null" ? pessoa.caracte : "Nao Informado."}
+              </span>
+          </div>
+          <div class='flex flex-col'>
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Detalhes do Desaparecimento: </strong>  ${  pessoa.detalhes_desaparecimento !== null && pessoa.detalhes_desaparecimento !== "null" ? pessoa.detalhes_desaparecimento : "Nao Informado."}
+              </span>
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Vestimentas: </strong>  ${  pessoa.vestimentas !== null && pessoa.vestimentas !== "null" ? pessoa.vestimentas : "Nao Informado."}
+              </span>
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Local do Desaparecimento: </strong>  ${  pessoa.local_desaparecimento !== null && pessoa.local_desaparecimento !== "null" ? pessoa.local_desaparecimento : "Nao Informado."}
+              </span>
+              <span class='font-semibold first-letter:capitalize '>
+                  <strong class='font-bold tracking-wider'>Data do Desaparecimento: </strong>  ${  pessoa.data_desaparecimento !== null && pessoa.data_desaparecimento !== "null" ? 
+                    pessoa.data_desaparecimento.split("-").reverse().join("/"): "Nao Informado."}
               </span>
           </div>
       </div>
